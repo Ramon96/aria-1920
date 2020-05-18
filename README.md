@@ -13,6 +13,19 @@ Our goal is to provide a demo where a single user can:
 * Consume the external content while listening to a song
 * Persue embeded content to it's source / platform
 
+# External content providers discussed so far
+
+## Social media
+* Instagram 
+* Twitter
+
+## Videos
+* Youtube
+
+## News
+* Pitchfork
+* The New York Times?
+
 # Contributers
 Ramon Meijers  
 Tomas Stolp
