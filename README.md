@@ -5,6 +5,7 @@ Aria is a prototype of a Spotify plugin where the user is able to add social med
 
 # Contributers
 Ramon Meijers
+
 Tomas Stolp
 
 ## Commissioned by
