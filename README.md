@@ -10,7 +10,7 @@ Our goal is to provide a demo where a single user can:
 * Login with Spotify credentials
 * Configure and control which platforms provide enriching content within the Spotify demo
 * Listen to a song 
-* Consume the external content when listening to a song
+* Consume the external content while listening to a song
 * Persue embeded content to it's source / platform
 
 # Contributers
