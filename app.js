@@ -1,14 +1,15 @@
 /* eslint-disable */
 require('dotenv').config();
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var logger = require('morgan');
-var hbs = require('express-handlebars');
-var indexRouter = require('./routes/index');
-var app = express();
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const hbs = require('express-handlebars');
+const indexRouter = require('./routes/index');
+const settingsRouter = require('./routes/settings');
+const app = express();
 /* eslint-enable */
 
 
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'src')));
 
 // Routes
 app.use(indexRouter);
+app.use(settingsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
