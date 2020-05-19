@@ -9,7 +9,7 @@ var logger = require('morgan');
 var hbs = require('express-handlebars');
 var indexRouter = require('./routes/index');
 var app = express();
-/* eslint-enabl */
+/* eslint-enable */
 
 
 
