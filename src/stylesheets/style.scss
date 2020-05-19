@@ -1,0 +1,16 @@
+// https://fontawesome.com/how-to-use/on-the-web/using-with/sass
+@import "helpers/fontawesome/scss/fontawesome.scss";
+@import "helpers/fontawesome/scss/solid.scss";
+@import "helpers/fontawesome/scss/brands.scss";
+
+@import 'helpers/functions';
+@import 'helpers/fonts';
+@import 'helpers/partials';
+
+
+html,body{
+    margin: 0;
+    font-family: spotify-black;
+    background: color(Black);
+}
+

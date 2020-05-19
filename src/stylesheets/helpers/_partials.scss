@@ -1,0 +1,25 @@
+.navigation-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+    background: rgba($color: #ffffff, $alpha: 0.1);
+    color: color(Primary);
+    h2{
+        margin: 0;
+    }
+    a{
+        color: inherit;
+    }
+}
+
+.link-button{
+    color: color(Primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+    h3{
+        margin: 0;
+    }
+}

@@ -35,3 +35,7 @@ Joost de Boo
 
 ## Coaching
 Vasilis van Gemert
+
+
+## External sources
+[Spotify housestyle]("https://developer.spotify.com/branding-guidelines/") 

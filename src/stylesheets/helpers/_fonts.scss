@@ -1,0 +1,80 @@
+@font-face {
+    font-family: icons;
+    src: url('./fonts/spoticon_regular_2.d319d911.woff2') format('woff2')
+}
+@font-face {
+    font-family: spotify-black;
+    src: url('./fonts/CircularSpUIv3T-Black.c21e63c5.woff2') format('woff2')
+}
+@font-face {
+    font-family: spotify-bold;
+    src: url('./fonts/CircularSpUIv3T-Bold.8d0a45cc.woff2') format('woff2')
+}
+@font-face {
+    font-family: spotify-light;
+    src: url('./fonts/CircularSpUIv3T-Light.afd9ab26.woff2') format('woff2')
+}
+@font-face {
+    font-family: spotify-book;
+    src: url('./fonts/CircularSpUIv3T-Book.3466e0ec.woff2') format('woff2')
+}
+
+h1{
+    padding: 0.08em 0px;
+    font-size: 96px;
+    font-weight: 900;
+    letter-spacing: -.04em;
+    line-height: 96px;
+    color: color(Primary);
+    font-family: spotify-bold;
+}
+
+h2{
+    color: color(Primary);
+    font-family: spotify-bold;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: -.04em;
+    &:hover{
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+h3{
+    
+}
+
+span{
+    color: color(Secondary);
+    &:hover{
+        color: color(Primary);
+    }
+}
+
+// Control buttons, play, skip queue etc..
+button.control{
+    color: color(Secondary);
+
+    &::before{
+        font-family: icons;
+        font-style: normal;
+        font-weight: 400;
+        vertical-align: bottom;
+        display: inline-block;
+    }
+    &:hover{
+        outline: none;
+        color: color(Primary);
+    }
+
+    .active{
+        color: color(Green);
+        &:hover{
+            color: color(Green-active);
+        }
+    }
+}
+
+
