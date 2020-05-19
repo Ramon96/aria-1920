@@ -1,15 +1,19 @@
 /* eslint-disable */
 require('dotenv').config();
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var logger = require('morgan');
-var hbs = require('express-handlebars');
-var indexRouter = require('./routes/index');
-var app = express();
-/* eslint-enabl */
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const hbs = require('express-handlebars');
+// Routes
+const indexRouter = require('./routes/index');
+const login = require('./routes/login');
+const profile = require('./routes/profile');
+
+const app = express();
+/* eslint-enable */
 
 
 
@@ -31,11 +35,13 @@ app.use(express.static(path.join(__dirname, 'src')));
 
 
 
-// TODO remove this todo, it's for testing if I switched from GIT account
+// TODO remove this todo, it's for testing if I switched from
 
 
 // Routes
 app.use(indexRouter);
+app.use(login);
+app.use(profile);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -53,7 +59,11 @@ app.use(function(err, req, res) {
     res.render('error');
 });
 
+
+
+
 app.listen(function (){
+
     console.log("Server is running..");
 });
 
