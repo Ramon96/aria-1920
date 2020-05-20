@@ -80,6 +80,11 @@ router.get('/callback', function (req, res) {
 
                 // we can also pass the token to the browser to make requests from there
                 /* eslint-disable */
+
+                req.session.accessToken = accessToken;
+                console.log(accessToken);
+                console.log('Testing acces token', req.session.accessToken)
+
                 res.redirect('/profile/#' +
                     querystring.stringify({
                         access_token: accessToken,
