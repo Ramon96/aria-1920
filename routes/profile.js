@@ -16,7 +16,6 @@ const querystring = require('querystring');
 
 const clientId = String(process.env.clientId); // Your client id
 const clientSecret = String(process.env.clientSecret); // Your client secret
-const redirectUri = 'http://localhost:3000/callback/'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -33,6 +32,10 @@ router.get('/callback', function (req, res) {
     const code = req.query.code || null;
     const state = req.query.state || null;
     const storedState = req.cookies ? req.cookies[stateKey] : null;
+
+
+    const port = `:${ req.app.settings.port}` || '';
+    const redirectUri = `${ req.protocol }://${ req.hostname }${ port }/callback/`; // Your redirect uri
 
     if (state === null || state !== storedState) {
         res.redirect('/#' +
