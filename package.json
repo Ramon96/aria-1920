@@ -4,6 +4,7 @@
   "description": "Aria is a prototype of a spotify plugin where the user is able to add social media and news platforms to further enhance his music experience",
   "private": true,
   "scripts": {
+    "prestart": "eslint ./ --fix",
     "start": "node ./bin/www",
     "lint": "eslint ./"
   },
