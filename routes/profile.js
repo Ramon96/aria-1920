@@ -1,4 +1,3 @@
-require('dotenv').config();
 /**
  * This is an example of a basic node.js script that performs
  * the Authorization Code oAuth2 flow to authenticate against
@@ -13,7 +12,6 @@ const router = express.Router();
 const request = require('request'); // "Request" library
 // const cors = require('cors');
 const querystring = require('querystring');
-const cookieParser = require('cookie-parser');
 
 const clientId = String(process.env.clientId); // Your client id
 const clientSecret = String(process.env.clientSecret); // Your client secret
@@ -41,6 +39,7 @@ router.get('/callback', function (req, res) {
                 error: 'state_mismatch'
             }));
     } else {
+        /* eslint-disable */
         res.clearCookie(stateKey);
         const authOptions = {
             url: 'https://accounts.spotify.com/api/token',
@@ -54,7 +53,7 @@ router.get('/callback', function (req, res) {
             },
             json: true
         };
-
+        /* eslint-enable */
         request.post(authOptions, function (error, response, body) {
             if (!error && response.statusCode === 200) {
 
@@ -70,18 +69,18 @@ router.get('/callback', function (req, res) {
                 };
 
                 // use the access token to access the Spotify Web API
-                let data;
                 request.get(options, function (error, response, body) {
                     console.log(body);
-                    data = body;
                 });
 
                 // we can also pass the token to the browser to make requests from there
+                /* eslint-disable */
                 res.redirect('/profile/#' +
                     querystring.stringify({
                         access_token: accessToken,
                         refresh_token: refreshToken
                     }));
+                /* eslint-enable */
             } else {
                 res.redirect('/#' +
                     querystring.stringify({
@@ -95,7 +94,7 @@ router.get('/callback', function (req, res) {
 router.get('/profile', function (req, res) {
 
     res.render('spotify/profile');
-})
+});
 
 router.get('/refresh_token', function (req, res) {
 
@@ -106,10 +105,12 @@ router.get('/refresh_token', function (req, res) {
         headers: {
             'Authorization': 'Basic ' + (new Buffer(clientId + ':' + clientSecret).toString('base64'))
         },
+        /* eslint-disable */
         form: {
             grant_type: 'refresh_token',
             refresh_token: refreshToken
         },
+        /* eslint-enable */
         json: true
     };
 

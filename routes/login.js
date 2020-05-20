@@ -1,11 +1,7 @@
-require('dotenv').config();
 const querystring = require('querystring');
-
 const express = require('express');
 const router = express.Router();
-
 const clientId = String(process.env.clientId); // Your client id
-const clientSecret = String(process.env.clientSecret); // Your client secret
 const redirectUri = 'http://localhost:3000/callback/'; // Your redirect uri
 
 
@@ -30,6 +26,7 @@ router.get('/login', function (req, res) {
 
     // your application requests authorization
     const scope = 'user-read-private user-read-email streaming user-library-read';
+    /* eslint-disable */
     res.redirect('https://accounts.spotify.com/authorize?' +
         querystring.stringify({
             response_type: 'code',
@@ -38,6 +35,7 @@ router.get('/login', function (req, res) {
             redirect_uri: redirectUri,
             state: state
         }));
+    /* eslint-enable */
 });
 
 
