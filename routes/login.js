@@ -2,8 +2,6 @@ const querystring = require('querystring');
 const express = require('express');
 const router = express.Router();
 const clientId = String(process.env.clientId); // Your client id
-const redirectUri = 'http://localhost:3000/callback/'; // Your redirect uri
-
 
 const generateRandomString = function (length) {
     let text = '';
@@ -19,7 +17,12 @@ const stateKey = 'spotify_auth_state';
 
 router.get('/login', function (req, res) {
 
+    // TODO redirect is now dynamic, but for production we have to check if we want to reduce this to local and live links
+    // https://stackoverflow.com/questions/10183291/how-to-get-the-full-url-in-express
+    const port = `:${ req.app.settings.port}` || '';
+    const redirectUri = `${ req.protocol }://${ req.hostname }${ port }/callback/`; // Your redirect uri
 
+    console.log(redirectUri);
 
     const state = generateRandomString(16);
     res.cookie(stateKey, state);
@@ -37,7 +40,5 @@ router.get('/login', function (req, res) {
         }));
     /* eslint-enable */
 });
-
-
 
 module.exports = router;

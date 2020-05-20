@@ -11,8 +11,8 @@ const hbs = require('express-handlebars');
 // Routes
 const indexRouter = require('./routes/index');
 const settingsRouter = require('./routes/settings');
-const login = require('./routes/login');
-const profile = require('./routes/profile');
+const loginRouter = require('./routes/login');
+const profileRouter = require('./routes/profile');
 
 
 const app = express();
@@ -38,8 +38,8 @@ app.use(express.static(path.join(__dirname, 'src')));
 // Routes
 app.use(indexRouter);
 app.use(settingsRouter);
-app.use(login);
-app.use(profile);
+app.use(loginRouter);
+app.use(profileRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
