@@ -15,6 +15,7 @@ const request = require('request'); // "Request" library
 const querystring = require('querystring');
 
 const clientId = String(process.env.clientId); // Your client id
+const clientSecret = String(process.env.clientSecret); // Your client secret
 const redirectUri = 'http://localhost:3000/callback/'; // Your redirect uri
 
 /**
