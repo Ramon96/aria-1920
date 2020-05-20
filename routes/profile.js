@@ -34,7 +34,8 @@ router.get('/callback', function (req, res) {
     const storedState = req.cookies ? req.cookies[stateKey] : null;
 
 
-    const port = `:${ req.app.settings.port}` || '';
+    // const port = `:${ req.app.settings.port}` || '';
+    const port = `:${ process.env.PORT || '3000' }`;
     const redirectUri = `${ req.protocol }://${ req.hostname }${ port }/callback/`; // Your redirect uri
 
     if (state === null || state !== storedState) {

@@ -19,9 +19,8 @@ router.get('/login', function (req, res) {
 
     // TODO redirect is now dynamic, but for production we have to check if we want to reduce this to local and live links
     // https://stackoverflow.com/questions/10183291/how-to-get-the-full-url-in-express
-    const port = `:${ req.app.settings.port}` || '';
+    const port = `:${ process.env.PORT || '3000' }`;
     const redirectUri = `${ req.protocol }://${ req.hostname }${ port }/callback/`; // Your redirect uri
-
     console.log(redirectUri);
 
     const state = generateRandomString(16);
