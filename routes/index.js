@@ -6,6 +6,4 @@ router.get('/', function(req, res) {
     res.render('index', { title: 'Aria'});
 });
 
-
-
 module.exports = router;
