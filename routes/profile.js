@@ -1,19 +1,39 @@
 require('dotenv').config();
-const querystring = require('querystring');
-
-const express = require('express');
+/**
+ * This is an example of a basic node.js script that performs
+ * the Authorization Code oAuth2 flow to authenticate against
+ * the Spotify Accounts.
+ *
+ * For more information, read
+ * https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow
+ */
+const express = require('express'); // Express web server framework
 const router = express.Router();
 
-const request = require('request');
+const request = require('request'); // "Request" library
+// const cors = require('cors');
+const querystring = require('querystring');
+const cookieParser = require('cookie-parser');
 
-router.get('/profile', function (req, res) {
-    const stateKey = 'spotify_auth_state';
-    const redirectUri = 'http://localhost:3000/profile';
-    const clientId = process.env.clientId;
-    const clientSecret = process.env.clientSecret;
-    var code = req.query.code || null;
-    var state = req.query.state || null;
-    var storedState = req.cookies ? req.cookies[stateKey] : null;
+const clientId = String(process.env.clientId); // Your client id
+const clientSecret = String(process.env.clientSecret); // Your client secret
+const redirectUri = 'http://localhost:3000/callback/'; // Your redirect uri
+
+/**
+ * Generates a random string containing numbers and letters
+ * @param  {number} length The length of the string
+ * @return {string} The generated string
+ */
+
+const stateKey = 'spotify_auth_state';
+router.get('/callback', function (req, res) {
+    // console.log('testing');
+    // your application requests refresh and access tokens
+    // after checking the state parameter
+
+    const code = req.query.code || null;
+    const state = req.query.state || null;
+    const storedState = req.cookies ? req.cookies[stateKey] : null;
 
     if (state === null || state !== storedState) {
         res.redirect('/#' +
@@ -42,7 +62,7 @@ router.get('/profile', function (req, res) {
                     refreshToken = body.refresh_token;
 
                 const options = {
-                    url: 'https://api.spotify.com/v1/me/tracks',
+                    url: 'https://api.spotify.com/v1/me',
                     headers: {
                         'Authorization': 'Bearer ' + accessToken
                     },
@@ -50,19 +70,18 @@ router.get('/profile', function (req, res) {
                 };
 
                 // use the access token to access the Spotify Web API
+                let data;
                 request.get(options, function (error, response, body) {
                     console.log(body);
-                    console.log(body['items'][0]['track']);
-
-                    res.render('spotify/profile', {body:body})
+                    data = body;
                 });
 
                 // we can also pass the token to the browser to make requests from there
-                // res.redirect('/#' +
-                //     querystring.stringify({
-                //         access_token: accessToken,
-                //         refresh_token: refreshToken
-                //     }));
+                res.redirect('/profile/#' +
+                    querystring.stringify({
+                        access_token: accessToken,
+                        refresh_token: refreshToken
+                    }));
             } else {
                 res.redirect('/#' +
                     querystring.stringify({
@@ -73,27 +92,32 @@ router.get('/profile', function (req, res) {
     }
 });
 
+router.get('/profile', function (req, res) {
+
+    res.render('spotify/profile');
+})
+
 router.get('/refresh_token', function (req, res) {
 
     // requesting access token from refresh token
-    var refresh_token = req.query.refresh_token;
-    var authOptions = {
+    const refreshToken = req.query.refresh_token;
+    const authOptions = {
         url: 'https://accounts.spotify.com/api/token',
         headers: {
-            'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+            'Authorization': 'Basic ' + (new Buffer(clientId + ':' + clientSecret).toString('base64'))
         },
         form: {
             grant_type: 'refresh_token',
-            refresh_token: refresh_token
+            refresh_token: refreshToken
         },
         json: true
     };
 
     request.post(authOptions, function (error, response, body) {
         if (!error && response.statusCode === 200) {
-            var access_token = body.access_token;
+            const accessToken = body.access_token;
             res.send({
-                'access_token': access_token
+                'access_token': accessToken
             });
         }
     });
