@@ -2,19 +2,13 @@
 require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
+
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const hbs = require('express-handlebars');
-
-// Routes
-const indexRouter = require('./routes/index');
-const settingsRouter = require('./routes/settings');
-const loginRouter = require('./routes/login');
-const profileRouter = require('./routes/profile');
-
-
+const fs = require('fs');
 const app = express();
 /* eslint-enable */
 
@@ -33,10 +27,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'src')));
 
 // Routes
-app.use(indexRouter);
-app.use(settingsRouter);
-app.use(loginRouter);
-app.use(profileRouter);
+/* eslint-disable */
+fs.readdirSync("./routes/").forEach(file => {
+    app.use(require("./routes/" + file));
+});
+/* eslint-enable */
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
