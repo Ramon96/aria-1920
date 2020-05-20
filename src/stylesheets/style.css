@@ -6161,5 +6161,32 @@ html, body {
   margin: 0;
   font-family: spotify-black;
   background: #191414;
+  height: 100%;
+}
+
+.center-wrap {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.center-wrap h1 {
+  margin-top: 0;
+}
+
+.button {
+  color: #fff;
+  font-family: spotify-bold;
+  background: #1DB954;
+  border: none;
+  border-radius: 15px;
+  padding: 5px 10px;
 }
 /*# sourceMappingURL=style.css.map */
