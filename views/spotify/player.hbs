@@ -281,8 +281,11 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     const {
       artists,
       name,
-      album
+      album,
+      duration
     } = state.track_window.current_track
+
+    // Duration from miliseconds to minutest an
 
     const albumCover = album['images'][1]['url']
 
@@ -411,16 +414,16 @@ function loadMore(offset, limit) {
 function isBottom() {
   let offset = 0;
   window.addEventListener('scroll', throttle(function (e) {
-    console.log('scroll')
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+   console.table(window.innerHeight, window.scrollY, document.body.scrollHeight) 
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
       console.log("you're at the bottom of the page")
-
+ 
       offset += 50
 
       loadMore(offset, 50)
     }
 
-  }, 3000))
+  }, 50))
 
 }
 
