@@ -1,0 +1,27 @@
+#track-list{
+    ul{
+        li{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            list-style-type: none;
+            height: 4.5em;
+            transition: background-color .2s;
+            &:hover{
+                background-color: hsla(0,0%,100%,.1);
+                transition: background-color .2s;
+            }
+
+            .track-name{
+                font-size: 16px;
+                line-height: 22px;
+                letter-spacing: .015em;
+                color: #fff;
+            }
+            .track-artist{
+                color: rgb(179, 179, 179);
+                font-size: 0.875rem;
+            }
+        }
+    }
+}

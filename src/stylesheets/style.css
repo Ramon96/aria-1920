@@ -6157,6 +6157,41 @@ button.control .active:hover {
   margin: 0;
 }
 
+#track-list ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  list-style-type: none;
+  height: 4.5em;
+  -webkit-transition: background-color .2s;
+  transition: background-color .2s;
+}
+
+#track-list ul li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  -webkit-transition: background-color .2s;
+  transition: background-color .2s;
+}
+
+#track-list ul li .track-name {
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: .015em;
+  color: #fff;
+}
+
+#track-list ul li .track-artist {
+  color: #b3b3b3;
+  font-size: 0.875rem;
+}
+
 html, body {
   margin: 0;
   font-family: spotify-black;

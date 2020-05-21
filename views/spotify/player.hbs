@@ -12,23 +12,22 @@
     </style>
 
 
-  <body>
     <div class="container">
-      <div id="login">
+
         <h1>Spotify Player</h1>
-        <a href="/login" class="btn btn-primary">Log in with Spotify</a>
-      </div>
+
       <div id="loggedin">
         <div id="user-profile">
         </div>
         <div id="oauth">
         </div>
-        <div id="track-list">
-        </div>
+
         <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
       </div>
     </div>
-
+        <div id="track-list">
+        </div>
+        
     <script id="user-profile-template" type="text/x-handlebars-template">
       <h1>Logged in as {{display_name}}</h1>
       <div class="media">
@@ -68,9 +67,16 @@
     <script id="track-list-template" type="text/x-handlebars-template">
       <h3>Title</h3>
       <ul>
-        {{#each tracks }}
-          <li>{{this}}</li>
-        {{/each}}
+        \{{#each tracks }}
+          <li data-track_uri=\{{this.uri}}>
+            <div class="track-name">\{{this.name}}</div>
+            <div class="track-artist">
+              \{{#each artists}}
+                  \{{this.name}}
+              \{{/each}}
+            </div>
+            </li>
+        \{{/each}}
       </ul>
     </script>
 
@@ -110,6 +116,9 @@
             trackListTemplate = Handlebars.compile(trackListSource),
             trackListPlaceholder = document.getElementById('track-list');
 
+
+            console.log(trackListSource, trackListTemplate, trackListPlaceholder)
+
         
 
         var params = getHashParams();
@@ -120,6 +129,7 @@
             refresh_token = params.refresh_token,
             error = params.error;
 
+        console.log(access_token)
 
         let tracks;
 
@@ -139,6 +149,8 @@
                   'Authorization': 'Bearer ' + access_token
                 },
                 success: function(response) {
+
+                  console.log(response)
                   userProfilePlaceholder.innerHTML = userProfileTemplate(response);
 
                   $('#login').hide();
@@ -149,8 +161,16 @@
                   }})
                     .then(data => data.json())
                     .then(data =>  { 
-                      console.log(data.items.map(song => song.track.name))
-                      trackListPlaceholder.innerHTML = trackListTemplate({ tracks:data.items.map(song => song.track.name) })
+
+
+                      console.table(data.items.map(song => song.track))
+
+                      const tracks = data.items.map(song => song.track)
+                      trackListPlaceholder.innerHTML = trackListTemplate({ tracks:tracks })
+
+
+
+
                       return data
                     })
 
@@ -223,7 +243,20 @@ console.log('token' , token)
     console.log('Ready with Device ID', data.device_id);
     console.log(token)
     // Play a track using our new device ID
-    play(data.device_id, token);
+    //play(data.device_id, token);
+
+    
+                      document.querySelector('#track-list').addEventListener('click', function(event) {
+
+                        const target = event.target;
+                        console.log(target)
+
+                        if(target.tagName == 'LI'){
+                          console.log(target.getAttribute('data-track_uri'))
+                          const trackUri = target.getAttribute('data-track_uri')
+                          play(data.device_id, token, trackUri );
+                        }
+                      })
   });
 
   // Connect to the player!
@@ -253,8 +286,11 @@ console.log('token' , token)
 
 }
 
+
+
+
 // Play a specified track on the Web Playback SDK's device ID
-function play(device_id, token) {
+function play(device_id, token, trackUri) {
     console.log(token)
  fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
         method: "PUT",
@@ -264,7 +300,7 @@ function play(device_id, token) {
             Authorization: "Bearer " + token,
         },
         body: JSON.stringify({
-            uris: ["spotify:track:6UB9mShVLbMm0W4e6vud4C"]
+            uris: [trackUri]
         })})
         
 }
