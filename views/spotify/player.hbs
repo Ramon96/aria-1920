@@ -57,12 +57,23 @@
     </script>
 
 
-    <button data-control="pause">
+      <script id="playing-now-template" type="text/x-handlebars-template">
+      <h2></h2>
+      <dl class="dl-horizontal">
+        <dt>Access token</dt><dd class="text-overflow">{{access_token}}</dd>
+        <dt>Refresh token</dt><dd class="text-overflow">{{refresh_token}}</dd>
+      </dl>
+
+       <button data-control="pause">
       Pause
     </button>
     <button data-control="play">
       Play
     </button>
+    </script>
+
+
+   
 
     <script id="track-list-template" type="text/x-handlebars-template">
       <h3>Title</h3>
@@ -236,6 +247,9 @@ console.log('token' , token)
   player.on('player_state_changed', state => {
     console.log(state)
    
+    const { artists, name } = state.track_window.current_track
+
+    console.table([artists, name])
   });
 
   // Ready
@@ -250,13 +264,25 @@ console.log('token' , token)
 
                         const target = event.target;
                         console.log(target)
+                        console.log('nu')
 
-                        if(target.tagName == 'LI'){
+                        // Check wether the event bubbling path contains the list item element
+                        const LI = event.path.find(el => el.tagName == 'LI')
+
+                        if(typeof LI != 'undefined'){
+                          console.log('Element:', event.path.find(el => el.tagName == 'LI'))
+                          const trackUri = LI.getAttribute('data-track_uri')
+                          play(data.device_id, token, trackUri );
+                        }else{
+                          console.log('nope')
+                        }
+
+                     /*   if(target.tagName == 'LI'){
                           console.log(target.getAttribute('data-track_uri'))
                           const trackUri = target.getAttribute('data-track_uri')
                           play(data.device_id, token, trackUri );
-                        }
-                      })
+                        }*/
+                      }, false)
   });
 
   // Connect to the player!
