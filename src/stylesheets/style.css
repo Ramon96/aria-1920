@@ -6215,7 +6215,7 @@ button.control .active:hover {
   transition: transform .5s, -webkit-transform .5s;
 }
 
-.track .track-name {
+.track {
   color: #fff;
 }
 
