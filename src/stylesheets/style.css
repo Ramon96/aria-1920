@@ -6192,6 +6192,37 @@ button.control .active:hover {
   font-size: 0.875rem;
 }
 
+.play-bar {
+  position: fixed;
+  bottom: 0;
+  background: #282828;
+  width: 100%;
+  padding: 1rem;
+  -webkit-transform: translate(0, 100%);
+          transform: translate(0, 100%);
+  -webkit-transition: -webkit-transform .5s;
+  transition: -webkit-transform .5s;
+  transition: transform .5s;
+  transition: transform .5s, -webkit-transform .5s;
+}
+
+.play-bar.playing {
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+  -webkit-transition: -webkit-transform .5s;
+  transition: -webkit-transform .5s;
+  transition: transform .5s;
+  transition: transform .5s, -webkit-transform .5s;
+}
+
+.track .track-name {
+  color: #fff;
+}
+
+.track .track-artist {
+  color: #b3b3b3;
+}
+
 html, body {
   margin: 0;
   font-family: spotify-black;

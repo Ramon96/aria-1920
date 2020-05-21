@@ -1,3 +1,7 @@
+$white: #fff;
+$semi-white: #b3b3b3;
+
+
 #track-list{
     ul{
         li{
@@ -24,4 +28,28 @@
             }
         }
     }
+}
+
+.play-bar{
+    position: fixed;
+    bottom: 0;
+    background: #282828;
+    width: 100%;
+    padding: 1rem;
+    transform: translate(0, 100%);
+    transition: transform .5s;
+}
+
+.play-bar.playing{
+    transform: translate(0, 0);
+    transition: transform .5s;
+}
+
+.track{
+    .track-name{
+        color: $white;
+    }
+    .track-artist{
+        color: $semi-white;
+    } 
 }
