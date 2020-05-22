@@ -62,79 +62,92 @@ var access_token = params.access_token,
             });
 
             // TODO remove any jQuery, remove what's unnecessary, refactor to vanilla what's useful 
-            $.ajax({
-                url: 'https://api.spotify.com/v1/me',
+            fetch('https://api.spotify.com/v1/me', {
                 headers: {
                     'Authorization': 'Bearer ' + access_token
-                },
-                success: function (response) {
+                }})
+            .then(res => res.json())
+            .then(response => {
 
-                    console.log(response)
-                    userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+                console.log(response)
+                userProfilePlaceholder.innerHTML = userProfileTemplate(response);
 
-                    $('#login').hide();
-                    $('#loggedin').show();
 
-                    fetch('https://api.spotify.com/v1/me/tracks?limit=50', {
-                            headers: {
-                                'Authorization': 'Bearer ' + access_token
+
+                fetch('https://api.spotify.com/v1/me/tracks?limit=50', {
+                        headers: {
+                            'Authorization': 'Bearer ' + access_token
+                        }
+                    })
+                    .then(data => data.json())
+                    .then(data => {
+
+
+                        //console.table(data.items.map(song => song.track))
+                        console.log(data)
+
+                        const tracks = data.items.map(song => {
+                            return {
+                                name: song.track.name,
+                                duration: msToMinAndSec(song.track.duration_ms),
+                                artists: song.track.artists,
+                                uri: song.track.uri
                             }
                         })
-                        .then(data => data.json())
-                        .then(data => {
-
-
-                            //console.table(data.items.map(song => song.track))
-                            console.log(data)
-
-                            const tracks = data.items.map(song => {
-                                return {
-                                    name: song.track.name,
-                                    duration: msToMinAndSec(song.track.duration_ms),
-                                    artists: song.track.artists,
-                                    uri: song.track.uri
-                                }
-                            })
-                            trackListPlaceholder.innerHTML = trackListTemplate({
-                                tracks: tracks
-                            })
-
-
-                            return data
+                        trackListPlaceholder.innerHTML = trackListTemplate({
+                            tracks: tracks
                         })
 
-                    fetch('https://api.spotify.com/v1/search?q=battery&type=track&limit=50', {
-                            headers: {
-                                'Authorization': 'Bearer ' + access_token
-                            }
-                        })
-                        .then(data => data.json())
-                        .then(data => {
 
-                            console.log(data.tracks.items[0].artists)
-                            console.log(data.tracks.items.filter(song => song.artists[0]['name'] == "Metallica"))
-                        })
-                }
-            });
+                        return data
+                    })
+
+                fetch('https://api.spotify.com/v1/search?q=battery&type=track&limit=50', {
+                        headers: {
+                            'Authorization': 'Bearer ' + access_token
+                        }
+                    })
+                    .then(data => data.json())
+                    .then(data => {
+
+                        console.log(data.tracks.items[0].artists)
+                        console.log(data.tracks.items.filter(song => song.artists[0]['name'] == "Metallica"))
+                    })
+            })
+                
+            
         } else {
             // render initial screen
-            $('#login').show();
-            $('#loggedin').hide();
+            // $('#login').show();
+            // $('#loggedin').hide();
+            
+            // TODO Redirect to login? Can we handle this better?
         }
 
         document.getElementById('obtain-new-token').addEventListener('click', function () {
-            $.ajax({
-                url: '/refresh_token',
-                data: {
-                    'refresh_token': refresh_token
-                }
-            }).done(function (data) {
-                access_token = data.access_token;
-                oauthPlaceholder.innerHTML = oauthTemplate({
-                    access_token: access_token,
-                    refresh_token: refresh_token
-                });
-            });
+
+            fetch(`/refresh_token?refresh_token=${refresh_token}`)
+                .then(res => {
+                    return res.json()
+                })
+                .then(json => {
+                    console.log(json.access_token)
+                    access_token = json.access_token;
+                    oauthPlaceholder.innerHTML = oauthTemplate({
+                        access_token: access_token,
+                        refresh_token: refresh_token
+                    });
+                })
+
+
+            // $.ajax({
+            //     url: `/refresh_token?refresh_token=${refresh_token}`,
+            //     data: {
+            //         'refresh_token': refresh_token
+            //     }
+            // }).done(function (data) {
+              
+            // });
         }, false);
     }
 })();
@@ -148,6 +161,17 @@ const token = window.location.hash.substr(1).split('=')[1]
 window.onSpotifyWebPlaybackSDKReady = () => {
     // const token = urlParams.get('code');
 
+    // Small play-bar
+    var playBarSource = document.getElementById('play-bar-template').innerHTML,
+    playBarTemplate = Handlebars.compile(playBarSource),
+    playBarPlaceholder = document.getElementById('play-bar');
+    
+    // Detail-overlay of the current song / artist
+    var songDetailOverlaySource = document.getElementById('song-detail-overlay-template').innerHTML,
+    songDetailOverlayTemplate = Handlebars.compile(songDetailOverlaySource),
+    songDetailOverlayPlaceholder = document.getElementById('song-detail');
+
+
     console.log('token', token)
 
 
@@ -156,7 +180,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         getOAuthToken: cb => {
             cb(token);
         },
-        volume: 0.9
+        volume: 1
     });
 
     // Error handling
@@ -169,9 +193,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     player.on('player_state_changed', state => {
 
 
-        var playingSource = document.getElementById('playing-now-template').innerHTML,
-            playingTemplate = Handlebars.compile(playingSource),
-            playingPlaceholder = document.getElementById('playing-now');
+     
 
         console.log(state)
 
@@ -195,13 +217,34 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
         const formatedDuration = msToMinAndSec(duration_ms)
 
-        playingPlaceholder.innerHTML = playingTemplate({
+        // Render current song in playbar
+        playBarPlaceholder.innerHTML = playBarTemplate({
             name: name,
             duration: formatedDuration,
             artists: artists,
             albumCover: albumCover
         });
 
+        // Render current song and artist data in hidden overlay
+        // To be enabled when the user clicks on it.
+        songDetailOverlayPlaceholder.innerHTML = songDetailOverlayTemplate({
+            name: name,
+            duration: formatedDuration,
+            artists: artists,
+            albumCover: albumCover
+        });
+
+
+        songDetailOverlayPlaceholder.querySelector('button').addEventListener('click', function(event) {
+            document.body.classList.remove('overflow-hidden')
+            songDetailOverlayPlaceholder.dataset.overlay = 'disabled'
+        })
+
+        // When clicked on the playbar, trigger overlay with details and content
+        playBarPlaceholder.addEventListener('click', function(event){
+            document.body.classList.add('overflow-hidden')
+            songDetailOverlayPlaceholder.dataset.overlay = 'enabled'
+        })
     });
 
     // Ready
@@ -210,9 +253,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         console.log(token)
         // Play a track using our new device ID
         //play(data.device_id, token);
-
         setupTrackList(data)
-
     });
 
     // Connect to the player!
@@ -289,7 +330,7 @@ function setupTrackList(data) {
 
             play(data.device_id, token, trackUri);
         } else {
-            console.log('nope')
+            console.error("Can't find list-item along event path")
         }
     }, false)
 }
@@ -326,7 +367,7 @@ function loadMore(offset, limit) {
 function isBottom() {
     let offset = 0;
     window.addEventListener('scroll', throttle(function (e) {
-        console.table(window.innerHeight, window.scrollY, document.body.scrollHeight)
+        // console.table(window.innerHeight, window.scrollY, document.body.scrollHeight)
         if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
             console.log("you're at the bottom of the page")
 
