@@ -4,9 +4,9 @@ const router = express.Router();
 // const request = require('request'); // "Request" library
 
 router.get('/player*', function (req, res){
-    console.log('AccesToken:', req.session.accessToken)
+    console.log('AccesToken:', req.session.accessToken);
     res.render('spotify/player');
-})
+});
 
 
 
