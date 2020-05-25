@@ -1,23 +1,159 @@
-.play-bar{
+$white: #fff;
+$semi-white: #b3b3b3;
+
+
+#track-list {
+    ul {
+        li {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            list-style-type: none;
+            height: 4.5em;
+            transition: background-color .2s;
+
+            &:hover {
+                background-color: hsla(0, 0%, 100%, .1);
+                transition: background-color .2s;
+            }
+
+            .track-name {
+                font-size: 16px;
+                line-height: 22px;
+                letter-spacing: .015em;
+                color: color(Primary);
+            }
+
+            .track-artist {
+                color: color(Secondairy);
+                font-size: 0.875rem;
+            }
+        }
+    }
+}
+
+
+.play-bar {
+    position: fixed;
+    bottom: 0;
+    background: #282828;
+    width: 100%;
+    transform: translate(0, 100%);
+    transition: transform .5s;
+
+    &.playing {
+        transform: translate(0, 0);
+        transition: transform .5s;
+    }
+}
+
+#play-bar {
     display: flex;
     flex-direction: row;
-    button{
+    align-items: center;
+    padding-right: 1rem;
+    font-family: spotify-book;
+
+    progress {
+        // for some reason, the styling of the progress bar gets lost if you remove the border-radius, I dont know why..
+        border-radius: 1px; 
+        height: 2px;
+        position: fixed;
+        top: -1px;
+        width: 100%;
+    }
+
+    progress::-webkit-progress-bar {
+        background-color: #535353;
+    }
+
+    progress::-webkit-progress-value {
+        background: color(Primary);
+    }
+
+    progress::-moz-progress-bar {
+        /* style rules */
+    }
+
+    img {
+        padding-right: 10px;
+    }
+
+    .track-name {
+        color: color(Primary);
+
+        &::after {
+            content: "•";
+            padding: 0 5px;
+        }
+    }
+
+    .track-artist {
+        color: color(Secondairy);
+    }
+
+    button {
         font-family: icons;
         background: none;
         border: none;
         color: color(White);
-        &[data-control="play"]{
-            &::before{
+        margin-left: auto;
+
+        &[data-control="play"] {
+            &::before {
                 content: "\f132";
                 font-size: 16px;
             }
         }
 
-        &[data-control="pause"]{
-            &::before{
+        &[data-control="pause"] {
+            &::before {
                 content: "\f130";
                 font-size: 16px;
             }
+        }
+    }
+}
+
+
+#song-detail {
+    width: 100%;
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    background-color: #292929db;
+    transition: opacity 3s;
+    overflow-y: scroll;
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        background-color: #000;
+    }
+
+    &[data-overlay="disabled"] {
+        transform: translate(100%);
+        transition: transform .3s;
+
+        &::before {
+            opacity: 1;
+            transition: opacity .3s .3s;
+        }
+    }
+
+    &[data-overlay="enabled"] {
+        transform: translate(0);
+        transition: transform .3s;
+
+        &::before {
+            opacity: 0;
+            transition: opacity .3s .3s;
+            display: none;
         }
     }
 }

@@ -212,7 +212,24 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     
 
         // Render current song in playbar
-    
+        playBarPlaceholder.innerHTML = playBarTemplate({
+            name: name,
+            duration: formatedDuration,
+            artists: artists,
+            albumCover: albumCover
+        });
+        // TODO: turn this into a function
+        const pauseBtn = document.querySelector('button.playButton')
+
+            pauseBtn.addEventListener('click', function(event) {
+                console.log('Pause btn click')
+                const target = event.target
+                if (target.dataset.control === 'pause') {
+                    player.togglePlay().then(() => {
+                        target.setAttribute('data-control', 'play')
+                    });
+                } 
+            })
 
         // Render current song and artist data in hidden overlay
         // To be enabled when the user clicks on it.
@@ -273,35 +290,6 @@ function play(device_id, token, trackUri) {
             })
         })
         .then(res => {
-
-
-            console.log('res', res)
-
-            const {
-                artists,
-                name,
-                album,
-                duration_ms
-            } = res
-
-            playBarPlaceholder.innerHTML = playBarTemplate({
-            name: name,
-            duration: formatedDuration,
-            artists: artists,
-            albumCover: albumCover
-        });
-        // TODO: turn this into a function
-        const pauseBtn = document.querySelector('button.playButton')
-
-            pauseBtn.addEventListener('click', function(event) {
-                console.log('Pause btn click')
-                const target = event.target
-                if (target.dataset.control === 'pause') {
-                    player.togglePlay().then(() => {
-                        target.setAttribute('data-control', 'play')
-                    });
-                } 
-            })
 
             if (!playBar.classList.contains('playing')) {
                 playBar.classList.add('playing')

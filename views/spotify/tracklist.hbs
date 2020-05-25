@@ -1,29 +1,29 @@
-    <div class="container">
+<div class="container">
 
-      <h1>Spotify Player</h1>
+  <h1>Spotify Player</h1>
 
-      <div id="loggedin">
-        <div id="user-profile">
-        </div>
-        <div id="oauth">
-        </div>
-
-        <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
-      </div>
+  <div id="loggedin">
+    <div id="user-profile">
     </div>
-    <div id="track-list">
+    <div id="oauth">
     </div>
 
+    <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
+  </div>
+</div>
+<div id="track-list">
+</div>
 
-  <!-- music control partial  -->
-    {{> music-control}}
 
-    <div id="song-detail" data-overlay="disabled">
+<!-- music control partial  -->
+{{> music-control}}
 
-    </div>
+<div id="song-detail" data-overlay="disabled">
+
+</div>
 
 {{!-- User Profile info Template --}}
-    <script id="user-profile-template" type="text/x-handlebars-template">
+<script id="user-profile-template" type="text/x-handlebars-template">
       <h1>Logged in as \{{display_name}}</h1>
       <div class="media">
         <div class="pull-left">
@@ -48,7 +48,7 @@
   Because we have it around while inspecting the the demo. But when it goes live, this should maybe be removed.
 -->
 {{!-- HBS CS template for rendering the access_token and refresh_token. --}}
-    <script id="oauth-template" type="text/x-handlebars-template">
+<script id="oauth-template" type="text/x-handlebars-template">
       <h2>oAuth info</h2>
       <dl class="dl-horizontal">
         <dt>Access token</dt><dd class="text-overflow">\{{access_token}}</dd>
@@ -61,26 +61,21 @@
   HBS expressions which should be rendered in the client are prefixed by a backward slash to prevent
   them from being processed before it reaches the client.
 --}}
-    <script id="play-bar-template" type="text/x-handlebars-template">
+<script id="play-bar-template" type="text/x-handlebars-template">
       {{!-- <div class="track"> --}}
+        <progress value="20" max="100" ></progress>
             <img src="\{{albumCover}}" alt="\{{name}}">
+            <div class="track-name">\{{name}}</div>
             <div class="track-artist">
               \{{#each artists}}
                   \{{this.name}}
               \{{/each}}
             </div>
-            
-            <div class="track-name">\{{name}}</div>
-
-                  <button data-control="pause" class="playButton">
+          <button data-control="pause" class="playButton"></button>       
+</script>
 
 
-      </button>       
-
-    </script>
-
-
-    <script id="song-detail-overlay-template" type="text/x-handlebars-template">
+<script id="song-detail-overlay-template" type="text/x-handlebars-template">
     <button data-btn="back"><</button>
       <div class="track">
             <div class="track-name">\{{name}}</div>
@@ -99,7 +94,7 @@
 
 
 
-    <script id="track-list-template" type="text/x-handlebars-template">
+<script id="track-list-template" type="text/x-handlebars-template">
       <h3>Title</h3>
       <ul>
         \{{#each tracks }}
@@ -118,7 +113,7 @@
       </ul>
     </script>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
-    <script src="https://sdk.scdn.co/spotify-player.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="/js/index.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="/js/index.js"></script>
