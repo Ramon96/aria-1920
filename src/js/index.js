@@ -138,16 +138,6 @@ var access_token = params.access_token,
                         refresh_token: refresh_token
                     });
                 })
-
-
-            // $.ajax({
-            //     url: `/refresh_token?refresh_token=${refresh_token}`,
-            //     data: {
-            //         'refresh_token': refresh_token
-            //     }
-            // }).done(function (data) {
-              
-            // });
         }, false);
     }
 })();

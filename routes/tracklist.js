@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/player*', function (req, res){
     console.log('AccesToken:', req.session.accessToken);
-    res.render('spotify/player');
+    res.render('spotify/tracklist');
 });
 
 
