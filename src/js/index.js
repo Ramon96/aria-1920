@@ -179,10 +179,13 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     player.on('account_error', e => console.error(e));
     player.on('playback_error', e => console.error(e));
 
+    let currentTrack;
+
     // Playback status updates
     player.on('player_state_changed', state => {
 
 
+        currentTrack = state.track_window.current_track
      
 
         console.log(state)
@@ -195,12 +198,6 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         } = state.track_window.current_track
 
         // Duration from miliseconds to minutest an
-
-
-
-
-
-
         const albumCover = album['images'][1]['url']
 
         console.table([artists, name])
@@ -208,9 +205,9 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         const formatedDuration = msToMinAndSec(duration_ms)
 
 
-
+        setInterval(function(){ getState(player) }, 1000)
     
-
+        if(state.track_window.current_track.id != currentTrack.id){
         // Render current song in playbar
         playBarPlaceholder.innerHTML = playBarTemplate({
             name: name,
@@ -218,6 +215,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
             artists: artists,
             albumCover: albumCover
         });
+<<<<<<< HEAD
         // TODO: turn this into a function
         const pauseBtn = document.querySelector('button.playButton')
 
@@ -230,6 +228,25 @@ window.onSpotifyWebPlaybackSDKReady = () => {
                     });
                 } 
             })
+=======
+        
+                // TODO: turn this into a function
+                const pauseBtn = document.querySelector('button.playButton')
+
+
+
+                pauseBtn.addEventListener('click', function(event) {
+                    console.log('Pause btn click')
+                    const target = event.target
+                    if (target.dataset.control === 'pause') {
+                        player.togglePlay().then(() => {
+                            target.setAttribute('data-control', 'play')
+                        });
+                    } 
+                })
+    }
+
+>>>>>>> spotify_oath_setup
 
         // Render current song and artist data in hidden overlay
         // To be enabled when the user clicks on it.
@@ -266,7 +283,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     // const pauseBtn = document.querySelector('button[data-control="pause"]')
 
 
-
+    
 
 }
 
@@ -289,7 +306,14 @@ function play(device_id, token, trackUri) {
                 uris: [trackUri]
             })
         })
+<<<<<<< HEAD
         .then(res => {
+=======
+        .then(json => {
+
+
+            console.log('res', json)
+>>>>>>> spotify_oath_setup
 
             if (!playBar.classList.contains('playing')) {
                 playBar.classList.add('playing')
@@ -297,6 +321,27 @@ function play(device_id, token, trackUri) {
 
         })
 
+}
+
+
+
+function getState(player){
+    console.log('getting state')
+    player.getCurrentState().then(state => {
+        if (!state) {
+          console.error('User is not playing music through the Web Playback SDK');
+          return;
+        }
+      
+        let {
+          current_track,
+          next_tracks: [next_track]
+        } = state.track_window;
+      
+        console.log('Currently Playing', current_track);
+        console.log('Playing Next', next_track);
+        console.log('Track window', state);
+      });
 }
 
 
