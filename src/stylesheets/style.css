@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
  * Font Awesome Free 5.13.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -6157,37 +6158,6 @@ button.control .active:hover {
   margin: 0;
 }
 
-.play-bar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
-.play-bar button {
-  font-family: icons;
-  background: none;
-  border: none;
-  color: #FFF;
-}
-
-.play-bar button[data-control="play"]::before {
-  content: "\f132";
-  font-size: 16px;
-}
-
-.play-bar button[data-control="pause"]::before {
-  content: "\f130";
-  font-size: 16px;
-}
-
-.overflow-hidden {
-  overflow: hidden;
-}
-
 #track-list ul li {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -6228,7 +6198,6 @@ button.control .active:hover {
   bottom: 0;
   background: #282828;
   width: 100%;
-  padding: 1rem;
   -webkit-transform: translate(0, 100%);
           transform: translate(0, 100%);
   -webkit-transition: -webkit-transform .5s;
@@ -6246,12 +6215,74 @@ button.control .active:hover {
   transition: transform .5s, -webkit-transform .5s;
 }
 
-.track {
+#play-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-right: 1rem;
+  font-family: spotify-book;
+}
+
+#play-bar progress {
+  border-radius: 1px;
+  height: 2px;
+  position: fixed;
+  top: -1px;
+  width: 100%;
+}
+
+#play-bar progress::-webkit-progress-bar {
+  background-color: #535353;
+}
+
+#play-bar progress::-webkit-progress-value {
+  background: #fff;
+}
+
+#play-bar progress::-moz-progress-bar {
+  /* style rules */
+}
+
+#play-bar img {
+  padding-right: 10px;
+}
+
+#play-bar .track-name {
   color: #fff;
 }
 
-.track .track-artist {
+#play-bar .track-name::after {
+  content: "•";
+  padding: 0 5px;
+}
+
+#play-bar .track-artist {
   color: #b3b3b3;
+}
+
+#play-bar button {
+  font-family: icons;
+  background: none;
+  border: none;
+  color: #FFF;
+  margin-left: auto;
+}
+
+#play-bar button[data-control="play"]::before {
+  content: "\f132";
+  font-size: 16px;
+}
+
+#play-bar button[data-control="pause"]::before {
+  content: "\f130";
+  font-size: 16px;
 }
 
 #song-detail {
