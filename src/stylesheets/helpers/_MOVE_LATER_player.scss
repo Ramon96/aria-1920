@@ -1,0 +1,95 @@
+$white: #fff;
+$semi-white: #b3b3b3;
+
+.overflow-hidden{
+    overflow: hidden;
+}
+
+#track-list{
+    ul{
+        li{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            list-style-type: none;
+            height: 4.5em;
+            transition: background-color .2s;
+            &:hover{
+                background-color: hsla(0,0%,100%,.1);
+                transition: background-color .2s;
+            }
+
+            .track-name{
+                font-size: 16px;
+                line-height: 22px;
+                letter-spacing: .015em;
+                color: #fff;
+            }
+            .track-artist{
+                color: rgb(179, 179, 179);
+                font-size: 0.875rem;
+            }
+        }
+    }
+}
+
+.play-bar{
+    position: fixed;
+    bottom: 0;
+    background: #282828;
+    width: 100%;
+    padding: 1rem;
+    transform: translate(0, 100%);
+    transition: transform .5s;
+}
+
+.play-bar.playing{
+    transform: translate(0, 0);
+    transition: transform .5s;
+}
+
+.track{
+    color: $white;
+    .track-artist{
+        color: $semi-white;
+    } 
+}
+
+#song-detail{
+    width: 100%;
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    background-color: #292929db;
+    transition: opacity 3s;
+    overflow-y: scroll;
+
+    &::before{
+        content:'';
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        background-color: #000;
+    }
+
+    &[data-overlay="disabled"]{
+        transform: translate(100%);
+        transition: transform .3s;
+        &::before{
+            opacity: 1;
+            transition: opacity .3s .3s;
+        }
+    }
+    &[data-overlay="enabled"]{
+        transform: translate(0);
+        transition: transform .3s;
+        &::before{
+            opacity: 0;
+            transition: opacity .3s .3s;
+            display: none;
+        }
+    }
+} 

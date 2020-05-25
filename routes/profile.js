@@ -80,6 +80,12 @@ router.get('/callback', function (req, res) {
 
                 // we can also pass the token to the browser to make requests from there
                 /* eslint-disable */
+
+                req.session.accessToken = accessToken;
+                req.session.refreshToken = refreshToken;
+                console.log(accessToken);
+                console.log('Testing acces token', req.session.accessToken)
+
                 res.redirect('/profile/#' +
                     querystring.stringify({
                         access_token: accessToken,
@@ -98,7 +104,9 @@ router.get('/callback', function (req, res) {
 
 router.get('/profile', function (req, res) {
 
-    res.render('spotify/profile');
+    const accessTokenUri = `${req.session.accessToken}`;
+    const refreshTokenUri = req.session.refreshToken;
+    res.render('spotify/profile', {accesToken: accessTokenUri, refreshToken: refreshTokenUri});
 });
 
 router.get('/refresh_token', function (req, res) {
