@@ -38,5 +38,5 @@ Vasilis van Gemert
 
 
 ## External sources
-[Spotify housestyle]("https://developer.spotify.com/branding-guidelines/") 
-[Joost's case]("https://drive.google.com/file/d/1LIhH6LVYCvJZ8bm6NlvcSjMMKwOUjwI2/view")
+[Spotify housestyle](https://developer.spotify.com/branding-guidelines/) 
+[Joost's case](https://drive.google.com/file/d/1LIhH6LVYCvJZ8bm6NlvcSjMMKwOUjwI2/view)
