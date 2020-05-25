@@ -14,16 +14,9 @@
     <div id="track-list">
     </div>
 
-    <div class="play-bar">
-      <div id="play-bar">
-      </div>
-      <button data-control="pause">
-        Pause
-      </button>
-      <button data-control="play">
-        Play
-      </button>
-    </div>
+
+  <!-- music control partial  -->
+    {{> music-control}}
 
     <div id="song-detail" data-overlay="disabled">
 
@@ -69,18 +62,21 @@
   them from being processed before it reaches the client.
 --}}
     <script id="play-bar-template" type="text/x-handlebars-template">
-      <div class="track">
-            <div class="track-name">\{{name}}</div>
+      {{!-- <div class="track"> --}}
+            <img src="\{{albumCover}}" alt="\{{name}}">
             <div class="track-artist">
               \{{#each artists}}
                   \{{this.name}}
               \{{/each}}
             </div>
-            <img src="\{{albumCover}}" alt="\{{name}}">
-            <div class="track-duration">
-              \{{duration}}
-            </div>
-          </div>
+            
+            <div class="track-name">\{{name}}</div>
+
+                  <button data-control="pause" class="playButton">
+
+
+      </button>       
+
     </script>
 
 

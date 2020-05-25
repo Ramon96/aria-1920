@@ -6157,6 +6157,33 @@ button.control .active:hover {
   margin: 0;
 }
 
+.play-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.play-bar button {
+  font-family: icons;
+  background: none;
+  border: none;
+  color: #FFF;
+}
+
+.play-bar button[data-control="play"]::before {
+  content: "\f132";
+  font-size: 16px;
+}
+
+.play-bar button[data-control="pause"]::before {
+  content: "\f130";
+  font-size: 16px;
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
