@@ -43,7 +43,7 @@
         "computed-property-spacing":"error",
         "key-spacing":"error",
         "indent":"error",
-        "linebreak-style":["error","unix"],
+        "linebreak-style":["error","windows"],
         "no-trailing-spaces":"error"
     }
 }
