@@ -61,23 +61,18 @@
   HBS expressions which should be rendered in the client are prefixed by a backward slash to prevent
   them from being processed before it reaches the client.
 --}}
-    <script id="play-bar-template" type="text/x-handlebars-template">
+<script id="play-bar-template" type="text/x-handlebars-template">
       {{!-- <div class="track"> --}}
             <img src="\{{albumCover}}" alt="\{{name}}">
+            <div class="track-name">\{{name}}</div>
             <div class="track-artist">
               \{{#each artists}}
                   \{{this.name}}
               \{{/each}}
             </div>
-            
-            <div class="track-name">\{{name}}</div>
-
-                  <button data-control="pause" class="playButton">
-
-
+          <button data-control="pause" class="playButton">
       </button>       
-
-    </script>
+</script>
 
 
     <script id="song-detail-overlay-template" type="text/x-handlebars-template">
