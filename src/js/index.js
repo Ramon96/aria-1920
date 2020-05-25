@@ -41,13 +41,13 @@ var access_token = params.access_token,
 
 
 
-    console.log(trackListSource, trackListTemplate, trackListPlaceholder)
+    // console.log(trackListSource, trackListTemplate, trackListPlaceholder)
 
 
 
 
 
-    console.log(access_token)
+    // console.log(access_token)
 
     let tracks;
 
@@ -207,13 +207,12 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
         const formatedDuration = msToMinAndSec(duration_ms)
 
+
+
+    
+
         // Render current song in playbar
-        playBarPlaceholder.innerHTML = playBarTemplate({
-            name: name,
-            duration: formatedDuration,
-            artists: artists,
-            albumCover: albumCover
-        });
+    
 
         // Render current song and artist data in hidden overlay
         // To be enabled when the user clicks on it.
@@ -225,22 +224,21 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         });
 
 
-        songDetailOverlayPlaceholder.querySelector('button').addEventListener('click', function(event) {
-            document.body.classList.remove('overflow-hidden')
-            songDetailOverlayPlaceholder.dataset.overlay = 'disabled'
-        })
+        // songDetailOverlayPlaceholder.querySelector('button').addEventListener('click', function(event) {
+        //     document.body.classList.remove('overflow-hidden')
+        //     songDetailOverlayPlaceholder.dataset.overlay = 'disabled'
+        // })
 
-        // When clicked on the playbar, trigger overlay with details and content
-        playBarPlaceholder.addEventListener('click', function(event){
-            document.body.classList.add('overflow-hidden')
-            songDetailOverlayPlaceholder.dataset.overlay = 'enabled'
-        })
+        // // When clicked on the playbar, trigger overlay with details and content
+        // playBarPlaceholder.addEventListener('click', function(event){
+        //     document.body.classList.add('overflow-hidden')
+        //     songDetailOverlayPlaceholder.dataset.overlay = 'enabled'
+        // })
     });
 
     // Ready
     player.on('ready', data => {
         console.log('Ready with Device ID', data.device_id);
-        console.log(token)
         // Play a track using our new device ID
         //play(data.device_id, token);
         setupTrackList(data)
@@ -248,26 +246,9 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
     // Connect to the player!
     player.connect();
+    // const pauseBtn = document.querySelector('button[data-control="pause"]')
 
 
-    const pauseBtn = document.querySelector('button[data-control="pause"]')
-    const playBtn = document.querySelector('button[data-control="play"]')
-
-    const controls = [pauseBtn, playBtn];
-
-    controls.forEach(control => {
-        control.addEventListener('click', e => {
-            if (e.target.dataset.control === 'pause') {
-                player.pause().then(() => {
-                    console.log('Paused!');
-                });
-            } else if (e.target.dataset.control === 'play') {
-                player.resume().then(() => {
-                    console.log('Paused!');
-                });
-            }
-        })
-    })
 
 
 }
@@ -280,7 +261,6 @@ function play(device_id, token, trackUri) {
 
     const playBar = document.querySelector('.play-bar')
 
-    console.log(token)
     fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
             method: "PUT",
             headers: {
@@ -293,7 +273,35 @@ function play(device_id, token, trackUri) {
             })
         })
         .then(res => {
-            console.log(res)
+
+
+            console.log('res', res)
+
+            const {
+                artists,
+                name,
+                album,
+                duration_ms
+            } = res
+
+            playBarPlaceholder.innerHTML = playBarTemplate({
+            name: name,
+            duration: formatedDuration,
+            artists: artists,
+            albumCover: albumCover
+        });
+        // TODO: turn this into a function
+        const pauseBtn = document.querySelector('button.playButton')
+
+            pauseBtn.addEventListener('click', function(event) {
+                console.log('Pause btn click')
+                const target = event.target
+                if (target.dataset.control === 'pause') {
+                    player.togglePlay().then(() => {
+                        target.setAttribute('data-control', 'play')
+                    });
+                } 
+            })
 
             if (!playBar.classList.contains('playing')) {
                 playBar.classList.add('playing')
@@ -308,7 +316,6 @@ function setupTrackList(data) {
     document.querySelector('#track-list').addEventListener('click', function (event) {
 
         const target = event.target;
-        console.log(target)
 
         // Check wether the event bubbling path contains the list item element
         const LI = event.path.find(el => el.tagName == 'LI')
@@ -336,7 +343,6 @@ function loadMore(offset, limit) {
         .then(data => {
 
             //console.table(data.items.map(song => song.track))
-            console.log(data)
 
             const tracks = data.items.map(song => {
                 return {
@@ -359,7 +365,7 @@ function isBottom() {
     window.addEventListener('scroll', throttle(function (e) {
         // console.table(window.innerHeight, window.scrollY, document.body.scrollHeight)
         if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
-            console.log("you're at the bottom of the page")
+            // console.log("you're at the bottom of the page")
 
             offset += 50
 

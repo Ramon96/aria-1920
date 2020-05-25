@@ -1,0 +1,23 @@
+.play-bar{
+    display: flex;
+    flex-direction: row;
+    button{
+        font-family: icons;
+        background: none;
+        border: none;
+        color: color(White);
+        &[data-control="play"]{
+            &::before{
+                content: "\f132";
+                font-size: 16px;
+            }
+        }
+
+        &[data-control="pause"]{
+            &::before{
+                content: "\f130";
+                font-size: 16px;
+            }
+        }
+    }
+}
