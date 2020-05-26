@@ -63,7 +63,7 @@
 --}}
 <script id="play-bar-template" type="text/x-handlebars-template">
       {{!-- <div class="track"> --}}
-        <progress value="20" max="100" ></progress>
+        <progress value="0" max="100" ></progress>
             <img src="\{{albumCover}}" alt="\{{name}}">
             <div class="track-name">\{{name}}</div>
             <div class="track-artist">
@@ -71,12 +71,8 @@
                   \{{this.name}}
               \{{/each}}
             </div>
-<<<<<<< HEAD
-          <button data-control="pause" class="playButton"></button>       
-=======
           <button data-control="pause" class="playButton">
       </button>       
->>>>>>> spotify_oath_setup
 </script>
 
 
