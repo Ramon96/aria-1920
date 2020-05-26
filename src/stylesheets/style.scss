@@ -13,11 +13,10 @@ html,body{
     margin: 0;
     font-family: spotify-black;
     background: color(Black);
-    height: 100%;
 }
 
 .center-wrap{
-    height: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,3 +34,11 @@ html,body{
     border-radius: 15px;
     padding: 5px 10px;
 }
+
+.container{
+    word-break: break-all;
+}
+
+
+
+

@@ -76,19 +76,53 @@
 
 
 <script id="song-detail-overlay-template" type="text/x-handlebars-template">
-    <button data-btn="back"><</button>
+    <div class="songDetail-navigation">
+      <button data-btn="back"><svg height="24" role="img" width="24" viewBox="0 0 24 24" class="folddown"><polygon points="7.96,21.151 7.311,20.39 16.865,12.229 7.311,4.069 7.96,3.309 18.405,12.229 "></polygon></svg></button>
+      <button class="horizontal-dots"></button>
+    </div>
+     
+     
       <div class="track">
-            <div class="track-name">\{{name}}</div>
-            <div class="track-artist">
-              \{{#each artists}}
-                  \{{this.name}}
-              \{{/each}}
+            <img class="cover-img" src="\{{albumCover}}" alt="\{{name}}">
+
+            <div class="track-information">
+              <h2 class="track-name">\{{name}}</h2>
+              <div class="track-artist">
+                \{{#each artists}}
+                    \{{this.name}}
+                \{{/each}}
+              </div>
+              <button class="like-button"></button>
             </div>
-            <img src="\{{albumCover}}" alt="\{{name}}">
+            {{!-- dit word de progressbar --}}
+            <input class="track-progress" type="range" min="1" max="100" value="1">
+
+
             <div class="track-duration">
-              \{{duration}}
+              <div id="timecurrent">1:39</div>
+             <div id="timeleft"> \{{duration}} </div>
             </div>
+
+            <div class="track-controls">
+                <button class="shuffle"></button>
+                <div>
+                  <button class="prevSong"></button>
+                  <button class="playPause"></button>
+                  <button class="nextSong"></button>
+                </div>
+                <button class="repeat"></button>
+            </div>
+
+            <div class="track-location">
+              <button class="devices"></button>
+              <button class="queue"></button>
+            </div>
+
           </div>
+          {{!-- Socials --}}
+          <h3>Socials</h3>
+          {{!-- // TODO socials content, for each social, load content in  --}}
+          {{!-- // TODO Make socials partial --}}
     </script>
 
 
@@ -117,3 +151,4 @@
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="/js/index.js"></script>
+

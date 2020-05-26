@@ -240,6 +240,10 @@ window.onSpotifyWebPlaybackSDKReady = () => {
             albumCover: albumCover
         });
 
+        document.querySelector(".track-progress").oninput = function() {
+            this.style.background = 'linear-gradient(to right, #fff 0%, #fff ' + this.value + '%, #535353 ' + this.value + '%, #535353 100%)'
+        };
+
 
         // songDetailOverlayPlaceholder.querySelector('button').addEventListener('click', function(event) {
         //     document.body.classList.remove('overflow-hidden')
