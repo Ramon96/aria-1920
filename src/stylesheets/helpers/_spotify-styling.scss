@@ -86,6 +86,10 @@ $semi-white: #b3b3b3;
             content: "•";
             padding: 0 5px;
         }
+
+        .playing{
+            color: color(Green);
+        }
     }
 
     .track-artist {
@@ -157,3 +161,4 @@ $semi-white: #b3b3b3;
         }
     }
 }
+
