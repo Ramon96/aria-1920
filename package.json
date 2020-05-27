@@ -1,68 +1,28 @@
 {
   "name": "aria",
-  "version": "1.0.0",
-  "description": "Aria is a prototype of a spotify plugin where the user is able to add social media and news platforms to further enhance his music experience",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prestart": "eslint ./ --fix",
-    "start": "node ./bin/www",
-    "lint": "eslint ./"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "dotenv": "^8.2.0",
-    "express": "~4.16.1",
-    "express-handlebars": "^3.1.0",
-    "express-session": "^1.17.1",
-    "hbs": "^4.1.0",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "node-fetch": "^2.6.0",
-    "request": "^2.88.2"
+    "register-service-worker": "^1.7.1",
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0",
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "handlebars": "^4.7.6",
-    "nodemon": "^2.0.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Ramon96/aria-1920.git"
-  },
-  "keywords": [
-    "aria",
-    "spotify",
-    "youtube",
-    "twitter",
-    "rolling",
-    "stones",
-    "music",
-    "plugin",
-    "oauth",
-    "real",
-    "time",
-    "web",
-    "webdesign",
-    "prototype",
-    "exentsion",
-    "database",
-    "back",
-    "end",
-    "front",
-    "end",
-    "client",
-    "server",
-    "nodejs",
-    "javascript",
-    "html",
-    "css"
-  ],
-  "author": "Tomas Stolp & Ramon Meijers",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Ramon96/aria-1920/issues"
-  },
-  "homepage": "https://github.com/Ramon96/aria-1920#readme"
+    "@vue/cli-plugin-eslint": "~4.4.0",
+    "@vue/cli-plugin-pwa": "~4.4.0",
+    "@vue/cli-plugin-router": "~4.4.0",
+    "@vue/cli-plugin-vuex": "~4.4.0",
+    "@vue/cli-service": "~4.4.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11"
+  }
 }
