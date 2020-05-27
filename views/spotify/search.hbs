@@ -1,0 +1,155 @@
+<div class="container">
+
+  <h1>Spotify Player</h1>
+
+  <div id="loggedin">
+    <div id="user-profile">
+    </div>
+    <div id="oauth">
+    </div>
+
+    <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
+  </div>
+</div>
+<div id="track-list">
+</div>
+
+
+<!-- music control partial  -->
+{{> music-control}}
+
+<div id="song-detail" data-overlay="disabled">
+
+</div>
+
+{{!-- User Profile info Template --}}
+<script id="user-profile-template" type="text/x-handlebars-template">
+      <h1>Logged in as \{{display_name}}</h1>
+      <div class="media">
+        <div class="pull-left">
+          <img class="media-object" width="150" src="\{{images.0.url}}" />
+        </div>
+        <div class="media-body">
+          <dl class="dl-horizontal">
+            <dt>Display name</dt><dd class="clearfix">\{{display_name}}</dd>
+            <dt>Id</dt><dd>\{{id}}</dd>
+            <dt>Email</dt><dd>\{{email}}</dd>
+            <dt>Spotify URI</dt><dd><a href="\{{external_urls.spotify}}">\{{external_urls.spotify}}</a></dd>
+            <dt>Link</dt><dd><a href="\{{href}}">\{{href}}</a></dd>
+            <dt>Profile Image</dt><dd class="clearfix"><a href="\{{images.0.url}}">\{{images.0.url}}</a></dd>
+            <dt>Country</dt><dd>\{{country}}</dd>
+          </dl>
+        </div>
+      </div>
+    </script>
+
+<!-- 
+  TODO The oath template a great use now while the application is in development. 
+  Because we have it around while inspecting the the demo. But when it goes live, this should maybe be removed.
+-->
+{{!-- HBS CS template for rendering the access_token and refresh_token. --}}
+<script id="oauth-template" type="text/x-handlebars-template">
+      <h2>oAuth info</h2>
+      <dl class="dl-horizontal">
+        <dt>Access token</dt><dd class="text-overflow">\{{access_token}}</dd>
+        <dt>Refresh token</dt><dd class="text-overflow">\{{refresh_token}}</dd>
+      </dl>
+    </script>
+
+{{!-- 
+  Own Client-side template for the tracklist. 
+  HBS expressions which should be rendered in the client are prefixed by a backward slash to prevent
+  them from being processed before it reaches the client.
+--}}
+<script id="play-bar-template" type="text/x-handlebars-template">
+      {{!-- <div class="track"> --}}
+        <progress value="0" max="100" ></progress>
+            <img src="\{{albumCover}}" alt="\{{name}}">
+            <div class="track-name">\{{name}}</div>
+            <div class="track-artist">
+              \{{#each artists}}
+                  \{{this.name}}
+              \{{/each}}
+            </div>
+          <button data-control="pause" class="playButton">
+      </button>       
+</script>
+
+
+<script id="song-detail-overlay-template" type="text/x-handlebars-template">
+    <div class="songDetail-navigation">
+      <button data-btn="back"><svg height="24" role="img" width="24" viewBox="0 0 24 24" class="folddown"><polygon points="7.96,21.151 7.311,20.39 16.865,12.229 7.311,4.069 7.96,3.309 18.405,12.229 "></polygon></svg></button>
+      <button class="horizontal-dots"></button>
+    </div>
+     
+     
+      <div class="track">
+            <img class="cover-img" src="\{{albumCover}}" alt="\{{name}}">
+
+            <div class="track-information">
+              <h2 class="track-name">\{{name}}</h2>
+              <div class="track-artist">
+                \{{#each artists}}
+                    \{{this.name}}
+                \{{/each}}
+              </div>
+              <button class="like-button"></button>
+            </div>
+            {{!-- dit word de progressbar --}}
+            <input class="track-progress" type="range" min="1" max="100" value="1">
+
+
+            <div class="track-duration">
+              <div id="timecurrent">1:39</div>
+             <div id="timeleft"> \{{duration}} </div>
+            </div>
+
+            <div class="track-controls">
+                <button class="shuffle"></button>
+                <div>
+                  <button class="prevSong"></button>
+                  <button class="playPause"></button>
+                  <button class="nextSong"></button>
+                </div>
+                <button class="repeat"></button>
+            </div>
+
+            <div class="track-location">
+              <button class="devices"></button>
+              <button class="queue"></button>
+            </div>
+
+          </div>
+          {{!-- Socials --}}
+          <h3>Socials</h3>
+          {{!-- // TODO socials content, for each social, load content in  --}}
+          {{!-- // TODO Make socials partial --}}
+    </script>
+
+
+
+
+<script id="track-list-template" type="text/x-handlebars-template">
+      <h3>Title</h3>
+      <ul>
+        \{{#each tracks }}
+          <li data-track_uri=\{{this.uri}}>
+            <div class="track-name">\{{this.name}}</div>
+            <div class="track-artist">
+              \{{#each artists}}
+                  \{{this.name}}
+              \{{/each}}
+            </div>
+            <div class="track-duration">
+              \{{this.duration}}
+            </div>
+            </li>
+        \{{/each}}
+      </ul>
+    </script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="/js/index.js"></script>
+
