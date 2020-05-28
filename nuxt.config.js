@@ -1,6 +1,6 @@
 
 module.exports = {
-  mode: 'spa',
+  mode: 'universal',
   /*
   ** Headers of the page
   */
@@ -16,6 +16,12 @@ module.exports = {
     ]
   },
   /*
+  ** Route middleware
+  */
+  serverMiddleware: [
+    { path: '/login', handler: '~/OAUTH,js' }
+  ],
+  /*
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
@@ -23,6 +29,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    '~/css/main.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -44,8 +51,27 @@ module.exports = {
     'bootstrap-vue/nuxt',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/style-resources',
+    'nuxt-fontawesome'
   ],
+  styleResources: {
+    scss: [
+      '~/css/main.scss'
+    ]
+  },
+  fontawesome: {
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas']
+      },
+      {
+        set: '@fortawesome/free-brands-svg-icons',
+        icons: ['fab']
+      }
+    ]
+  },
   /*
   ** Build configuration
   */

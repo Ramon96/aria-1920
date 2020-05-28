@@ -1,72 +1,39 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        aria
-      </h1>
-      <h2 class="subtitle">
-        Aria is a prototype of a Spotify plugin where the user is able to add social media and news platforms to further enhance his music experience.
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+  <div class="container d-flex justify-content-center ">
+    <div class="align-self-center">
+      <h1>Aria</h1>
+      <!-- <a href="/login"><font-awesome-icon :icon="['fab', 'spotify']" /> LOGIN WITH SPOTIFY</a> -->
+      <nuxt-link to="/login/1"><font-awesome-icon :icon="['fab', 'spotify']" /> LOGIN WITH SPOTIFY</nuxt-link>
     </div>
   </div>
 </template>
 
-<script>
-import Logo from '~/components/Logo.vue'
-
-export default {
-  components: {
-    Logo
-  }
-}
-</script>
-
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+<style lang="scss">
+.container{
+  height: 100vh;
+      h1{
+        margin-top: 0;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: color(White);
+        padding: 0.08em 0px;
+        font-size: 96px;
+        font-weight: 900;
+        letter-spacing: -.04em;
+        line-height: 96px;
+        color: #fff;
+        font-family: spotify-bold;
+    }
+    a{
+      color: color(Primary);
+      font-family: spotify-bold;
+      background: color(Green);
+      border: none;
+      border-radius: 15px;
+      padding: 5px 10px;
+      path{
+        fill: color(White);
+      }
+    }
 }
 </style>
