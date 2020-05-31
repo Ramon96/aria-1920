@@ -1,0 +1,4 @@
+/API
+store/*
+components/NowPlaying.vue
+components/SearchField.vue
