@@ -17,9 +17,8 @@
 
 
 if(process.client){
-  window.onSpotifyWebPlaybackSDKReady = () => {
-  console.log(window)
-     
+   window.onSpotifyWebPlaybackSDKReady = () => {
+
     console.log('token', token)
 
     // Create a new player, listening to the playtrack

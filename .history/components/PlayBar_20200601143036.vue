@@ -17,8 +17,8 @@
 
 
 if(process.client){
-  window.onSpotifyWebPlaybackSDKReady = () => {
-  console.log(window)
+  console.log('hoi')
+   window.onSpotifyWebPlaybackSDKReady = () => {
      
     console.log('token', token)
 

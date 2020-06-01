@@ -6,7 +6,7 @@
       <Track v-for="track in tracks" :key="track.id" :track="track" />
     </ul>
     <transition name="fade">
-      <PlayBar :playing-track="playingTrack" :class="playingTrack ? 'show' : 'hide'" />
+      <PlayBar :playingTrack="playingTrack" />
     </transition>
   </section>
 </template>
@@ -14,13 +14,11 @@
 <script>
 import SearchField from '~/components/SearchField.vue'
 import Track from '~/components/Track.vue'
-import PlayBar from '~/components/PlayBar.vue'
 
 export default {
   components: {
     SearchField,
-    Track,
-    PlayBar
+    Track
   },
 
   data () {
@@ -55,19 +53,19 @@ export default {
         // play(data.device_id, token, trackUri);
         // this.$emit('playTrack', trackUri)
 
-        this.playingTrack = trackUri
+        this.playTrack(trackUri)
       } else {
         console.error("Can't find list-item along event path")
       }
     },
     async play (uri) {
-      // const track = await this.$axios.$get(
-      //   '/api/spotify/play/'
-      //   , {
-      //     params: {
-      //       track: this.trackTerm
-      //     }
-      //   })
+      const track = await this.$axios.$get(
+        '/api/spotify/play/'
+        , {
+          params: {
+            track: this.trackTerm
+          }
+        })
     }
   }
 

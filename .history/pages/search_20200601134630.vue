@@ -6,7 +6,7 @@
       <Track v-for="track in tracks" :key="track.id" :track="track" />
     </ul>
     <transition name="fade">
-      <PlayBar :playing-track="playingTrack" :class="playingTrack ? 'show' : 'hide'" />
+      <PlayBar :playingTrack="playingTrack" />
     </transition>
   </section>
 </template>
@@ -19,8 +19,7 @@ import PlayBar from '~/components/PlayBar.vue'
 export default {
   components: {
     SearchField,
-    Track,
-    PlayBar
+    Track
   },
 
   data () {
@@ -61,13 +60,13 @@ export default {
       }
     },
     async play (uri) {
-      // const track = await this.$axios.$get(
-      //   '/api/spotify/play/'
-      //   , {
-      //     params: {
-      //       track: this.trackTerm
-      //     }
-      //   })
+      const track = await this.$axios.$get(
+        '/api/spotify/play/'
+        , {
+          params: {
+            track: this.trackTerm
+          }
+        })
     }
   }
 

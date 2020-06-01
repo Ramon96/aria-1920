@@ -6,7 +6,7 @@
       <Track v-for="track in tracks" :key="track.id" :track="track" />
     </ul>
     <transition name="fade">
-      <PlayBar :playing-track="playingTrack" :class="playingTrack ? 'show' : 'hide'" />
+      <PlayBar :playing-track="playingTrack" />
     </transition>
   </section>
 </template>
@@ -61,13 +61,13 @@ export default {
       }
     },
     async play (uri) {
-      // const track = await this.$axios.$get(
-      //   '/api/spotify/play/'
-      //   , {
-      //     params: {
-      //       track: this.trackTerm
-      //     }
-      //   })
+      const track = await this.$axios.$get(
+        '/api/spotify/play/'
+        , {
+          params: {
+            track: this.trackTerm
+          }
+        })
     }
   }
 

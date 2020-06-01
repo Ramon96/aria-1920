@@ -12,34 +12,8 @@
             </div>
   </transition>
 </template>
- <script src="https://sdk.scdn.co/spotify-player.js"></script>
+
 <script>
-
-
-if(process.client){
-  window.onSpotifyWebPlaybackSDKReady = () => {
-  console.log(window)
-     
-    console.log('token', token)
-
-    // Create a new player, listening to the playtrack
-    const player = new Spotify.Player({
-        name: 'ARIA',
-        getOAuthToken: cb => {
-            cb(token);
-        },
-        volume: 1
-    });
-
-    // Error logging
-    player.on('initialization_error', e => console.error(e));
-    player.on('authentication_error', e => console.error(e));
-    player.on('account_error', e => console.error(e));
-    player.on('playback_error', e => console.error(e));
-      }
-      
-}
-
 export default {
   name: 'PlayBar',
   components: {},
