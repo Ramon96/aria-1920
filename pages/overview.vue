@@ -3,18 +3,15 @@
     <nuxt-link to="/search">
       Search
     </nuxt-link>
-    <NowPlaying v-if="isConnected && track" :now-playing="track" :is-playing="isPlaying" />
-    <p v-if="!isConnected">
-      😭 {{ $nuxt.layout.authorName }} hasn’t connected yet. 😭
-    </p>
+    <!-- <NowPlaying v-if="isConnected && track" :now-playing="track" :is-playing="isPlaying" /> -->
+
   </section>
 </template>
 
 <script>
-import NowPlaying from '~/components/NowPlaying.vue'
 
 export default {
-  components: { NowPlaying },
+  components: { },
   computed: {
     nowPlaying () {
       if ((Object.keys(this.$store.state.nowPlaying).length !== 0)) {
