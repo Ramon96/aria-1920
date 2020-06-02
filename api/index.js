@@ -177,7 +177,6 @@ app.get('/spotify/now-playing/', async (req, res) => {
 app.get('/spotify/search/', async (req, res) => {
   try {
     const access_token = await getAccessToken()
-    console.log(req.query)
     const response = await axios.get(
       `${spotifyBaseUrl}search?query=${req.query.track}&type=track`,
       {
