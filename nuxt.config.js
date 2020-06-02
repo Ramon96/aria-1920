@@ -60,7 +60,9 @@ module.exports = {
     'cookie-universal-nuxt'
   ],
   axios: {
-    debug: true
+    debug: true,
+    baseURL: `http://localhost:${process.env.PORT || 3000}/`,
+    browserBaseURL: '/'
   },
   styleResources: {
     scss: [
