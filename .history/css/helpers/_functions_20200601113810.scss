@@ -1,0 +1,18 @@
+@function color($value) {
+    @if map-has-key($colors, $value) {
+        @return map-get($colors, $value);
+    }
+
+    @warn "Unused `#{$value}` in $colors";
+    @return null;
+}
+
+$colors: (
+    Green: #1DB954,
+    Green-active: #1ed760,
+    White: #FFF,
+    Black: #191414,
+    Primary: #fff,
+    Secondairy: #b3b3b3;
+    DarkerGrey: rgb(83, 83, 83);
+);
