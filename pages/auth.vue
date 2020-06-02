@@ -16,7 +16,6 @@
 <script>
 export default {
   asyncData ({ env: { spotifyId, clientUrl }, query }) {
-    console.log('Spotify id', spotifyId)
     const spotifyUrl = `https://accounts.spotify.com/authorize?client_id=${spotifyId}&response_type=code&scope=user-read-private,user-read-email,streaming,user-library-read,user-read-playback-state,user-modify-playback-state&redirect_uri=${clientUrl}/api/spotify/callback`
     return {
       spotifyUrl,
@@ -48,7 +47,18 @@ export default {
       }
     }
     if (this.isConnected) {
+      this.getAccesToken()
       this.$store.commit('updateMessage', "⚡ We're Connected ⚡")
+      // this.$store.commit('accesToken')
+    }
+  },
+  methods: {
+    async getAccesToken () {
+      console.log('Getting acces token')
+      const accesToken = await this.$axios.get('/api/spotify/get-accestoken')
+      console.log(accesToken)
+      const { data } = accesToken
+      this.$store.commit('updateAccessToken', data)
     }
   }
 }

@@ -8,7 +8,8 @@ export const state = () => ({
   nowPlaying: {},
   recentlyPlayed: {},
   trackProgress: 0,
-  isPlaying: false
+  isPlaying: false,
+  accessToken: null
 })
 
 export const mutations = {
@@ -29,12 +30,22 @@ export const mutations = {
   },
   recentlyPlayedChange (state, recentlyPlayed) {
     state.recentlyPlayed = recentlyPlayed
+  },
+  updateAccessToken (state, accessToken) {
+    state.accessToken = accessToken
+  },
+}
+
+export const getters = { 
+  getAccessToken: (state, getters) => {
+    return getters.accessToken
   }
 }
 
 /* eslint-disable no-debugger, no-console */
 export const actions = {
   async nuxtServerInit ({ commit }) {
+    
     try {
       const redisUrl = `${clientUrl}/api/spotify/data/`
       const {
@@ -69,6 +80,7 @@ export const actions = {
   updateConnection: ({ commit, state }, isConnected) => {
     commit('connectionChange', isConnected)
     return state.isConnected
-  }
+  },
+
 }
 /* eslint-enable no-alert, no-console */

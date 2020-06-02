@@ -69,6 +69,17 @@ export default {
       //     }
       //   })
     }
+  },
+  head () {
+    return {
+      script: [
+        {
+          src: 'https://sdk.scdn.co/spotify-player.js',
+          body: true,
+          async: true
+        }
+      ]
+    }
   }
 
 }

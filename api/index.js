@@ -1,3 +1,4 @@
+// https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
 import express from 'express'
 import redis from 'async-redis'
 import axios from 'axios'
@@ -21,7 +22,7 @@ function connectToRedis() {
 }
 
 // Express app
-
+// https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
 app.all('/spotify/data/:key', async ({ params: { key }, query }, res) => {
   try {
     if (key === ('refresh_token' || 'access_token'))
@@ -35,6 +36,7 @@ app.all('/spotify/data/:key', async ({ params: { key }, query }, res) => {
   }
 })
 
+// https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
 function storageArgs(key, props) {
   const { expires, body, value } = props
   const val = Boolean(body) ? JSON.stringify(body) : value
@@ -47,6 +49,7 @@ function storageArgs(key, props) {
   ].filter(arg => Boolean(arg))
 }
 
+// https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
 async function callStorage(method, ...args) {
   const redisClient = connectToRedis()
   const response = await redisClient[method](...args)
@@ -54,6 +57,7 @@ async function callStorage(method, ...args) {
   return response
 }
 
+// https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
 app.get('/spotify/callback', async ({ query: { code } }, res) => {
   try {
     const { data } = await getSpotifyToken({
@@ -77,16 +81,22 @@ app.get('/spotify/callback', async ({ query: { code } }, res) => {
       })
     )
 
-    const success = '🎉 Welcome Back 🎉'
+    const success = 'Welcome Back'
     res.redirect(`/auth?success=${success}`)
   } catch (err) {
     console.error(
-      `\n🚨 There was an error at /api/spotify/callback: ${err} 🚨\n`
+      `There was an error at /api/spotify/callback: ${err} 🚨\n`
     )
     res.redirect(`/auth?message=${err}`)
   }
 })
 
+app.get('/spotify/get-accestoken', async (req, res) => {
+  const accesToken = await getAccessToken()
+  res.send(accesToken)
+})
+
+// https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
 const getSpotifyToken = (props = {}) =>
   axios({
     method: 'post',
@@ -102,6 +112,7 @@ const getSpotifyToken = (props = {}) =>
     }
   })
 
+// https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
 const spotifyBaseUrl = 'https://api.spotify.com/v1/'
 
 const getUserData = access_token =>
@@ -112,6 +123,7 @@ const getUserData = access_token =>
     }
   })
 
+  // https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
 async function getAccessToken() {
   const redisClient = connectToRedis()
   const accessTokenObj = { value: await redisClient.get('access_token') }
@@ -133,6 +145,7 @@ async function getAccessToken() {
   return accessTokenObj.value
 }
 
+// https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
 app.get('/spotify/now-playing/', async (req, res) => {
   try {
     const access_token = await getAccessToken()
@@ -191,6 +204,10 @@ app.get('/spotify/search/', async (req, res) => {
 
 
 
+
+
+
+// https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
 async function setLastPlayed(access_token, item) {
   if (!Boolean(item)) {
     const { data } = await axios.get(
@@ -208,6 +225,7 @@ async function setLastPlayed(access_token, item) {
   }
 }
 
+// https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
 function postStoredTrack(props) {
   callStorage(
     ...storageArgs('last_played', {
