@@ -35,6 +35,7 @@ export default {
       !(this.query.success || this.query.error) &&
       !this.isConnected
     ) {
+      console.log('Not connected, but will connect')
       window.location = this.spotifyUrl
     } else if ((Object.keys(this.query).length !== 0)) {
       window.history.replaceState({}, document.title, window.location.pathname)
@@ -47,6 +48,7 @@ export default {
       }
     }
     if (this.isConnected) {
+      console.log('Connected already...')
       this.getAccesToken()
       this.$store.commit('updateMessage', "⚡ We're Connected ⚡")
       // this.$store.commit('accesToken')

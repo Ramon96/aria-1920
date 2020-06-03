@@ -3,11 +3,10 @@
     <nuxt-link to="/search">
       Search
     </nuxt-link>
+    <button @click="logout">
+      Logout
+    </button>
     <NowPlaying v-if="isConnected && track" :now-playing="track" :is-playing="isPlaying" />
-    <div @click="getUser">
-      click
-        {{user}}
-    </div>
   </section>
 </template>
 
@@ -15,12 +14,12 @@
 import NowPlaying from '~/components/NowPlaying.vue'
 
 export default {
+  components: { NowPlaying },
   data () {
     return {
       user: ''
     }
   },
-  components: { NowPlaying },
   computed: {
     nowPlaying () {
       if ((Object.keys(this.$store.state.nowPlaying).length !== 0)) {
@@ -40,10 +39,11 @@ export default {
     }
   },
   methods: {
-    async getUser () {
-      const user = await this.$axios.get('/api/spotify/loggedin')
-      console.log(user)
-      this.user = user
+    logout () {
+      if (this.isConnected) {
+        this.$store.dispatch('updateConnection', false)
+        window.location = '/'
+      }
     }
   }
 }
