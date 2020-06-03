@@ -40,11 +40,12 @@ export default {
   },
   methods: {
     logout () {
-      if (this.isConnected) {
+      if (this.isConnected === true) {
         this.$store.dispatch('updateConnection', false)
-        window.location = '/'
+        window.location = '/api/spotify/logout/'
       }
     }
+
   }
 }
 </script>

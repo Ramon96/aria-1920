@@ -8,7 +8,8 @@
               {{playingTrack}}
             </div> -->
               {{playingTrack}}
-              <button data-control="pause" class="playButton"> </button>
+              <button data-control="pause" class="playButton">Pause</button>
+              <button @click="getUserInfo">Get User</button>
             </div>
   </transition>
 </template>
@@ -63,6 +64,21 @@ export default {
       console.log('token' , this.accessToken)
       return this.accessToken
       // this.$store.commit('updateAccessToken', tpl)
+    },
+      async getUserInfo () {
+      // TODO remove this, this is for testing which user is logged in
+       const userData =  await this.$axios(
+        {
+          url: `https://api.spotify.com/v1/me/`,
+          method: 'GET',
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${this.accessToken}`,
+          },
+        }
+      )
+      console.log(userData)
     },
     // TODO This will turn into initSdk or whatever
     async init () {

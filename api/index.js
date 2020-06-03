@@ -1,9 +1,9 @@
 // https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
+require('dotenv').config()
 import express from 'express'
 import redis from 'async-redis'
 import axios from 'axios'
 
-require('dotenv').config()
 
 const app = express()
 app.use(express.json())
@@ -13,7 +13,7 @@ app.use(express.json())
 function connectToRedis() {
   const redisClient = redis.createClient(process.env.REDIS_URL)
   redisClient.on('connect', () => {
-    console.log('\n🎉 Redis client connected 🎉\n')
+    console.log('Redis client connected')
   })
   redisClient.on('error', err => {
     console.error(`\n🚨 Redis client could not connect: ${err} 🚨\n`)
@@ -71,9 +71,9 @@ app.get('/spotify/callback', async ({ query: { code } }, res) => {
 
     console.log(test)
 
-    if (test.id !== process.env.SPOTIFY_USER_ID)
-      throw "🤖 You aren't the droid we're looking for. 🤖"
-
+    // if (test.id !== process.env.SPOTIFY_USER_ID)
+    //   throw "🤖 You aren't the droid we're looking for."
+    console.log(callStorage('get', 'is_connected'), process.env.SPOTIFY_USER_ID)
     callStorage(...storageArgs('is_connected', { value: true }))
     callStorage(...storageArgs('refresh_token', { value: refresh_token }))
     callStorage(
@@ -222,7 +222,17 @@ app.get('/spotify/search/', async (req, res) => {
 })
 
 
-
+app.get('/spotify/logout/', async (req, res) => {
+  try {
+    callStorage('set','is_connected', false)
+    res.redirect('https://www.spotify.com/logout/')
+    console.log('logout')
+  } catch(err) {
+    console.log('Logging out is not working properly', `error: ${error.message}`)
+  }
+  
+ 
+})
 
 
 
