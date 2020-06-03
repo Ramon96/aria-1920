@@ -3,15 +3,24 @@
     <nuxt-link to="/search">
       Search
     </nuxt-link>
-    <!-- <NowPlaying v-if="isConnected && track" :now-playing="track" :is-playing="isPlaying" /> -->
-
+    <NowPlaying v-if="isConnected && track" :now-playing="track" :is-playing="isPlaying" />
+    <div @click="getUser">
+      click
+        {{user}}
+    </div>
   </section>
 </template>
 
 <script>
+import NowPlaying from '~/components/NowPlaying.vue'
 
 export default {
-  components: { },
+  data () {
+    return {
+      user: ''
+    }
+  },
+  components: { NowPlaying },
   computed: {
     nowPlaying () {
       if ((Object.keys(this.$store.state.nowPlaying).length !== 0)) {
@@ -28,6 +37,13 @@ export default {
     },
     isConnected () {
       return this.$store.state.isConnected
+    }
+  },
+  methods: {
+    async getUser () {
+      const user = await this.$axios.get('/api/spotify/loggedin')
+      console.log(user)
+      this.user = user
     }
   }
 }

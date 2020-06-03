@@ -66,10 +66,12 @@ app.get('/spotify/callback', async ({ query: { code } }, res) => {
     })
     const { access_token, refresh_token, expires_in } = data
     const {
-      data: { id }
+      test
     } = await getUserData(access_token)
 
-    if (id !== process.env.SPOTIFY_USER_ID)
+    console.log(test)
+
+    if (test.id !== process.env.SPOTIFY_USER_ID)
       throw "🤖 You aren't the droid we're looking for. 🤖"
 
     callStorage(...storageArgs('is_connected', { value: true }))
@@ -111,6 +113,25 @@ const getSpotifyToken = (props = {}) =>
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   })
+
+  
+// app.get('/spotify/loggedin', async (req, res) => {
+//   try {
+//     const { data } = await getSpotifyToken({
+//       code,
+//       grant_type: 'authorization_code'
+//     })
+//     const { access_token, refresh_token, expires_in } = data
+//     const {
+//       data: { id }
+//     } = await getUserData(access_token)
+
+//     res.send(data)
+//   }
+//   catch(err){
+//     res.send(err)
+//   }
+// })
 
 // https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
 const spotifyBaseUrl = 'https://api.spotify.com/v1/'
@@ -199,7 +220,6 @@ app.get('/spotify/search/', async (req, res) => {
     res.send({ error: err.message })
   }
 })
-
 
 
 
