@@ -1,27 +1,24 @@
 <template>
-  <transition name="fade">
-            <div v-if="playingTrack" id="play-bar">
-              <div class="play-bar" :class="playingTrack ? 'playing' : ''">
-
-      
-              <progress value="0" max="100" ></progress> 
-              <img :src="playingTrack.album.images[2]['url']" :alt="playingTrack.title">
-            <div class="track-name">{{playingTrack.title}}</div>
-            <div v-for="artist in playingTrack.artists" v-bind:key="artist.id" class="track-artist">
-              {{artist.name}}
-            </div> 
-          
-              <button data-control="pause" @click="getUserInfo" class="playButton"></button>
-            </div>
+  <div id="play-bar">
+    <transition name="fade">
+      <div v-if="playingTrack" class="play-bar" :class="playingTrack ? 'playing' : ''">
+        <progress value="0" max="100"></progress>
+        <img :src="playingTrack.album.images[2]['url']" :alt="playingTrack.title">
+        <div class="track-name">{{playingTrack.title}}</div>
+        <div v-for="artist in playingTrack.artists" v-bind:key="artist.id" class="track-artist">
+          {{artist.name}}
+        </div>
+        <button data-control="pause" @click="getUserInfo" class="playButton"></button>
       </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 <script>
 
 export default {
   head() {
     return {
-      title: this.playingTrack  ? `Playing - ${this.playingTrack.name}` : 'Search',
+      title: this.playingTrack ? `Playing - ${this.playingTrack.name}` : 'Search',
       script: [{
         src: 'https://sdk.scdn.co/spotify-player.js',
         async: true,
@@ -41,7 +38,6 @@ export default {
   watch: {
     playingTrack: function (newVal, oldVal) {
       console.log(newVal, oldVal)
-
 
       this.play(newVal.uri, this.data)
 
@@ -112,11 +108,21 @@ export default {
 
         player.on('player_state_changed', state => {
           console.log(state)
+          const { 
+            track_window: {
+              current_track
+            }
+          } = state
+
+          // this.playingTrack = current_track
+
+          // this.$emit('updateTrack', current_track)
         })
 
         // Ready
         player.on('ready', data => {
           console.log('Ready with Device ID', data.device_id);
+          this.initialised = true
           this.data = data
         });
 
@@ -124,7 +130,6 @@ export default {
         player.connect();
 
       })();
-
 
     },
 
@@ -158,76 +163,92 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.fade-enter{
+.fade-enter {
   transform: translate(0, 100%);
-  transition: transform .5s;
+  opacity: 0;
 }
-.fade-enter-active{
-  transform: translate(0, 0);
-  transition: transform .5s;
-}
-   .play-bar {
-    position: fixed;
-    bottom: 0;
-    background: #282828;
-    width: 100%;
-}
-#play-bar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-right: 1rem;
-    font-family: spotify-book;
 
-    progress {
-        // for some reason, the styling of the progress bar gets lost if you remove the border-radius, I dont know why..
-        border-radius: 1px;
-        height: 2px;
-        position: fixed;
-        top: -1px;
-        width: 100%;
-    }
-    progress::-webkit-progress-bar {
-        background-color: #535353;
-    }
-    progress::-webkit-progress-value {
-        background: color(Primary);
-    }
-    progress::-moz-progress-bar {
-        /* style rules */
-    }
-    img {
-        padding-right: 10px;
-    }
-    .track-name {
-        color: color(Primary);
-        &::after {
-            content: "•";
-            padding: 0 5px;
-        }
-    }
-    .track-artist {
-        color: color(Secondairy);
-    }
-    button {
-        font-family: icons;
-        background: none;
-        border: none;
-        color: color(White);
-        margin-left: auto;
-        &[data-control="play"] {
-            &::before {
-                content: "\f132";
-                font-size: 16px;
-            }
-        }
-        &[data-control="pause"] {
-            &::before {
-                content: "\f130";
-                font-size: 16px;
-            }
-        }
+.fade-enter-active {
+  transition: all 2s ease-in-out;
+}
+
+.fade-enter-to {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+.play-bar {
+  position: fixed;
+  bottom: 0;
+  background: #282828;
+  width: 100%;
+}
+
+#play-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 1rem;
+  font-family: spotify-book;
+
+  progress {
+    // for some reason, the styling of the progress bar gets lost if you remove the border-radius, I dont know why..
+    border-radius: 1px;
+    height: 2px;
+    position: fixed;
+    top: -1px;
+    width: 100%;
+  }
+
+  progress::-webkit-progress-bar {
+    background-color: #535353;
+  }
+
+  progress::-webkit-progress-value {
+    background: color(Primary);
+  }
+
+  progress::-moz-progress-bar {
+    /* style rules */
+  }
+
+  img {
+    padding-right: 10px;
+  }
+
+  .track-name {
+    color: color(Primary);
+
+    &::after {
+      content: "•";
+      padding: 0 5px;
     }
   }
+
+  .track-artist {
+    color: color(Secondairy);
+  }
+
+  button {
+    font-family: icons;
+    background: none;
+    border: none;
+    color: color(White);
+    margin-left: auto;
+
+    &[data-control="play"] {
+      &::before {
+        content: "\f132";
+        font-size: 16px;
+      }
+    }
+
+    &[data-control="pause"] {
+      &::before {
+        content: "\f130";
+        font-size: 16px;
+      }
+    }
+  }
+}
 </style>

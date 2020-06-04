@@ -5,9 +5,7 @@
     <ul v-if="tracks.length" id="track-list" @getPlaying="getTrack">
       <Track v-for="track in tracks" :key="track.id" :track="track" @click.native="getTrack(track)" />
     </ul>
-    <transition name="fade">
-      <PlayBar :playing-track="playingTrack" />
-    </transition>
+    <PlayBar :playing-track="playingTrack" @updateTrack="getTrack" />
   </section>
 </template>
 
