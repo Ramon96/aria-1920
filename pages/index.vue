@@ -76,13 +76,13 @@ export default {
 
 // console.log(musicbrainz('beyonce'))
 
-  fetch(`http://musicbrainz.org/ws/2/artist/?query=artist:beyonce&fmt=json`)
-    .then(res => res.json())
-    .then(res => console.log(res))
+  // fetch(`http://musicbrainz.org/ws/2/artist/?query=artist:beyonce&fmt=json`)
+  //   .then(res => res.json())
+  //   .then(res => console.log(res))
 
-      fetch(`http://musicbrainz.org/ws/2/artist/859d0860-d480-4efd-970c-c05d5f1776b8?inc=url-rels&fmt=json`)
-    .then(res => res.json())
-    .then(res => console.log(res))
+  //     fetch(`http://musicbrainz.org/ws/2/artist/859d0860-d480-4efd-970c-c05d5f1776b8?inc=url-rels&fmt=json`)
+  //   .then(res => res.json())
+  //   .then(res => console.log(res))
 
 // import gql from 'graphql-tag'
 
