@@ -5,6 +5,8 @@ import express from 'express'
 
 const spotify = require('./spotify/spotify.js')
 const musicBrainz = require('./musicbrainz/musicbrainz.js')
+const newsApi = require('./NewsApi/NewsApi.js')
+// const musicBrainz = require('./twitter/twitter.js')
 
 const app = express()
 app.use(express.json())
@@ -12,6 +14,8 @@ app.use(express.json())
 
 app.use(spotify)
 app.use(musicBrainz)
+app.use(newsApi)
+// app.use(twitter)
 
 module.exports = {
   path: '/api/',
