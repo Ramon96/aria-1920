@@ -1,17 +1,18 @@
 <template>
-  <div id="play-bar">
-    <transition name="fade">
-      <div v-if="playingTrack" class="play-bar" :class="playingTrack ? 'playing' : ''">
+ <transition name="fade">
+
+   
+      <div v-if="playingTrack" id="play-bar" :class="playingTrack ? 'playing' : ''">
         <progress value="0" max="100"></progress>
         <img :src="playingTrack.album.images[2]['url']" :alt="playingTrack.title">
-        <div class="track-name">{{playingTrack.title}}</div>
+        <div class="track-name">{{ playingTrack.name }}</div>
         <div v-for="artist in playingTrack.artists" v-bind:key="artist.id" class="track-artist">
           {{artist.name}}
         </div>
         <button data-control="pause" @click="getUserInfo" class="playButton"></button>
       </div>
+
     </transition>
-  </div>
 </template>
 <script>
 
@@ -165,7 +166,6 @@ export default {
 <style lang="scss" scoped>
 .fade-enter {
   transform: translate(0, 100%);
-  opacity: 0;
 }
 
 .fade-enter-active {
@@ -174,15 +174,11 @@ export default {
 
 .fade-enter-to {
   transform: translate(0, 0);
-  opacity: 1;
 }
 
-.play-bar {
-  position: fixed;
-  bottom: 0;
-  background: #282828;
-  width: 100%;
-}
+// .play-bar {
+
+// }
 
 #play-bar {
   display: flex;
@@ -190,7 +186,11 @@ export default {
   align-items: center;
   padding-right: 1rem;
   font-family: spotify-book;
-
+  // was class wrapper
+  position: fixed;
+  bottom: 0;
+  background: #282828;
+  width: 100%;
   progress {
     // for some reason, the styling of the progress bar gets lost if you remove the border-radius, I dont know why..
     border-radius: 1px;

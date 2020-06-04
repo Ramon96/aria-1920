@@ -1,12 +1,16 @@
 <template>
-  <section>
-    <SearchField @getTracks="onSearch" />
+  <main>
+    <section>
+      <SearchField @getTracks="onSearch" />
 
-    <ul v-if="tracks.length" id="track-list" @getPlaying="getTrack">
-      <Track v-for="track in tracks" :key="track.id" :track="track" @click.native="getTrack(track)" />
-    </ul>
-    <PlayBar :playing-track="playingTrack" @updateTrack="getTrack" />
-  </section>
+      <ul v-if="tracks.length" id="track-list" @getPlaying="getTrack">
+        <Track v-for="track in tracks" :key="track.id" :track="track" @click.native="getTrack(track)" />
+      </ul>
+    </section>
+    <footer>
+      <PlayBar :playing-track="playingTrack" @updateTrack="getTrack" />
+    </footer>
+  </main>
 </template>
 
 <script>
