@@ -14,8 +14,11 @@
 </template>
 
 <script>
+// // https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
+import { mapState } from 'vuex'
 export default {
   asyncData ({ env: { spotifyId, clientUrl }, query }) {
+    console.log('query', spotifyId, clientUrl)
     const spotifyUrl = `https://accounts.spotify.com/authorize?client_id=${spotifyId}&response_type=code&scope=user-read-private,user-read-email,streaming,user-library-read,user-read-playback-state,user-modify-playback-state&redirect_uri=${clientUrl}/api/spotify/callback`
     return {
       spotifyUrl,
@@ -23,33 +26,41 @@ export default {
     }
   },
   computed: {
-    isConnected () {
-      return this.$store.state.isConnected
-    },
+
     message () {
       return this.$store.state.message
-    }
+    },
+
+    ...mapState({
+      isConnected: state => state.isConnected
+    })
   },
   mounted () {
     if (
       !(this.query.success || this.query.error) &&
-      !this.isConnected
+      this.isConnected !== true
     ) {
+      console.log('Not connected, but will connect')
       window.location = this.spotifyUrl
     } else if ((Object.keys(this.query).length !== 0)) {
+      console.log('else if')
       window.history.replaceState({}, document.title, window.location.pathname)
       this.$store.commit(
         'updateMessage',
         this.query.success || this.query.error
       )
       if (this.query.success) {
+        console.log('query succes')
         this.$store.dispatch('updateConnection', true)
       }
     }
-    if (this.isConnected) {
+    if (this.isConnected === true) {
+      console.log('Connected already...' + this.isConnected)
       this.getAccesToken()
       this.$store.commit('updateMessage', "⚡ We're Connected ⚡")
       // this.$store.commit('accesToken')
+    } else {
+      console.log('what...')
     }
   },
   methods: {

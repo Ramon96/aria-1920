@@ -1,26 +1,27 @@
 <template>
   <transition name="fade">
-            <div>
-              <!-- <progress value="0" max="100" ></progress> -->
-              <!-- <img :src="track.albumCover" :alt="track.title">
-            <div class="track-name">{{track.title}}</div>
-            <div v-for="artist in track.artists" v-bind:key="artist.id" class="track-artist">
-              {{playingTrack}}
-            </div> -->
-              {{playingTrack}}
-              <button data-control="pause" class="playButton"> </button>
+            <div v-if="playingTrack" id="play-bar">
+              <div class="play-bar" :class="playingTrack ? 'playing' : ''">
+
+      
+              <progress value="0" max="100" ></progress> 
+              <img :src="playingTrack.album.images[2]['url']" :alt="playingTrack.title">
+            <div class="track-name">{{playingTrack.title}}</div>
+            <div v-for="artist in playingTrack.artists" v-bind:key="artist.id" class="track-artist">
+              {{artist.name}}
+            </div> 
+          
+              <button data-control="pause" @click="getUserInfo" class="playButton"></button>
             </div>
+      </div>
   </transition>
 </template>
 <script>
 
-
-
-
 export default {
-  head(){
+  head() {
     return {
-      title: 'playbar',
+      title: this.playingTrack  ? `Playing - ${this.playingTrack.name}` : 'Search',
       script: [{
         src: 'https://sdk.scdn.co/spotify-player.js',
         async: true,
@@ -31,43 +32,57 @@ export default {
   name: 'PlayBar',
   components: {},
   props: ['playingTrack'],
-  data () {
+  data() {
     return {
-      accessToken: ''
+      accessToken: '',
+      data: {}
     }
   },
   watch: {
-    playingTrack: function(newVal, oldVal){
+    playingTrack: function (newVal, oldVal) {
       console.log(newVal, oldVal)
 
-      this.play()
+
+      this.play(newVal.uri, this.data)
 
     }
   },
   computed: {
-   
+
   },
-  mounted(){
+  beforeMount() {
     this.init();
   },
   methods: {
 
-    async getAccesToken () {
+    async getAccesToken() {
       console.log('Getting acces token')
       // if(this)
       const accesToken = await this.$axios.get('/api/spotify/get-accestoken')
       console.log(accesToken)
-    
-      const { data: token } = accesToken
+
+      const {
+        data: token
+      } = accesToken
       this.accessToken = token
-      console.log('token' , this.accessToken)
+      console.log('token', this.accessToken)
       return this.accessToken
       // this.$store.commit('updateAccessToken', tpl)
     },
+    async getUserInfo() {
+      // TODO remove this, this is for testing which user is logged in
+      const userData = await this.$axios({
+        url: `/api/spotify/ramon`,
+        method: 'GET',
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+      })
+      console.log(userData)
+    },
     // TODO This will turn into initSdk or whatever
-    async init () {
-
-
+    async init() {
 
       (async () => {
         const {
@@ -75,59 +90,46 @@ export default {
         } = await this.waitForSpotifyWebPlaybackSDKToLoad();
         console.log("The Web Playback SDK has loaded.");
 
-            // if(process.client){
-
-        
-        // window.onSpotifyWebPlaybackSDKReady = () => {
-
-        
-
-        const token = await this.getAccesToken ()
+        const token = await this.getAccesToken()
         console.log('token', this.accessToken)
-        
+
         // Create a new player, listening to the playtrack
         const player = new Player({
-            name: 'ARIA',
-            getOAuthToken: cb => {
-                cb(token);
-            },
-            volume: .9
+          name: 'ARIA',
+          getOAuthToken: cb => {
+            cb(token);
+          },
+          volume: .9
         });
 
-      console.log(player)
+        console.log(player)
 
-    // Error logging
-    player.on('initialization_error', e => console.error(e));
-    player.on('authentication_error', e => console.error(e));
-    player.on('account_error', e => console.error(e));
-    player.on('playback_error', e => console.error(e));
+        // Error logging
+        player.on('initialization_error', e => console.error(e));
+        player.on('authentication_error', e => console.error(e));
+        player.on('account_error', e => console.error(e));
+        player.on('playback_error', e => console.error(e));
 
-    player.on('player_state_changed', state => {
-      console.log(state)
+        player.on('player_state_changed', state => {
+          console.log(state)
+        })
 
+        // Ready
+        player.on('ready', data => {
+          console.log('Ready with Device ID', data.device_id);
+          this.data = data
+        });
 
+        // Connect to the player!
+        player.connect();
 
-     
-       
-    })
-
-       // Ready
-    player.on('ready', data => {
-        console.log('Ready with Device ID', data.device_id);
-        //   this.$axios.put(`https://api.spotify.com/v1/me/player/play?device_id=${data.device_id}`, {
-            
-        //     headers: {
-        //         'Authorization': `Bearer ${this.accessToken}`,
-        //     },
-        //     body: {
-            
-        //         uris: ['spotify:track:6UB9mShVLbMm0W4e6vud4C']
-        //     }
-        // })
+      })();
 
 
-    this.$axios(
-      {
+    },
+
+    play(uri, data) {
+      this.$axios({
         url: `https://api.spotify.com/v1/me/player/play?device_id=${data.device_id}`,
         method: 'PUT',
         headers: {
@@ -136,52 +138,11 @@ export default {
           Authorization: `Bearer ${this.accessToken}`,
         },
         data: JSON.stringify({
-                uris: ['spotify:track:6UB9mShVLbMm0W4e6vud4C']
-            })
-      }
-    )
-        
-    // fetch(`https://api.spotify.com/v1/me/player/play?device_id=${data.device_id}`, {
-    //         method: "PUT",
-    //         headers: {
-    //             "Accept": "application/json",
-    //             "Content-Type": "application/json",
-    //             Authorization: "Bearer " + this.accessToken,
-    //         },
-    //         body: JSON.stringify({
-    //             uris: ['spotify:track:6UB9mShVLbMm0W4e6vud4C']
-    //         })
-    //     })
-
-
-        
-
-
-    });
-
-    // Connect to the player!
-    player.connect();
-      // }
-      
-
-
-          // const track = await this.$axios.$get(
-          //   '/api/spotify/play/'
-          //   , {
-          //     params: {
-          //       track: this.trackTerm
-          //     }
-          //   })
-        // }
-      })();
-
-  
-  }, 
-
-  play(uri){
-
-  },
-    async waitForSpotifyWebPlaybackSDKToLoad () {
+          uris: [uri]
+        })
+      })
+    },
+    async waitForSpotifyWebPlaybackSDKToLoad() {
       return new Promise(resolve => {
         if (window.Spotify) {
           resolve(window.Spotify);
@@ -191,11 +152,82 @@ export default {
           };
         }
       });
-  },
+    },
   },
 }
 </script>
 
-<style scoped>
-   
+<style lang="scss" scoped>
+
+.fade-enter{
+  transform: translate(0, 100%);
+  transition: transform .5s;
+}
+.fade-enter-active{
+  transform: translate(0, 0);
+  transition: transform .5s;
+}
+   .play-bar {
+    position: fixed;
+    bottom: 0;
+    background: #282828;
+    width: 100%;
+}
+#play-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 1rem;
+    font-family: spotify-book;
+
+    progress {
+        // for some reason, the styling of the progress bar gets lost if you remove the border-radius, I dont know why..
+        border-radius: 1px;
+        height: 2px;
+        position: fixed;
+        top: -1px;
+        width: 100%;
+    }
+    progress::-webkit-progress-bar {
+        background-color: #535353;
+    }
+    progress::-webkit-progress-value {
+        background: color(Primary);
+    }
+    progress::-moz-progress-bar {
+        /* style rules */
+    }
+    img {
+        padding-right: 10px;
+    }
+    .track-name {
+        color: color(Primary);
+        &::after {
+            content: "•";
+            padding: 0 5px;
+        }
+    }
+    .track-artist {
+        color: color(Secondairy);
+    }
+    button {
+        font-family: icons;
+        background: none;
+        border: none;
+        color: color(White);
+        margin-left: auto;
+        &[data-control="play"] {
+            &::before {
+                content: "\f132";
+                font-size: 16px;
+            }
+        }
+        &[data-control="pause"] {
+            &::before {
+                content: "\f130";
+                font-size: 16px;
+            }
+        }
+    }
+  }
 </style>

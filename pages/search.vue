@@ -2,11 +2,11 @@
   <section>
     <SearchField @getTracks="onSearch" />
 
-    <ul v-if="tracks.length" id="track-list" @click="getTrack">
-      <Track v-for="track in tracks" :key="track.id" :track="track" />
+    <ul v-if="tracks.length" id="track-list" @getPlaying="getTrack">
+      <Track v-for="track in tracks" :key="track.id" :track="track" @click.native="getTrack(track)" />
     </ul>
     <transition name="fade">
-      <PlayBar :playing-track="playingTrack" :class="playingTrack ? 'show' : 'hide'" />
+      <PlayBar :playing-track="playingTrack" />
     </transition>
   </section>
 </template>
@@ -27,7 +27,7 @@ export default {
     return {
       trackTerm: '',
       tracks: [],
-      playingTrack: {}
+      playingTrack: false
     }
   },
   methods: {
@@ -37,29 +37,31 @@ export default {
       this.tracks = value
     },
 
-    test (value) {
-      console.log(value)
-    },
-
-    getTrack (event) {
-      console.log(event.path)
-      console.log(event.target.dataset.track_uri)
-      // this.$store.dispatch('')
-
-      const LI = event.path.find(el => el.tagName.toLowerCase() === 'li')
-      console.log('li', LI)
-      if (typeof LI !== 'undefined') {
-        // Get track uri from li data attribute
-        const trackUri = LI.getAttribute('data-track_uri')
-        console.log('trackuri', trackUri)
-        // play(data.device_id, token, trackUri);
-        // this.$emit('playTrack', trackUri)
-
-        this.playingTrack = trackUri
-      } else {
-        console.error("Can't find list-item along event path")
+    getTrack (value) {
+      if (value !== 'undefined') {
+        this.playingTrack = value
       }
     },
+
+    // getTrack (event) {
+    //   console.log(event.path)
+    //   console.log(event.target.dataset.track_uri)
+    //   // this.$store.dispatch('')
+
+    //   const LI = event.path.find(el => el.tagName.toLowerCase() === 'li')
+    //   console.log('li', LI)
+    //   if (typeof LI !== 'undefined') {
+    //     // Get track uri from li data attribute
+    //     const trackUri = LI.getAttribute('data-track_uri')
+    //     console.log('trackuri', trackUri)
+    //     // play(data.device_id, token, trackUri);
+    //     // this.$emit('playTrack', trackUri)
+
+    //     this.playingTrack = trackUri
+    //   } else {
+    //     console.error("Can't find list-item along event path")
+    //   }
+    // },
     async play (uri) {
       // const track = await this.$axios.$get(
       //   '/api/spotify/play/'
