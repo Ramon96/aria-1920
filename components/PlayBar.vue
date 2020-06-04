@@ -9,7 +9,7 @@
         <div v-for="artist in playingTrack.artists" v-bind:key="artist.id" class="track-artist">
           {{artist.name}}
         </div>
-        <button data-control="pause" @click="getUserInfo" class="playButton"></button>
+        <button data-control="pause" @click="checkPaused" class="playButton"></button>
       </div>
 
     </transition>
@@ -33,7 +33,9 @@ export default {
   data() {
     return {
       accessToken: '',
-      data: {}
+      data: {},
+      paused: true,
+      player: {}
     }
   },
   watch: {
@@ -125,6 +127,7 @@ export default {
           console.log('Ready with Device ID', data.device_id);
           this.initialised = true
           this.data = data
+          this.player = player
         });
 
         // Connect to the player!
@@ -147,6 +150,13 @@ export default {
           uris: [uri]
         })
       })
+    },
+    checkPaused (){
+
+        this.player.togglePlay().then(() => {
+          console.log('Toggled playback!');
+        });
+      
     },
     async waitForSpotifyWebPlaybackSDKToLoad() {
       return new Promise(resolve => {
