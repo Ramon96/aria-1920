@@ -56,6 +56,7 @@ module.exports = {
     '@nuxtjs/dotenv',
     '@nuxtjs/style-resources',
     '@nuxtjs/axios',
+    '@nuxtjs/apollo',
     'nuxt-fontawesome',
     'cookie-universal-nuxt'
   ],
@@ -63,6 +64,13 @@ module.exports = {
     debug: true,
     baseURL: `http://localhost:${process.env.PORT || 3000}/`,
     browserBaseURL: '/'
+  },
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'https://cors-anywhere.herokuapp.com/https://musicbrainz.org/ws/2/'
+      }
+    }
   },
   styleResources: {
     scss: [
