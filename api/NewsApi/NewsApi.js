@@ -11,10 +11,10 @@ async function getNews(artist){
       // You must include at least one q, source, or domain
       return newsapi.v2.everything({
         q: artist,
-        sources: 'mtv-news,the-verge,google-news',
+        domains: "billboard.com,pitchfork.com,rollingstone.com",
         language: 'en',
         sortBy: 'relevancy',
-        page: 2
+        // page: 1
       }).then(response => {
         console.log(response);
         return response
