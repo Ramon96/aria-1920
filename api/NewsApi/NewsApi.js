@@ -11,7 +11,7 @@ async function getNews(artist){
       // You must include at least one q, source, or domain
       return newsapi.v2.everything({
         q: artist,
-        sources: 'bbc-news,the-verge',
+        sources: 'mtv-news,the-verge,google-news',
         language: 'en',
         sortBy: 'relevancy',
         page: 2

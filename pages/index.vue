@@ -10,14 +10,21 @@
       >
         <font-awesome-icon :icon="['fab', 'spotify']" /> LOGIN WITH SPOTIFY
       </nuxt-link>
+      <Youtube />
     </div>
   </div>
 </template>
 
 <script>
+// import Instagram from '~/components/Instagram.vue'
+import Youtube from '~/components/Youtube.vue'
 export default {
   titleShort: 'is Listening',
   authorName: 'Tomas en Ramon',
+  components: {
+    // Instagram,
+    Youtube
+  },
   computed: {
     ariaCurrent () {
       return this.$route.name === 'auth' ? 'page' : false
@@ -29,6 +36,12 @@ export default {
             this.$options.titleShort
           } ·X· A Musical App`
     }
+  },
+  Instagram () {
+    return this.Instagram
+  },
+  Youtube () {
+    return this.Youtube
   }
 }
 </script>
