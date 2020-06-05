@@ -1,7 +1,6 @@
 <template>
  <transition name="fade">
 
-   
       <div v-if="playingTrack" id="play-bar" :class="playingTrack ? 'playing' : ''">
         <progress value="0" max="100"></progress>
         <img :src="playingTrack.album.images[2]['url']" :alt="playingTrack.title">
@@ -35,15 +34,22 @@ export default {
       accessToken: '',
       data: {},
       paused: true,
-      player: {}
+      player: {},
+      initialised: false
     }
   },
   watch: {
     playingTrack: function (newVal, oldVal) {
       console.log(newVal, oldVal)
 
-      this.play(newVal.uri, this.data)
-
+      if(this.initialised == true){
+        this.play(newVal.uri, this.data)
+      }else{
+        setTimeout(
+          this.play(newVal.uri, this.data)
+        , 1000)
+      }
+    
     }
   },
   computed: {
@@ -186,6 +192,17 @@ export default {
   transform: translate(0, 0);
 }
 
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave-active {
+  transition: all 2s ease-in-out;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
 // .play-bar {
 
 // }

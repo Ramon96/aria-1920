@@ -8,7 +8,9 @@
       </ul>
     </section>
     <footer>
-      <PlayBar :playing-track="playingTrack" @updateTrack="getTrack" />
+      <nuxt-link to="/player">
+        <PlayBar :playing-track="playingTrack" @updateTrack="getTrack" />
+      </nuxt-link>
     </footer>
   </main>
 </template>
@@ -78,7 +80,7 @@ export default {
     return {
       script: [
         {
-          src: 'https://sdk.scdn.co/spotify-player.js',
+          // src: 'https://sdk.scdn.co/spotify-player.js',
           body: true,
           async: true
         }
