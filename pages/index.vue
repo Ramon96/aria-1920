@@ -62,38 +62,3 @@ export default {
     }
 }
 </style>
-
- <script>
-    // this.$axios.get('https://musicbrainz.org/ws/2/area/45f07934-675a-46d6-a577-6f8637a411b1?inc=aliases&fmt=json')
-    //   .then(res => console.log(res))
-//   const muzicbrainz = async (name) => {
-//     const artist = await (await fetch(`http://musicbrainz.org/ws/2/artist/?query=artist:${name}&fmt=json`)).json()
-//     const artistId = artist.artists[0].id
-//     const artistLinks = await (await fetch(`http://musicbrainz.org/ws/2/artist/${musicbrainzArtistId}?inc=url-rels&fmt=json`)).json()
-
-//     return artistLinks
-//   }
-
-// console.log(musicbrainz('beyonce'))
-
-  // fetch(`http://musicbrainz.org/ws/2/artist/?query=artist:beyonce&fmt=json`)
-  //   .then(res => res.json())
-  //   .then(res => console.log(res))
-
-  //     fetch(`http://musicbrainz.org/ws/2/artist/859d0860-d480-4efd-970c-c05d5f1776b8?inc=url-rels&fmt=json`)
-  //   .then(res => res.json())
-  //   .then(res => console.log(res))
-
-// import gql from 'graphql-tag'
-
-// export default{
-//   apollo: {
-//     Artist: gql ` query getArtist{
-//       Artist(name: "Eminem"){
-//         name
-//       }
-//     }`
-//   }
-// }
-
- </script>

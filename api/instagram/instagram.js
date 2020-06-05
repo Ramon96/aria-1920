@@ -1,0 +1,37 @@
+const express = require('express');
+const router = express.Router();
+
+import axios from 'axios';
+
+async function getUserPage(url){
+    const instagramJson = await axios.get(url + '?__a=1');
+    const {
+         graphql:{
+             user:{
+                edge_owner_to_timeline_media: {
+                    edges
+                }
+             }
+         }
+    } = instagramJson.data;
+    return getShortCodes(edges)
+}
+
+
+function getShortCodes(edges){
+    return edges.map(edge => {
+        return edge.node.shortcode
+    })
+}
+
+router.get('/instagram/recent/:url', async (req,res) =>{
+    try{ 
+        const recentPosts = await getUserPage(req.params.url)
+        res.send(recentPosts)
+    }
+    catch(err){
+        console.log(err)
+    }
+})
+
+module.exports = router;

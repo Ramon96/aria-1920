@@ -6,7 +6,7 @@ const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI(process.env.NEWSAPI_KEY);
 
 async function getNews(artist){
-    console.log('ik word geroepen', artist)
+
       // To query /v2/everything
       // You must include at least one q, source, or domain
       return newsapi.v2.everything({
