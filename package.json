@@ -28,7 +28,9 @@
     "newsapi": "^2.4.0",
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
-    "throttle-debounce": "^2.1.0"
+    "swiper": "^5.4.2",
+    "throttle-debounce": "^2.1.0",
+    "vue-awesome-swiper": "^4.1.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
