@@ -80,7 +80,7 @@ export default {
     return {
       script: [
         {
-          // src: 'https://sdk.scdn.co/spotify-player.js',
+          src: 'https://sdk.scdn.co/spotify-player.js',
           body: true,
           async: true
         }

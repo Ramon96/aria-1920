@@ -17,8 +17,7 @@ export default {
   components: { Track },
   data() {
        return {
-           trackTerm: '',
-           tracks: []
+           trackTerm: ''
        }
    },
   methods: {

@@ -43,6 +43,7 @@ export default {
       console.log(newVal, oldVal)
 
       if(this.initialised == true){
+        this.$store.dispatch('currentlyPlaying', newVal)
         this.play(newVal.uri, this.data)
       }else{
         setTimeout(
