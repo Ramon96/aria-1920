@@ -1,14 +1,18 @@
 <template>
-  <section>
-    <SearchField @getTracks="onSearch" />
+  <main>
+    <section>
+      <SearchField @getTracks="onSearch" />
 
-    <ul v-if="tracks.length" id="track-list" @getPlaying="getTrack">
-      <Track v-for="track in tracks" :key="track.id" :track="track" @click.native="getTrack(track)" />
-    </ul>
-    <transition name="fade">
-      <PlayBar :playing-track="playingTrack" />
-    </transition>
-  </section>
+      <ul v-if="tracks.length" id="track-list" @getPlaying="getTrack">
+        <Track v-for="track in tracks" :key="track.id" :track="track" @click.native="getTrack(track)" />
+      </ul>
+    </section>
+    <footer>
+      <nuxt-link to="/player">
+        <PlayBar :playing-track="playingTrack" @updateTrack="getTrack" />
+      </nuxt-link>
+    </footer>
+  </main>
 </template>
 
 <script>
