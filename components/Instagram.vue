@@ -1,7 +1,6 @@
 <template>
   <div class="socials">
     <h2>Socials</h2>
-    <button @click="resize">asfdasdf</button>
     <swiper ref="mySwiper" :options="swiperOptions">
       <swiper-slide v-for="value in ids" v-bind:key="value ">
         <blockquote
@@ -92,7 +91,6 @@
         <script async src="//www.instagram.com/embed.js"></script>
       </swiper-slide>
     </swiper>
-    <div class="swiper-pagination" slot="pagination"></div>
   </div>
 </template>
 
@@ -103,27 +101,23 @@ blockquote {
 }
 
 iframe {
-  // margin-left: auto !important;
-  // margin-right: auto !important;
-  // margin-bottom: auto !important;
   max-width: unset !important;
   min-width: unset !important;
   width: inherit !important;
 }
-.swiper-slide {
-  transition: 1s;
-  // width: fit-content;
-  transform-origin: top;
-  // margin-left: 30px;
-  // margin-right: 30px;
-}
-
-.swiper-slide:not(.swiper-slide-active) {
-  transform: scale(0.5);
-}
 
 .swiper-slide-active{
-  width: 80%;
+  transform-origin: top center;
+}
+
+.swiper-slide-next{
+  transform: scale(0.5);
+  transform-origin: top left;
+}
+
+.swiper-slide-prev{
+  transform: scale(0.5);
+  transform-origin: top right;
 }
 </style>
 
@@ -142,16 +136,11 @@ export default {
     return {
       ids: [],
       swiperOptions: {
-        // init: false,
         grabCursor: true,
-        slidesPerView: 2,
+        slidesPerView: 1.2,
         centeredSlides: true,
-        loop: true
-        // spaceBetween: 30,
-        // pagination: {
-        //   el: '.swiper-pagination'
-        // },
-        // ...
+        loop: true,
+        spaceBetween: 10,
       }
     };
   },
@@ -165,24 +154,12 @@ export default {
     this.init();
   },
   mounted() {
-    this.swiper.slideTo(3, 1000, false);
   },
   methods: {
     async getPostIds() {
       // TODO eminem moet vervangen worden met een artiste naam die van musicbrianz
       const postIds = await this.$axios.get(`/api/instagram/recent/eminem`);
       this.ids = postIds.data;
-      // this.swiper.init();
-    },
-    async resize() {
-      // this.swiper.updateSlides()
-      // this.swiper.updateSize()
-      // this.swiper.slideNext()
-
-      const post = await this.$axios.get(
-        `https://api.instagram.com/oembed?url=https://www.instagram.com/p/CA4M3ROBOJJ&maxwidth=321`
-      );
-      console.log(post);
     },
     init() {
       this.getPostIds();

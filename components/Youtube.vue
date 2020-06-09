@@ -1,6 +1,8 @@
 <template>
   <div class="videos">
-    <div v-for="value in ids" v-bind:key="value">
+    <h2>Videos</h2>
+    <swiper ref="mySwiper" :options="swiperOptions">
+     <swiper-slide v-for="value in ids" v-bind:key="value ">
       <iframe
         width="560"
         height="315"
@@ -9,9 +11,30 @@
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
-    </div>
+     </swiper-slide>
+    </swiper>
   </div>
 </template>
+
+<style lang="scss">
+.swiper-slide{
+  transition: transform 1s;
+}
+
+.swiper-slide-active{
+  transform-origin: top center;
+}
+
+.swiper-slide-next{
+  transform: scale(0.5);
+  transform-origin: top left;
+}
+
+.swiper-slide-prev{
+  transform: scale(0.5);
+  transform-origin: top right;
+}
+</style>
 
 <script>
 export default {
@@ -26,13 +49,26 @@ export default {
   props: [],
   data() {
     return {
-      ids: []
+      ids: [],
+        swiperOptions: {
+        grabCursor: true,
+        slidesPerView: 1.2,
+        centeredSlides: true,
+        loop: true,
+        spaceBetween: 10,
+      }
     };
   },
   watch: {},
-  computed: {},
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.$swiper;
+    }
+  },
   beforeMount() {
     this.init();
+  },
+  mounted() {
   },
   methods: {
     async getVideoIds() {

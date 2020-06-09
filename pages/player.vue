@@ -2,24 +2,32 @@
   <section id="song-detail" data-overlay="enabled">
     <Player />
     <Instagram />
+    <Youtube />
   </section>
 </template>
 
 <script>
 import Player from '~/components/Player.vue'
 import Instagram from '~/components/Instagram.vue'
+import Youtube from '~/components/Youtube.vue'
 export default {
   components: {
     Player,
-    Instagram
-  },
-  Instagram () {
-    return this.Instagram
+    Instagram,
+    Youtube
   }
 }
 </script>
 
 <style lang="scss">
+  h2{
+    color: color(White);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 1.5em;
+    padding: 1em 0;
+  }
+
 /* TODO: Refactor styling, styling should be in its own component */
 #song-detail {
   width: 100%;
@@ -28,7 +36,8 @@ export default {
   height: 100vh;
   top: 0;
   transition: opacity 3s;
-  padding: 1.5rem;
+  // TODO padding per component, otherwise slider gets cutoff.
+  // padding: 1.5rem;
   // TODO The color has to be determined by the album color, Tomas found a node library for this
   // https://cssgradient.io/
   background: rgb(25, 20, 20);
