@@ -21,6 +21,7 @@ import Track from '~/components/Track.vue'
 import PlayBar from '~/components/PlayBar.vue'
 
 export default {
+  transition: 'slide-out',
   components: {
     SearchField,
     Track,
@@ -44,36 +45,8 @@ export default {
     getTrack (value) {
       if (value !== 'undefined') {
         this.playingTrack = value
+        this.$store.dispatch('player/setPlayingTrack', value)
       }
-    },
-
-    // getTrack (event) {
-    //   console.log(event.path)
-    //   console.log(event.target.dataset.track_uri)
-    //   // this.$store.dispatch('')
-
-    //   const LI = event.path.find(el => el.tagName.toLowerCase() === 'li')
-    //   console.log('li', LI)
-    //   if (typeof LI !== 'undefined') {
-    //     // Get track uri from li data attribute
-    //     const trackUri = LI.getAttribute('data-track_uri')
-    //     console.log('trackuri', trackUri)
-    //     // play(data.device_id, token, trackUri);
-    //     // this.$emit('playTrack', trackUri)
-
-    //     this.playingTrack = trackUri
-    //   } else {
-    //     console.error("Can't find list-item along event path")
-    //   }
-    // },
-    async play (uri) {
-      // const track = await this.$axios.$get(
-      //   '/api/spotify/play/'
-      //   , {
-      //     params: {
-      //       track: this.trackTerm
-      //     }
-      //   })
     }
   },
   head () {
@@ -92,6 +65,21 @@ export default {
 </script>
 
 <style scoped>
+
+.slide-out-leave{
+  transform: translate(0, 0);
+  /* opacity: 1; */
+}
+.slide-out-leave-active,
+.slide-out-enter-active{
+  transition: all 1s;
+}
+.slide-out-leave-to,
+.slide-enter{
+  transform: translate(-100%, 0);
+  /* opacity: 0; */
+}
+
 section {
   min-width: 300px;
   max-width: 750px;

@@ -43,7 +43,7 @@ export default {
       console.log(newVal, oldVal)
 
       if(this.initialised == true){
-        this.$store.dispatch('currentlyPlaying', newVal)
+        // this.$store.dispatch('currentlyPlaying', newVal)
         this.play(newVal.uri, this.data)
       }else{
         setTimeout(
@@ -186,7 +186,7 @@ export default {
 }
 
 .fade-enter-active {
-  transition: all 2s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 
 .fade-enter-to {
@@ -198,7 +198,7 @@ export default {
 }
 
 .fade-leave-active {
-  transition: all 2s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 
 .fade-leave-to {

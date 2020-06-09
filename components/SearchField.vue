@@ -90,8 +90,8 @@ input{
     text-overflow: ellipsis;
     margin-bottom: .5rem;
     position: fixed;
-    width: 50vw;
-    transition: width 1s ease-in-out;
+    width: 90%;
+    transition: width .3s ease-in-out;
     &:focus,
     &:active{
       caret-color: color(Green-active);
@@ -99,10 +99,10 @@ input{
       width: 100%;
       border-radius: 0;
       transform: translate(-50%, -2rem);
-      -webkit-transition: transform 1s ease-in-out, width 1s ease-in-out 1s, border-radius 1.5s ease-in-out .5s, background-color 1s ease-in-out;
-      -moz-transition:  transform 1s ease-in-out, width 1s ease-in-out 1s, border-radius 1.5s ease-in-out .5s, background-color 1s ease-in-out;
-      -o-transition: transform 1s ease-in-out, width 1s ease-in-out 1s, border-radius 1.5s ease-in-out .5s, background-color 1s ease-in-out;
-      transition:  transform 1s ease-in-out, width 1s ease-in-out 1s, border-radius 1.5s ease-in-out .5s, background-color 1s ease-in-out;
+      -webkit-transition: transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
+      -moz-transition:  transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
+      -o-transition: transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
+      transition:  transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
       color: color(White);
       &::placeholder{
         color: color(White);
