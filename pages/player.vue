@@ -51,6 +51,9 @@ export default {
       console.log('item', data)
       this.currentTrack = data.item
       this.trackdata = data
+      if (data.item.uri !== this.currentTrack.uri) {
+        this.$store.dispatch('player/updateTrack', data.item)
+      }
     }
   }
 }

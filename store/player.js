@@ -7,9 +7,9 @@ export const state = ( )=> ({
 
 
 // Mutations, functions to alter the state
-export const mutations = {
-    setPlayingTrack(value){
-        state.currentlyPlaying = value;
+export const mutations = { 
+    setPlayingTrack(state, currentlyPlaying){
+        state.currentlyPlaying = currentlyPlaying;
     },
     togglePlay(value){
         state.isToggled = value
@@ -20,11 +20,32 @@ export const mutations = {
 
 // Actions
 export const actions = {
+    async nuxtServerInit ({ commit }) {
+    
+        try {
+          const redisUrl = `${clientUrl}/api/spotify/data/`
+          const {
+            data: { is_connected }
+          } = await axios.get(`${redisUrl}is_connected`)
+    
+          commit('connectionChange', is_connected)
+    
+          if (is_connected) {
+            const {
+              data: { item, is_playing }
+            } = await axios.get(`${clientUrl}/api/spotify/now-playing`)
+            console.log('await currently playing')
+            commit('setPlayingTrack', item)
+          }
+        } catch (err) {
+          console.error(err)
+        }
+      },
     updateTrack: ({ commit, state }, currentlyPlaying) => {
         commit('setPlayingTrack', currentlyPlaying)
-        return state.currentlyPlaying
+        // return state.currentlyPlaying
     },
     togglePlay: ({ commit, state }, toggle) => {
         commit('togglePlay', 'yes')
-    }
+    },
 };  

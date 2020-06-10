@@ -8,7 +8,7 @@
       </ul>
     </section>
     <footer>
-      <PlayBar :playing-track="playingTrack" @updateTrack="getTrack" />
+      <!-- <PlayBar :playing-track="playingTrack" @updateTrack="getTrack" /> -->
     </footer>
   </main>
 </template>
@@ -16,14 +16,14 @@
 <script>
 import SearchField from '~/components/SearchField.vue'
 import Track from '~/components/Track.vue'
-import PlayBar from '~/components/PlayBar.vue'
+// import PlayBar from '~/components/PlayBar.vue'
 
 export default {
   transition: 'slide-out',
   components: {
     SearchField,
-    Track,
-    PlayBar
+    Track
+    // PlayBar
   },
 
   data () {
@@ -43,7 +43,8 @@ export default {
     getTrack (value) {
       if (value !== 'undefined') {
         this.playingTrack = value
-        this.$store.dispatch('player/setPlayingTrack', value)
+        console.log(value)
+        this.$store.dispatch('player/updateTrack', value)
       }
     }
   },

@@ -68,6 +68,9 @@ export default {
         line-height: 22px;
         letter-spacing: .015em;
         color: #fff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .track-artist{
@@ -91,5 +94,6 @@ export default {
       -webkit-box-pack: center;
       -ms-flex-pack: center;
       justify-content: center;
+      overflow: hidden
   }
 </style>

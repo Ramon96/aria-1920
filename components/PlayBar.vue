@@ -5,11 +5,14 @@
          
           <progress value="0" max="100"></progress>
           <nuxt-link to="/player">
+          <!-- {{ playingTrack.album.images }} -->
           <img :src="playingTrack.album.images[2]['url']" :alt="playingTrack.title">
-          <div class="track-name">{{ playingTrack.name }}</div>
-          <div v-for="artist in playingTrack.artists" v-bind:key="artist.id" class="track-artist">
+          <marquee behavior="scroll" direction="left">
+          <span class="track-name">{{ playingTrack.name }}</span>
+          <span v-for="artist in playingTrack.artists" v-bind:key="artist.id" class="track-artist">
             {{artist.name}}
-          </div>
+          </span>
+          </marquee>
          </nuxt-link>
         <button :data-control="paused ? 'pause' : 'play'" @click="checkPaused" class="playButton"></button>
       </div>
