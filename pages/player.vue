@@ -3,6 +3,7 @@
     <Player />
     <Instagram />
     <Youtube />
+    <NewsApi />
   </section>
 </template>
 
@@ -10,11 +11,13 @@
 import Player from '~/components/Player.vue'
 import Instagram from '~/components/Instagram.vue'
 import Youtube from '~/components/Youtube.vue'
+import NewsApi from '~/components/NewsApi.vue'
 export default {
   components: {
     Player,
     Instagram,
-    Youtube
+    Youtube,
+    NewsApi
   }
 }
 </script>
