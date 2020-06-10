@@ -30,9 +30,10 @@ async function getVideos(uploadsKey){
     return videos
 }
 
-router.get('/youtube/data/:username', async (req, res) =>{
+router.get('/youtube/data/:url', async (req, res) =>{
     try{
-        const videos = await getUploadsKey(req.params.username)
+        console.log(username)
+        const videos = await getUploadsKey(req.params.url)
         res.send(videos)
     }
     catch(err){

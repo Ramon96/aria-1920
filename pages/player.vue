@@ -1,9 +1,9 @@
 <template>
   <section id="song-detail" data-overlay="enabled">
     <Player v-if="currentTrack" :trackdata="trackdata" :track="currentTrack" />
-    <Instagram />
-    <Youtube />
-    <NewsApi />
+    <Instagram v-if="instagramHandle" :handle="instagramHandle" />
+    <Youtube v-if="youtubeHandle" :ythandle="youtubeHandle" />
+    <NewsApi v-if="artist" :artist="artist" />
   </section>
 </template>
 
@@ -23,8 +23,18 @@ export default {
     return {
       currentTrack: null,
       trackdata: null,
-      interval: null
+      interval: null,
+      uri: [],
+      artist: null,
+      instagramHandle: null,
+      youtubeHandle: null,
+      resources: ['youtube', 'instagram']
     }
+  },
+  watch: {
+    // artist () {
+    //   console.log('player watch')
+    // }
   },
   created () {
     console.time()
@@ -45,25 +55,62 @@ export default {
       //   '/api/spotify/now-playing/'
       // )
 
-      const data = await this.$axios.$get(
-        '/api/spotify/now-playing/'
-      )
-      console.log('item', data)
+      const data = await this.$axios.$get('/api/spotify/now-playing/')
+      // console.log('item', data)
       this.currentTrack = data.item
       this.trackdata = data
+
+      const newartist = data.item.artists[0].name
+      // console.log(this.artist)
+      if (newartist !== this.artist) {
+      // console.log('change artist')
+        this.artist = newartist
+        console.log(newartist + ' ' + this.artist)
+        const uris = await this.$axios.get(
+          '/api/musicbrainz/getartist/' + this.artist
+        )
+        this.uri = uris
+        this.updateHandles(uris)
+      }
+    },
+    updateHandles (uris) {
+      console.log(uris.data)
+
+      const filter = uris.data.filter((item) => {
+        // if(item)
+        for (let i = 0; i < this.resources.length; i++) {
+          if (item.url.resource.includes(this.resources[i])) {
+            console.log(item)
+            return item
+          }
+        }
+      }).map((item) => {
+        if (item.url.resource.includes('youtube')) {
+          console.log(item.url.resource)
+          const username = item.url.resource.split('/')[4]
+          this.youtubeHandle = username
+          console.log(this.youtubeHandle, username)
+        }
+        if (item.url.resource.includes('instagram')) {
+          const username = item.url.resource.split('/')[3]
+          this.instagramHandle = username
+          console.log(this.instagramHandle, username)
+        }
+      })
+      console.log(filter)
     }
   }
 }
 </script>
 
 <style lang="scss">
-  h2{
-    color: color(White);
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    font-size: 1.5em;
-    padding: 1em 0;
-  }
+h2 {
+  color: color(White);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 1.5em;
+  padding: 1em 0;
+}
 
 /* TODO: Refactor styling, styling should be in its own component */
 #song-detail {
@@ -78,13 +125,19 @@ export default {
   // TODO The color has to be determined by the album color, Tomas found a node library for this
   // https://cssgradient.io/
   background: rgb(25, 20, 20);
-  background: linear-gradient(360deg, rgba(25, 20, 20, 1) 0%, rgba(88, 15, 57, 1) 33%, rgba(97, 14, 62, 1) 48%, rgba(255, 0, 155, 1) 100%);
+  background: linear-gradient(
+    360deg,
+    rgba(25, 20, 20, 1) 0%,
+    rgba(88, 15, 57, 1) 33%,
+    rgba(97, 14, 62, 1) 48%,
+    rgba(255, 0, 155, 1) 100%
+  );
 
   // background-color: #292929db;
   overflow-y: scroll;
   // Wat doet deze before?
   &::before {
-    content: '';
+    content: "";
     width: 100%;
     height: 100vh;
     position: absolute;
@@ -96,21 +149,21 @@ export default {
 
   &[data-overlay="disabled"] {
     transform: translate(0, 100%);
-    transition: transform .3s;
+    transition: transform 0.3s;
 
     &::before {
       opacity: 1;
-      transition: opacity .3s .3s;
+      transition: opacity 0.3s 0.3s;
     }
   }
 
   &[data-overlay="enabled"] {
     transform: translate(0, 0);
-    transition: transform .3s;
+    transition: transform 0.3s;
 
     &::before {
       opacity: 0;
-      transition: opacity .3s .3s;
+      transition: opacity 0.3s 0.3s;
       display: none;
     }
   }
@@ -152,8 +205,8 @@ export default {
   .track-information {
     display: grid;
     grid-template-areas:
-      'track-name like-button'
-      'track-artist like-button';
+      "track-name like-button"
+      "track-artist like-button";
     padding: 1.5rem 0;
 
     .track-name {
@@ -199,7 +252,13 @@ export default {
 
   /*Chrome*/
   .track-progress {
-    background: linear-gradient(to right, color(White) 0%, color(White) 1%, #535353 1%, #535353 100%);
+    background: linear-gradient(
+      to right,
+      color(White) 0%,
+      color(White) 1%,
+      #535353 1%,
+      #535353 100%
+    );
     border-radius: 8px;
     height: 3px;
     width: 100%;
