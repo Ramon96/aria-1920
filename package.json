@@ -27,6 +27,7 @@
     "express": "^4.16.4",
     "nuxt": "^2.0.0",
     "nuxt-fontawesome": "^0.4.0",
+    "nuxt-socket-io": "^1.1.0",
     "throttle-debounce": "^2.1.0"
   },
   "devDependencies": {

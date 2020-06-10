@@ -2,12 +2,14 @@
  <transition name="fade">
 
       <div v-if="playingTrack" id="play-bar" :class="playingTrack ? 'playing' : ''">
+         <nuxt-link to="/player">
         <progress value="0" max="100"></progress>
         <img :src="playingTrack.album.images[2]['url']" :alt="playingTrack.title">
         <div class="track-name">{{ playingTrack.name }}</div>
         <div v-for="artist in playingTrack.artists" v-bind:key="artist.id" class="track-artist">
           {{artist.name}}
         </div>
+         </nuxt-link>
         <button data-control="pause" @click="checkPaused" class="playButton"></button>
       </div>
 
@@ -108,7 +110,7 @@ export default {
           volume: .9
         });
 
-        console.log(player)
+        console.log('Player',  player)
 
         // Error logging
         player.on('initialization_error', e => console.error(e));

@@ -48,8 +48,6 @@
 export default {
   props: ['trackdata', 'track'],
 
-
-
   beforeMount (){
     // this.track = data.item; 
     console.log('Name is', this.name)
@@ -66,7 +64,6 @@ export default {
       }else{
         // TODO show album cover placeholder img or icon
       }
-      
     },
     artists(){
       // This is formated, when using the artist name to fetch data, we should
