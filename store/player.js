@@ -1,7 +1,8 @@
 
 // The actual state
 export const state = ( )=> ({
-    currentlyPlaying: {}
+    currentlyPlaying: {},
+    isToggled: ''
 });
 
 
@@ -10,6 +11,9 @@ export const mutations = {
     setPlayingTrack(value){
         state.currentlyPlaying = value;
     },
+    togglePlay(value){
+        state.isToggled = value
+    }
 };
 
 
@@ -20,4 +24,7 @@ export const actions = {
         commit('setPlayingTrack', currentlyPlaying)
         return state.currentlyPlaying
     },
+    togglePlay: ({ commit, state }, toggle) => {
+        commit('togglePlay', 'yes')
+    }
 };  

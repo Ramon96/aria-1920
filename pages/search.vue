@@ -8,9 +8,7 @@
       </ul>
     </section>
     <footer>
-      <nuxt-link to="/player">
-        <PlayBar :playing-track="playingTrack" @updateTrack="getTrack" />
-      </nuxt-link>
+      <PlayBar :playing-track="playingTrack" @updateTrack="getTrack" />
     </footer>
   </main>
 </template>

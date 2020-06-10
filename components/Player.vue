@@ -77,6 +77,7 @@ export default {
   methods: {
     isPaused(){
       console.log(this.trackdata)
+      this.$store.dispatch('player/togglePlay', 'yes')
     }
   }
 }

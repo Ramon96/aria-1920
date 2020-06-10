@@ -2,15 +2,16 @@
  <transition name="fade">
 
       <div v-if="playingTrack" id="play-bar" :class="playingTrack ? 'playing' : ''">
-         <nuxt-link to="/player">
-        <progress value="0" max="100"></progress>
-        <img :src="playingTrack.album.images[2]['url']" :alt="playingTrack.title">
-        <div class="track-name">{{ playingTrack.name }}</div>
-        <div v-for="artist in playingTrack.artists" v-bind:key="artist.id" class="track-artist">
-          {{artist.name}}
-        </div>
+         
+          <progress value="0" max="100"></progress>
+          <nuxt-link to="/player">
+          <img :src="playingTrack.album.images[2]['url']" :alt="playingTrack.title">
+          <div class="track-name">{{ playingTrack.name }}</div>
+          <div v-for="artist in playingTrack.artists" v-bind:key="artist.id" class="track-artist">
+            {{artist.name}}
+          </div>
          </nuxt-link>
-        <button data-control="pause" @click="checkPaused" class="playButton"></button>
+        <button :data-control="paused ? 'pause' : 'play'" @click="checkPaused" class="playButton"></button>
       </div>
 
     </transition>
@@ -164,6 +165,7 @@ export default {
 
         this.player.togglePlay().then(() => {
           console.log('Toggled playback!');
+          this.paused = !this.paused
         });
       
     },
@@ -221,6 +223,12 @@ export default {
   bottom: 0;
   background: #282828;
   width: 100%;
+
+  a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
   progress {
     // for some reason, the styling of the progress bar gets lost if you remove the border-radius, I dont know why..
     border-radius: 1px;
