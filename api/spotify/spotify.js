@@ -7,10 +7,10 @@ import axios from 'axios'
 function connectToRedis() {
     const redisClient = redis.createClient(process.env.REDIS_URL)
     redisClient.on('connect', () => {
-      console.log('Redis client connected')
+      // console.log('Redis client connected')
     })
     redisClient.on('error', err => {
-      console.error(`\n🚨 Redis client could not connect: ${err} 🚨\n`)
+      // console.error(`\n🚨 Redis client could not connect: ${err} 🚨\n`)
     })
     return redisClient
   }
@@ -25,7 +25,7 @@ function connectToRedis() {
       const reply = await callStorage(...storageArgs(key, { value }))
       res.send({ [key]: reply })
     } catch (err) {
-      console.error(`\n🚨 There was an error at /api/spotify/data: ${err} 🚨\n`)
+      // console.error(`\n🚨 There was an error at /api/spotify/data: ${err} 🚨\n`)
       res.send(err)
     }
   })
@@ -63,11 +63,11 @@ function connectToRedis() {
         test
       } = await getUserData(access_token)
   
-      console.log(test)
+      // console.log(test)
   
       // if (test.id !== process.env.SPOTIFY_USER_ID)
       //   throw "🤖 You aren't the droid we're looking for."
-      console.log(callStorage('get', 'is_connected'), process.env.SPOTIFY_USER_ID)
+      // console.log(callStorage('get', 'is_connected'), process.env.SPOTIFY_USER_ID)
       callStorage(...storageArgs('is_connected', { value: true }))
       callStorage(...storageArgs('refresh_token', { value: refresh_token }))
       callStorage(
@@ -80,9 +80,9 @@ function connectToRedis() {
       const success = 'Welcome Back'
       res.redirect(`/auth?success=${success}`)
     } catch (err) {
-      console.error(
-        `There was an error at /api/spotify/callback: ${err} 🚨\n`
-      )
+      // console.error(
+      //   `There was an error at /api/spotify/callback: ${err} 🚨\n`
+      // )
       res.redirect(`/auth?message=${err}`)
     }
   })
@@ -210,9 +210,9 @@ router.get('/spotify/ramon/', (req, res) => {
     try {
       callStorage('set','is_connected', false)
       res.redirect('https://www.spotify.com/logout/')
-      console.log('logout')
+      // console.log('logout')
     } catch(err) {
-      console.log('Logging out is not working properly', `error: ${error.message}`)
+      // console.log('Logging out is not working properly', `error: ${error.message}`)
     }
     
    

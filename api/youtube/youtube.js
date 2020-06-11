@@ -17,6 +17,7 @@ async function getUploadsKey(username){
     }
     } = youtubeData.data
 
+
     return await getVideos(uploads);
 }
 
@@ -27,12 +28,13 @@ async function getVideos(uploadsKey){
         return item.contentDetails.videoId
     })
 
+    console.log(videos)
+
     return videos
 }
 
 router.get('/youtube/data/:url', async (req, res) =>{
     try{
-        console.log(username)
         const videos = await getUploadsKey(req.params.url)
         res.send(videos)
     }
