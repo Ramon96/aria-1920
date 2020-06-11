@@ -88,7 +88,7 @@
             </a>
           </div>
         </blockquote>
-        <script async defer src="http://www.instagram.com/embed.js"></script>
+        <script async defer src="//www.instagram.com/embed.js"></script>
       </swiper-slide>
     </swiper>
   </div>
