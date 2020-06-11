@@ -1,6 +1,6 @@
 <template>
   <div class="videos">
-    <h2>Videos</h2>
+    <h2 v-if="ids.length > 0">Videos</h2>
     <swiper ref="mySwiper" :options="swiperOptions">
      <swiper-slide v-for="value in ids" v-bind:key="value ">
       <iframe
@@ -59,7 +59,11 @@ export default {
       }
     };
   },
-  watch: {},
+  watch: {
+    ythandle: function(newHandle, oldHandle){
+      this.getVideoIds();
+    }, deep: true
+  },
   computed: {
     swiper() {
       return this.$refs.mySwiper.$swiper;

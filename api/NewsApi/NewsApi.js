@@ -16,7 +16,7 @@ async function getNews(artist){
         sortBy: 'relevancy',
         // page: 1
       }).then(response => {
-        console.log(response);
+        // console.log(response);
         return response
         /*
           {

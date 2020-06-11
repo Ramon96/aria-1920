@@ -77,27 +77,27 @@ export default {
       }
     },
     updateHandles (uris) {
-      console.log(uris.data)
-
+      // console.log(uris.data)
+      // if none of the resources are available then the value's should be set to null so the compents dont stay
       const filter = uris.data.filter((item) => {
         // if(item)
         for (let i = 0; i < this.resources.length; i++) {
           if (item.url.resource.includes(this.resources[i])) {
-            console.log(item)
+            // console.log(item)
             return item
           }
         }
       }).map((item) => {
         if (item.url.resource.includes('youtube')) {
-          console.log(item.url.resource)
+          // console.log(item.url.resource)
           const username = item.url.resource.split('/')[4]
           this.youtubeHandle = username
-          console.log(this.youtubeHandle, username)
+          // console.log(this.youtubeHandle, username)
         }
         if (item.url.resource.includes('instagram')) {
           const username = item.url.resource.split('/')[3]
           this.instagramHandle = username
-          console.log(this.instagramHandle, username)
+          // console.log(this.instagramHandle, username)
         }
       })
       console.log(filter)
