@@ -75,7 +75,7 @@ export default {
     },
     updateHandles (uris) {
       // console.log(uris.data)
-
+      // if none of the resources are available then the value's should be set to null so the compents dont stay
       const filter = uris.data.filter((item) => {
         // if(item)
         for (let i = 0; i < this.resources.length; i++) {

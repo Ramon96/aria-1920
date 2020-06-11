@@ -1,6 +1,6 @@
 <template>
   <div class="socials">
-    <h2>Socials</h2>
+    <h2 v-if="ids.length > 0">Socials</h2>
     <swiper ref="mySwiper" :options="swiperOptions">
       <swiper-slide v-for="value in ids" v-bind:key="value ">
         <blockquote
@@ -88,7 +88,7 @@
             </a>
           </div>
         </blockquote>
-        <script async src="//www.instagram.com/embed.js"></script>
+        <script async defer src="http://www.instagram.com/embed.js"></script>
       </swiper-slide>
     </swiper>
   </div>
@@ -144,7 +144,13 @@ export default {
       }
     };
   },
-  watch: {},
+  watch: {
+    handle: function(newHandle, oldHandle){
+      this.getPostIds().then(() =>{
+        window.instgrm.Embeds.process()
+      });
+    }, deep:true
+  },
   computed: {
     swiper() {
       return this.$refs.mySwiper.$swiper;
