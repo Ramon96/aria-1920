@@ -160,6 +160,7 @@ export default {
     this.init();
   },
   mounted() {
+    
   },
   methods: {
     async getPostIds() {
