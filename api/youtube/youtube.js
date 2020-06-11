@@ -5,6 +5,7 @@ import axios from 'axios';
 
 async function getUploadsKey(username){
     const youtubeData = await axios.get(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forUsername=${username}&key=${process.env.YOUTUBE_KEY}`)
+    console.log('YTDATA', youtubeData)
     const {
         items: {
         [0] :{ 
@@ -15,7 +16,7 @@ async function getUploadsKey(username){
             }
         }
     }
-    } = youtubeData.data
+    } = youtubeData
 
     return await getVideos(uploads);
 }
@@ -30,9 +31,12 @@ async function getVideos(uploadsKey){
     return videos
 }
 
-router.get('/youtube/data/:username', async (req, res) =>{
+router.get('/youtube/data/:url', async (req, res) =>{
+    // res.send('hoi')
+    console.log(req.params.url)
     try{
-        const videos = await getUploadsKey(req.params.username)
+        // console.log(username)
+        const videos = await getUploadsKey(req.params.url)
         res.send(videos)
     }
     catch(err){

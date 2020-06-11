@@ -4,6 +4,7 @@ const router = express.Router();
 import axios from 'axios';
 
 async function getUserPage(handle){
+    // const instagramJson = await axios.get(`https://www.instagram.com/${handle}/?__a=1`);
     const instagramJson = await axios.get(`https://www.instagram.com/${handle}/?__a=1`);
     const {
          graphql:{
@@ -24,9 +25,9 @@ function getShortCodes(edges){
     })
 }
 
-router.get('/instagram/recent/:handle', async (req,res) =>{
+router.get('/instagram/recent/:url', async (req,res) =>{
     try{ 
-        const recentPosts = await getUserPage(req.params.handle)
+        const recentPosts = await getUserPage(req.params.url)
         res.send(recentPosts)
     }
     catch(err){

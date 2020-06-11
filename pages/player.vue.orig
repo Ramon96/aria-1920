@@ -59,9 +59,11 @@ export default {
       // console.log('item', data)
       this.currentTrack = data.item
       this.trackdata = data
+<<<<<<< HEAD
       if (data.item.uri !== this.currentTrack.uri) {
         this.$store.dispatch('player/updateTrack', data.item)
       }
+=======
 
       const newartist = data.item.artists[0].name
       // console.log(this.artist)
@@ -101,6 +103,7 @@ export default {
         }
       })
       console.log(filter)
+>>>>>>> aria-api
     }
   }
 }
@@ -140,7 +143,7 @@ h2 {
   overflow-y: scroll;
   // Wat doet deze before?
   &::before {
-    content: '';
+    content: "";
     width: 100%;
     height: 100vh;
     position: absolute;
@@ -208,8 +211,8 @@ h2 {
   .track-information {
     display: grid;
     grid-template-areas:
-      'track-name like-button'
-      'track-artist like-button';
+      "track-name like-button"
+      "track-artist like-button";
     padding: 1.5rem 0;
 
     .track-name {

@@ -131,7 +131,7 @@ export default {
   },
   name: "Instagram",
   components: {},
-  props: [],
+  props: ['handle'],
   data() {
     return {
       ids: [],
@@ -158,7 +158,7 @@ export default {
   methods: {
     async getPostIds() {
       // TODO eminem moet vervangen worden met een artiste naam die van musicbrianz
-      const postIds = await this.$axios.get(`/api/instagram/recent/eminem`);
+      const postIds = await this.$axios.get(`/api/instagram/recent/${this.handle}`);
       this.ids = postIds.data;
     },
     init() {

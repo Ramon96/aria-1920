@@ -36,10 +36,7 @@ export default {
     })
   },
   mounted () {
-    if (
-      !(this.query.success || this.query.error) &&
-      this.isConnected !== true
-    ) {
+    if (!(this.query.success || this.query.error)) {
       console.log('Not connected, but will connect')
       window.location = this.spotifyUrl
     } else if ((Object.keys(this.query).length !== 0)) {

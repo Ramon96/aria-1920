@@ -46,7 +46,7 @@ export default {
   },
   name: "Youtube",
   components: {},
-  props: [],
+  props: ['ythandle'],
   data() {
     return {
       ids: [],
@@ -73,7 +73,8 @@ export default {
   methods: {
     async getVideoIds() {
       // TODO vervang eminimen met de youtube handle die we van de music brainz api terug krijgen.
-      const videos = await this.$axios.get(`/api/youtube/data/eminemMusic`);
+      console.log('ik maak een call' + this.ythandle)
+      const videos = await this.$axios.get(`/api/youtube/data/${this.ythandle}`);
       this.ids = videos.data;
     },
     init() {
