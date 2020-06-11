@@ -15,6 +15,7 @@ async function getUserPage(handle){
              }
          }
     } = instagramJson.data;
+    console.log('handle from server ', handle )
     console.log(instagramJson.data)
     return getShortCodes(edges)
 }
