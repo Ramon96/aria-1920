@@ -166,6 +166,7 @@ export default {
       // TODO eminem moet vervangen worden met een artiste naam die van musicbrianz
       const postIds = await this.$axios.get(`/api/instagram/recent/${this.handle}`);
       this.ids = postIds.data;
+      console.log('getting instagram posts')
     },
     init() {
       this.getPostIds();

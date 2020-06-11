@@ -97,6 +97,7 @@ export default {
         if (item.url.resource.includes('instagram')) {
           const username = item.url.resource.split('/')[3]
           this.instagramHandle = username
+          console.log('instagram Handle: ', username)
           // console.log(this.instagramHandle, username)
         }
       })
