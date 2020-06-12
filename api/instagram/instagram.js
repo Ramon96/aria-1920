@@ -8,7 +8,7 @@ import axios from 'axios';
 
 async function getUserPage(handle){
     // const instagramJson = await axios.get(`https://www.instagram.com/${handle}/?__a=1`);
-    const instagramJson = await fetch(`https://www.instagram.com/${handle}/?__a=1`);
+    const instagramJson = await (await fetch(`https://www.instagram.com/${handle}/?__a=1`)).json();
     // const {
     //      graphql:{
     //          user:{
@@ -21,9 +21,9 @@ async function getUserPage(handle){
     console.log('handle from server ', handle )
     // console.log(instagramJson.data)
 
-    const data = await instagramJson.json()
-    console.log(data)
-    return getShortCodes(data.graphql.user.edge_owner_to_timeline_media.edges)
+    // const data = await instagramJson.json()
+    // console.log(data)
+    return getShortCodes(instagramJson.graphql.user.edge_owner_to_timeline_media.edges)
 }
 
 
