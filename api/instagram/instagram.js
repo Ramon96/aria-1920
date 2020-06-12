@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
+// TODO remove this, this is just for testing purposes
+const fetch = require('node-fetch');
+
 import axios from 'axios';
 
 async function getUserPage(handle){
     // const instagramJson = await axios.get(`https://www.instagram.com/${handle}/?__a=1`);
-    const instagramJson = await axios.get(`https://www.instagram.com/${handle}/?__a=1`);
+    const instagramJson = await fetch(`https://www.instagram.com/${handle}/?__a=1`);
     const {
          graphql:{
              user:{

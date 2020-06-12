@@ -63,7 +63,7 @@ module.exports = {
   ],
   axios: {
     debug: true,
-    baseURL: `https://aria-hva.herokuapp.com/:${process.env.PORT || 3000}/`,
+    baseURL: `http://localhost:${process.env.PORT || 3000}/`,
     browserBaseURL: '/'
   },
   styleResources: {
