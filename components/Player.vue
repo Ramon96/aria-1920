@@ -64,12 +64,14 @@ export default {
         // TODO show album cover placeholder img or icon
       }
     },
-    artists(){
+    artists () {
       // This is formated, when using the artist name to fetch data, we should
       // devide that into another property or somehow get it from the route params
       return this.track.artists.length > 1 ? 
         this.track.artists.map(artist => artist.name).join(', ') : this.track.artists[0].name
     },
+
+
 
   },
 

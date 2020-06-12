@@ -1,10 +1,12 @@
 <template>
-  <section id="song-detail" data-overlay="enabled">
-    <Player v-if="currentTrack" :trackdata="trackdata" :track="currentTrack" />
-    <Instagram v-if="instagramHandle" :handle="instagramHandle" />
-    <Youtube v-if="youtubeHandle" :ythandle="youtubeHandle" />
-    <NewsApi v-if="artist" :artist="artist" />
-  </section>
+  <transition name="page">
+    <section id="song-detail" data-overlay="enabled" :style="{'background-color':'rgb(' + albumCoverColor + ')'}">
+      <Player v-if="currentTrack" :trackdata="trackdata" :track="currentTrack" />
+      <Instagram v-if="instagramHandle" :handle="instagramHandle" />
+      <Youtube v-if="youtubeHandle" :ythandle="youtubeHandle" />
+      <NewsApi v-if="artist" :artist="artist" />
+    </section>
+  </transition>
 </template>
 
 <script>
@@ -19,6 +21,8 @@ export default {
     Youtube,
     NewsApi
   },
+
+  transition: 'page',
   data () {
     return {
       currentTrack: null,
@@ -28,13 +32,27 @@ export default {
       artist: null,
       instagramHandle: null,
       youtubeHandle: null,
-      resources: ['youtube', 'instagram']
+      resources: ['youtube', 'instagram'],
+      albumCoverColor: null
     }
   },
+  computed: {
+
+  },
   watch: {
-    // artist () {
-    //   console.log('player watch')
+    // albumCoverColor (newVal, oldVal) {
+    //   // console.log(this.trackdata)
+    //   console.log('is', this.trackdata)
+    //   if (this.trackdata != null) {
+    //     return this.trackdata
+    //   } else {
+    //     return '255, 255, 255'
+    //   }
     // }
+    trackdata (newVal, oldVal) {
+      console.log('changed', newVal)
+      this.albumCoverColor = newVal.albumColor
+    }
   },
   created () {
     console.time()
@@ -58,11 +76,14 @@ export default {
       const data = await this.$axios.$get('/api/spotify/now-playing/')
       // console.log('item', data)
       this.currentTrack = data.item
-      this.trackdata = data
-      if (data.item.uri !== this.currentTrack.uri) {
+      console.log('this track', data)
+      if (this.trackdata == null) {
+        this.trackdata = data
+      } else if (data.item.uri !== this.trackdata.item.uri) {
+        // console.log('updating song?')
+        this.trackdata = data
         this.$store.dispatch('player/updateTrack', data.item)
       }
-
       const newartist = data.item.artists[0].name
       // console.log(this.artist)
       if (newartist !== this.artist) {
@@ -107,6 +128,19 @@ export default {
 </script>
 
 <style lang="scss">
+
+.page-enter{
+  transform: translate(0, -100%);
+}
+
+.page-enter-active {
+  transition: all 2s;
+}
+
+.page-enter-to {
+  transform: translate(0, 0);
+}
+
 h2 {
   color: color(White);
   text-transform: uppercase;
@@ -128,14 +162,21 @@ h2 {
   // TODO The color has to be determined by the album color, Tomas found a node library for this
   // https://cssgradient.io/
   background: rgb(25, 20, 20);
-  background: linear-gradient(
-    360deg,
-    rgba(25, 20, 20, 1) 0%,
-    rgba(88, 15, 57, 1) 33%,
-    rgba(97, 14, 62, 1) 48%,
-    rgba(255, 0, 155, 1) 100%
-  );
+  // background: linear-gradient(
+  //   360deg,
+  //   rgba(25, 20, 20, 1) 0%,
+  //   rgba(88, 15, 57, 1) 33%,
+  //   rgba(97, 14, 62, 1) 48%,
+  //   rgba(255, 0, 155, 1) 100%
+  // );
 
+  // background: linear-gradient(
+  //   360deg,
+  //   rgba(25, 20, 20, 1) 0%,
+  //   rgba(var(--albumColor)) 33%,
+  //   rgba(var(--albumColor)) 48%,
+  //   rgba(var(--albumColor)) 100%
+  // );
   // background-color: #292929db;
   overflow-y: scroll;
   // Wat doet deze before?

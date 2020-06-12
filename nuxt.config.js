@@ -90,7 +90,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    watch: ['api'],
+    // watch: ['api'],
     extend (config, ctx) {
     }
   }

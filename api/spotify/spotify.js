@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const { download, getProminentColor } = require('./helpers/albumcover/albumcover')
+
 import redis from 'async-redis'
 import axios from 'axios'
 
@@ -156,10 +158,39 @@ function connectToRedis() {
         }
       )
       const { data } = response
-      setLastPlayed(access_token, data)
-      const reply = await callStorage('get', 'last_played')
+      const getLastPlayed = await callStorage('get', 'last_played')
+      const jsonReply = JSON.parse(getLastPlayed)
+ 
+      let albumColor
+      
+      // console.log('last played id', jsonReply.id, data.item.id)
+      // if(jsonReply.id != data.item.id) {
+        
+        
+
+        download(data.item.album.images[0].url)
+          .then(response => {
+              console.log('res', response)
+              return getProminentColor(response)
+          })
+          .then(color => {
+            console.log(color)
+            albumColor = color
+          })
+          .catch(err => {
+              console.log(err)
+          })
+          setLastPlayed(access_token, data)
+      // }else{
+        console.log('why not')
+        // setLastPlayed(access_token, data)
+      // }
+
+    // res.send('hmm')
+
       res.send({
-        item: JSON.parse(reply),
+        item: data.item,
+        albumC: albumColor,
         is_playing: Boolean(data.is_playing),
         progress_ms: data.progress_ms || 0
       })

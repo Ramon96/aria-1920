@@ -19,7 +19,7 @@ import Track from '~/components/Track.vue'
 // import PlayBar from '~/components/PlayBar.vue'
 
 export default {
-  transition: 'slide-out',
+  // transition: 'slide-out',
   components: {
     SearchField,
     Track
@@ -64,20 +64,6 @@ export default {
 </script>
 
 <style scoped>
-
-.slide-out-leave{
-  transform: translate(0, 0);
-  /* opacity: 1; */
-}
-.slide-out-leave-active,
-.slide-out-enter-active{
-  transition: all 1s;
-}
-.slide-out-leave-to,
-.slide-enter{
-  transform: translate(-100%, 0);
-  /* opacity: 0; */
-}
 
 section {
   min-width: 300px;
