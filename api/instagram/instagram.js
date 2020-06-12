@@ -1,31 +1,23 @@
 const express = require('express');
 const router = express.Router();
 
-// TODO remove this, this is just for testing purposes
-const fetch = require('node-fetch');
-
 import axios from 'axios';
 
 async function getUserPage(handle){
     // const instagramJson = await axios.get(`https://www.instagram.com/${handle}/?__a=1`);
-    // const instagramJson = await (await fetch(`https://www.instagram.com/${handle}/?__a=1`)).json();
-    const instagramJson = await fetch(`https://www.instagram.com/${handle}/?__a=1`);
-    // const {
-    //      graphql:{
-    //          user:{
-    //             edge_owner_to_timeline_media: {
-    //                 edges
-    //             }
-    //          }
-    //      }
-    // } = await instagramJson.data;
+    const instagramJson = await axios.get(`https://www.instagram.com/${handle}/?__a=1`);
+    const {
+         graphql:{
+             user:{
+                edge_owner_to_timeline_media: {
+                    edges
+                }
+             }
+         }
+    } = instagramJson.data;
     console.log('handle from server ', handle )
-    // console.log(instagramJson.data)
-
-    // const data = await instagramJson.json()
-    // console.log(data)
-    console.log(JSON.stringify(instagramJson))
-    return getShortCodes(instagramJson.graphql.user.edge_owner_to_timeline_media.edges)
+    console.log(instagramJson.data)
+    return getShortCodes(edges)
 }
 
 
