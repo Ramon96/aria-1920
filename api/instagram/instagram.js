@@ -8,7 +8,8 @@ import axios from 'axios';
 
 async function getUserPage(handle){
     // const instagramJson = await axios.get(`https://www.instagram.com/${handle}/?__a=1`);
-    const instagramJson = await (await fetch(`https://www.instagram.com/${handle}/?__a=1`)).json();
+    // const instagramJson = await (await fetch(`https://www.instagram.com/${handle}/?__a=1`)).json();
+    const instagramJson = await fetch(`https://www.instagram.com/${handle}/?__a=1`);
     // const {
     //      graphql:{
     //          user:{
