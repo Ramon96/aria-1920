@@ -22,8 +22,8 @@ async function getUserPage(handle){
     console.log('handle from server ', handle )
     // console.log(instagramJson.data)
 
-    // const data = await instagramJson.json()
-    // console.log(data)
+    const data = await instagramJson.json()
+    console.log(data)
     console.log(instagramJson.json())
     return getShortCodes(instagramJson.graphql.user.edge_owner_to_timeline_media.edges)
 }
