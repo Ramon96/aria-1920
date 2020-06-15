@@ -1,35 +1,21 @@
 const express = require('express');
 const router = express.Router();
 
-import axios from 'axios';
+const ig = require('instagram-scraping');
 
-async function getUserPage(handle){
-    // const instagramJson = await axios.get(`https://www.instagram.com/${handle}/?__a=1`);
-    const instagramJson = await axios.get(`https://www.instagram.com/${handle}/?__a=1`);
-    const {
-         graphql:{
-             user:{
-                edge_owner_to_timeline_media: {
-                    edges
-                }
-             }
-         }
-    } = instagramJson.data;
-    console.log('handle from server ', handle )
-    console.log(instagramJson.data)
-    return getShortCodes(edges)
-}
-
-
-function getShortCodes(edges){
-    return edges.map(edge => {
-        return edge.node.shortcode
-    })
+async function getMediaId(handle){
+    return ig.scrapeUserPage('eminem')
+        .then(result => {
+        return result.medias.map(post => {
+            return post.shortcode
+        })
+      });
 }
 
 router.get('/instagram/recent/:url', async (req,res) =>{
     try{ 
-        const recentPosts = await getUserPage(req.params.url)
+        // const recentPosts = await getUserPage(req.params.url)
+        const recentPosts = await getMediaId(req.params.url)
         res.send(recentPosts)
     }
     catch(err){
