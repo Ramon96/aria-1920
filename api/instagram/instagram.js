@@ -32,7 +32,7 @@ async function getMediaId(handle) {
                   }
               }
             } = media;
-
+            console.log(media)
         return getShortCodes(edges)
 
       })
