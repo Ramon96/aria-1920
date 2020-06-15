@@ -1,14 +1,19 @@
 <template>
   <transition name="fade" mode="out-in">
     <section aria-live="polite">
-      <nuxt-link
+      <!-- <nuxt-link
         to="/overview"
         name="home"
         :aria-current="'/overview' === $nuxt.$route.path ? 'page' : false"
       >
-        Close
-      </nuxt-link>
-      {{ message }}
+      </nuxt-link> -->
+      <div class="container d-flex justify-content-center">
+        <div class="align-self-center">
+          <font-awesome-icon :icon="['fab', 'spotify']" />
+          <p>loading ...</p>
+        </div>
+      </div>
+      <!-- {{ message }} -->
     </section>
   </transition>
 </template>
@@ -54,7 +59,7 @@ export default {
     if (this.isConnected === true) {
       console.log('Connected already...' + this.isConnected)
       this.getAccesToken()
-      this.$store.commit('updateMessage', "⚡ We're Connected ⚡")
+      // this.$store.commit('updateMessage', "⚡ We're Connected ⚡")
       // this.$store.commit('accesToken')
     } else {
       console.log('what...')
@@ -72,45 +77,26 @@ export default {
 }
 </script>
 
-<style scoped>
-section {
-  position: absolute;
-  width: 30%;
-  min-width: 300px;
-  left: 0;
-  right: 0;
-  bottom: 50%;
-  margin: auto;
-  padding: 1em;
-  display: flex;
-  flex-direction: column;
+<style scoped lang="scss">
+
+.container {
+  height: 100vh;
+}
+
+svg {
+  font-size: 8rem;
+  margin-bottom: 1.5rem;
+  path {
+    fill: color(GreenActive);
+  }
+}
+
+p{
+  color: #fff;
   text-align: center;
-  justify-content: center;
-  mix-blend-mode: hard-light;
-  z-index: 2;
+  font-size: 1.5rem;
 }
-section:after,
-section:before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: -1;
-}
-section:after {
-  transform: rotate(1deg);
-  background: rgba(255, 255, 255, 0.1);
-}
-section:before {
-  transform: rotate(3deg);
-  background: rgba(255, 255, 255, 0.03);
-}
-a {
-  margin: auto;
-}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 600ms ease-out;
