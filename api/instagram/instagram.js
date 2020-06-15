@@ -5,9 +5,9 @@ const ig = require('instagram-scraping');
 const delay = require('delay');
 
 async function getMediaId(handle){
+    await delay(getRandomArbitrary(1000,2000));
     return  ig.scrapeUserPage('eminem')
-        .then( async result => {
-            await delay(getRandomArbitrary(1000,2000));
+        .then(  result => {
         return result.medias.map( post => {
             return post.shortcode
         })
