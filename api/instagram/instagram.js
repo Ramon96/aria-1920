@@ -6,7 +6,7 @@ const delay = require('delay');
 
 async function getMediaId(handle){
     await delay(getRandomArbitrary(1000,2000));
-    return  ig.scrapeUserPage('eminem')
+    return  ig.scrapeTag('eminem')
         .then(  result => {
         return result.medias.map( post => {
             return post.shortcode
