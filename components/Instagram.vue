@@ -88,7 +88,7 @@
             </a>
           </div>
         </blockquote>
-        <script async defer src="https//www.instagram.com/embed.js"></script>
+        <!-- <script async defer src="https://www.instagram.com/embed.js"></script> -->
       </swiper-slide>
     </swiper>
   </div>
@@ -126,7 +126,14 @@ export default {
   head() {
     return {
       // TODO fix title
-      Title: "Instagram"
+      Title: "Instagram",
+      script: [
+        {
+          src: 'https://www.instagram.com/embed.js',
+          body: true,
+          async: true
+        }
+      ]
     };
   },
   name: "Instagram",
