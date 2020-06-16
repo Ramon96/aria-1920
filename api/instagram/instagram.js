@@ -6,15 +6,8 @@ import axios from 'axios';
 
 async function getMediaId(handle) {
       const oege = await axios.get(`https://oege.ie.hva.nl/~stolpt1/insta/index.php?username=${handle}`)
-      console.log(oege.data)
       return(oege.data)
     }
-
-    // function getShortCodes(edges) {
-    //   return edges.map(edge => {
-    //     return edge.node.shortcode
-    //   })
-    // }
 
     router.get('/instagram/recent/:url', async (req, res) => {
       try {

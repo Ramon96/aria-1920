@@ -54,7 +54,7 @@ export default {
 
   computed: {
     name(){
-      console.log(this.track.name)
+      // console.log(this.track.name)
       return this.track.name
     },
     albumCover(){

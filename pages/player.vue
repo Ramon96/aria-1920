@@ -25,6 +25,7 @@ export default {
       trackdata: null,
       interval: null,
       uri: [],
+      newartist: null,
       artist: null,
       instagramHandle: null,
       youtubeHandle: null,
@@ -37,9 +38,9 @@ export default {
     // }
   },
   created () {
-    console.time()
+    // console.time()
     this.updateCurrentSong()
-    console.timeEnd()
+    // console.timeEnd()
 
     this.interval = setInterval(() => {
       this.updateCurrentSong()
@@ -47,14 +48,6 @@ export default {
   },
   methods: {
     async updateCurrentSong () {
-      // const {
-      //   progress_ms: progressMs,
-      //   is_playing: isPlaying,
-      //   item
-      // } = await this.$axios.$get(
-      //   '/api/spotify/now-playing/'
-      // )
-
       const data = await this.$axios.$get('/api/spotify/now-playing/')
       // console.log('item', data)
       this.currentTrack = data.item
@@ -63,12 +56,11 @@ export default {
         this.$store.dispatch('player/updateTrack', data.item)
       }
 
-      const newartist = data.item.artists[0].name
+      this.newartist = data.item.artists[0].name
       // console.log(this.artist)
-      if (newartist !== this.artist) {
-      // console.log('change artist')
-        this.artist = newartist
-        console.log(newartist + ' ' + this.artist)
+      if (this.newartist !== this.artist) {
+        console.error('New Artist: ' + this.newartist + 'Old Artist' + this.artist)
+        this.artist = this.newartist
         const uris = await this.$axios.get(
           '/api/musicbrainz/getartist/' + this.artist
         )
@@ -77,31 +69,33 @@ export default {
       }
     },
     updateHandles (uris) {
-      // console.log(uris.data)
       // if none of the resources are available then the value's should be set to null so the compents dont stay
       const filter = uris.data.filter((item) => {
-        // if(item)
         for (let i = 0; i < this.resources.length; i++) {
           if (item.url.resource.includes(this.resources[i])) {
-            // console.log(item)
             return item
           }
         }
-      }).map((item) => {
-        if (item.url.resource.includes('youtube')) {
-          // console.log(item.url.resource)
-          const username = item.url.resource.split('/')[4]
-          this.youtubeHandle = username
-          // console.log(this.youtubeHandle, username)
-        }
-        if (item.url.resource.includes('instagram')) {
-          const username = item.url.resource.split('/')[3]
-          this.instagramHandle = username
-          console.log('instagram Handle: ', username)
-          // console.log(this.instagramHandle, username)
-        }
       })
-      console.log(filter)
+
+      const getHandle = (array) => {
+        console.log('Getting new handles')
+        const instagram = array.find(handle => handle.url.resource.includes('instagram'))
+        if (instagram == null) {
+          this.instagramHandle = null
+        } else {
+          this.instagramHandle = instagram.url.resource.split('/')[3]
+        }
+
+        const youtube = array.find(handle => handle.url.resource.includes('youtube'))
+        if (youtube == null) {
+          this.youtubeHandle = null
+        } else {
+          this.youtubeHandle = youtube.url.resource.split('/')[4]
+        }
+      }
+
+      getHandle(filter)
     }
   }
 }

@@ -104,6 +104,7 @@ iframe {
   max-width: unset !important;
   min-width: unset !important;
   width: inherit !important;
+  max-height: 450px ;
 }
 
 .swiper-slide-active{
@@ -147,7 +148,7 @@ export default {
         slidesPerView: 1.2,
         centeredSlides: true,
         loop: true,
-        spaceBetween: 10,
+        spaceBetween: 10
       }
     };
   },
@@ -167,7 +168,8 @@ export default {
     this.init();
   },
   mounted() {
-    //  window.instgrm.Embeds.process()
+    //  window.instgrm.Embeds.process() 
+
   },
   methods: {
     async getPostIds() {
