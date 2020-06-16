@@ -160,7 +160,7 @@ export default {
     this.init();
   },
   mounted() {
-    
+     window.instgrm.Embeds.process()
   },
   methods: {
     async getPostIds() {
