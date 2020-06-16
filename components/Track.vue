@@ -56,6 +56,7 @@ export default {
 <style lang="scss" scoped>
   li{
       padding: 8px 16px;
+      padding-left: 0;
       display: flex;
       list-style-type: none;
       height: 4.5em;

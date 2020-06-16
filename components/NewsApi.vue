@@ -17,8 +17,9 @@
 <style lang="scss">
 .article {
   display: flex;
-  padding-bottom: 1em;
+  padding: 15px 20px;
   position: relative;
+
   div {
     padding: 0 1em;
     display: flex;

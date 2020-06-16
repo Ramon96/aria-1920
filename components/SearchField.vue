@@ -100,7 +100,7 @@ h1{
   outline: none;
   width: 100%;
   border-radius: 0;
-  transform: translate(-50%, -11rem);
+  transform: translate(-50%, 0);
   -webkit-transition: transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
   -moz-transition:  transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
   -o-transition: transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
@@ -116,9 +116,9 @@ input{
     color: #000;
     padding: 6px 48px;
     height: 40px;
-    top: 11rem;
+    top: 0;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 50%);
     border: 0;
     border-radius: 500px;
     text-overflow: ellipsis;
@@ -132,7 +132,7 @@ input{
       outline: none;
       width: 100%;
       border-radius: 0;
-      transform: translate(-50%, -11rem);
+      transform: translate(-50%, 0);
       -webkit-transition: transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
       -moz-transition:  transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
       -o-transition: transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
