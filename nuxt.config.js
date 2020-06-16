@@ -93,5 +93,11 @@ module.exports = {
     watch: ['api'],
     extend (config, ctx) {
     }
+  },
+
+  pwa: {
+    icon: {
+      iconSrc: 'static/icon.png'
+    }
   }
 }

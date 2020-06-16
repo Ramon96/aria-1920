@@ -1,8 +1,9 @@
 <template>
   <main>
     <section>
-      <SearchField @getTracks="onSearch" />
+      <SearchField ref="search" @getTracks="onSearch" />
 
+      <h2 v-if="tracks.length">Results</h2>
       <ul v-if="tracks.length" id="track-list" @getPlaying="getTrack">
         <Track v-for="track in tracks" :key="track.id" :track="track" @click.native="getTrack(track)" />
       </ul>
@@ -63,8 +64,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+@import "~/css/main.scss";
 .slide-out-leave{
   transform: translate(0, 0);
   /* opacity: 1; */
@@ -77,6 +78,16 @@ export default {
 .slide-enter{
   transform: translate(-100%, 0);
   /* opacity: 0; */
+}
+
+h2{
+  color: color(Primary);
+}
+
+ul{
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-left: 0;
 }
 
 section {

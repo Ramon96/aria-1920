@@ -78,7 +78,8 @@ function connectToRedis() {
       )
   
       const success = 'Welcome Back'
-      res.redirect(`/auth?success=${success}`)
+      // res.redirect(`/auth?success=${success}`)
+      res.redirect(`/search`)
     } catch (err) {
       // console.error(
       //   `There was an error at /api/spotify/callback: ${err} 🚨\n`

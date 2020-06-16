@@ -1,11 +1,11 @@
 <template>
   <transition name="fade">
     <section>
-      <input id="search" type="text" name="search" v-model=trackTerm @input="getTracks" placeholder="Search tracks...">
+      <h1>Search</h1>
+     <input @focus="focus" id="search" ref="search" type="text" name="search" v-model=trackTerm @input="getTracks" placeholder="Search tracks...">
       <!-- <li >
           {{ track.name }}
       </li> -->
-     
     </section>
   </transition>
 </template>
@@ -24,6 +24,10 @@ export default {
     async getTracks () {
       console.log('Dit werkt')
 
+      if(this.trackTerm.length <= 0){
+        // this.$refs.search.classList.remove('focus')
+        // this.$refs.search.blur()
+      }
     //   debounce(300, () => {
         // Debounced function
             const data = await this.$axios.$get(
@@ -70,6 +74,9 @@ export default {
     //         console.log('now')
     // });
       console.log(this.trackTerm)
+    },
+    focus (){
+      this.$refs.search.classList.add('focus')
     }
   }
 }
@@ -78,11 +85,38 @@ export default {
 <style lang="scss"scoped>
 @import "~/css/main.scss";
 
+h1{
+  color: color(Primary);
+  margin-top: 3rem;
+  text-align: center;
+}
+
+// TODO right now we added a focus class over the focus state, because the focus state gets removed
+// easily when navigating with a mouse a lot
+// Tried to fix this with focussing onblur, but there's a delay
+.focus{
+  color: #000;
+  caret-color: color(GreenActive);
+  outline: none;
+  width: 100%;
+  border-radius: 0;
+  transform: translate(-50%, -11rem);
+  -webkit-transition: transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
+  -moz-transition:  transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
+  -o-transition: transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
+  transition:  transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
+  
+  &:focus{
+    color: color(White);
+  }
+
+}
+
 input{
     color: #000;
     padding: 6px 48px;
     height: 40px;
-    top: 2rem;
+    top: 11rem;
     left: 50%;
     transform: translate(-50%, -50%);
     border: 0;
@@ -94,11 +128,11 @@ input{
     transition: width .3s ease-in-out;
     &:focus,
     &:active{
-      caret-color: color(Green-active);
+      caret-color: color(GreenActive);
       outline: none;
       width: 100%;
       border-radius: 0;
-      transform: translate(-50%, -2rem);
+      transform: translate(-50%, -11rem);
       -webkit-transition: transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
       -moz-transition:  transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
       -o-transition: transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
