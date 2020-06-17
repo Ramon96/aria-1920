@@ -134,7 +134,8 @@ export default {
       this.loadedArticles = postIds.data.articles
       // get 5 articles of the max 20 loaded
       this.articles = postIds.data.articles.filter((article, i) => i < 5)
-      this.offset += 5
+      this.totalArticles = postIds.data.totalResults
+      this.offset += 20
       // console.log(this.articles)
     },
     init () {
