@@ -3,7 +3,6 @@
     <section>
       <SearchField ref="search" @getTracks="onSearch" />
 
-      <h2 v-if="tracks.length">Results</h2>
       <ul v-if="tracks.length" id="track-list" @getPlaying="getTrack">
         <Track v-for="track in tracks" :key="track.id" :track="track" @click.native="getTrack(track)" />
       </ul>
@@ -94,6 +93,6 @@ section {
   min-width: 300px;
   max-width: 750px;
   margin: auto;
-  padding: 1em;
+  // padding: 1em;
 }
 </style>

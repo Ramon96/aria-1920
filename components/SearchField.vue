@@ -22,7 +22,7 @@ export default {
    },
   methods: {
     async getTracks () {
-      console.log('Dit werkt')
+      // console.log('Dit werkt')
 
       if(this.trackTerm.length <= 0){
         // this.$refs.search.classList.remove('focus')
@@ -38,11 +38,11 @@ export default {
                 }
             })
 
-            console.log('data',data)
+            // console.log('data',data)
 
             if(!data.error){
             
-            console.log('yes, has tracks')
+            // console.log('yes, has tracks')
             const { 
                 data:{
                   tracks:{
@@ -52,28 +52,15 @@ export default {
             } = data;
 
           
-                console.log('data', items)
+                // console.log('data', items)
                 this.tracks = items
                 this.$emit('getTracks', this.tracks)
             }
             else{
-                console.log('nope')
+                // console.log('nope')
                 this.tracks = []
                 this.$emit('getTracks', this.tracks)
             }
-
-           
-       
-    // });
-
-    // debounce(300, async () => {
-    //     // Debounced function
-    //         const data = await this.$axios.$get(
-    //         `/api/spotify/search/${this.trackTerm}`
-    //         )
-    //         console.log('now')
-    // });
-      console.log(this.trackTerm)
     },
     focus (){
       this.$refs.search.classList.add('focus')
@@ -87,7 +74,7 @@ export default {
 
 h1{
   color: color(Primary);
-  margin-top: 3rem;
+  margin: 3rem 0;
   text-align: center;
 }
 
@@ -100,7 +87,7 @@ h1{
   outline: none;
   width: 100%;
   border-radius: 0;
-  transform: translate(-50%, -11rem);
+  // transform: translate(-50%, 0);
   -webkit-transition: transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
   -moz-transition:  transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
   -o-transition: transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
@@ -116,14 +103,17 @@ input{
     color: #000;
     padding: 6px 48px;
     height: 40px;
-    top: 11rem;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    // top: 0;
+    // left: 50%;
+    // transform: translate(-50%, 50%);
     border: 0;
     border-radius: 500px;
     text-overflow: ellipsis;
     margin-bottom: .5rem;
-    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    // position: fixed;
     width: 90%;
     transition: width .3s ease-in-out;
     &:focus,
@@ -132,7 +122,7 @@ input{
       outline: none;
       width: 100%;
       border-radius: 0;
-      transform: translate(-50%, -11rem);
+      // transform: translate(-50%, 0);
       -webkit-transition: transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
       -moz-transition:  transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;
       -o-transition: transform .3s ease-in-out, width .3s ease-in-out .3s, border-radius .3s ease-in-out .3s, background-color .3s ease-in-out;

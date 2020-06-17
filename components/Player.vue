@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="song">
     <div class="songDetail-navigation">
       <nuxt-link to="/search" data-btn="back">
         <svg height="24" role="img" width="24" viewBox="0 0 24 24" class="folddown">

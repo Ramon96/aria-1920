@@ -17,6 +17,14 @@
 </template>
 
 <style lang="scss">
+
+.videos{
+  iframe{
+    width: inherit;
+    height: auto;
+  }
+}
+
 .swiper-slide{
   transition: transform 1s;
 }
