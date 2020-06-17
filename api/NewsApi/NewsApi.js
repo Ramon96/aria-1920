@@ -5,7 +5,7 @@ import axios from 'axios'
 const NewsAPI = require('newsapi');
 const newsapi = new NewsAPI(process.env.NEWSAPI_KEY);
 
-async function getNews(artist){
+async function getNews(artist, offset){
 
       // To query /v2/everything
       // You must include at least one q, source, or domain
@@ -29,9 +29,9 @@ async function getNews(artist){
 
 
 
-router.get('/newsapi/getnews/:name', async (req, res)=>{
+router.get('/newsapi/getnews/:name/:offset?', async (req, res)=>{
     try{
-        const news = await getNews(req.params.name)
+        const news = await getNews(req.params.name, req.params.offset)
         res.send(news)
     }catch(err){
         console.log(err)

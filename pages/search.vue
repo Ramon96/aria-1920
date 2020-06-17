@@ -37,14 +37,14 @@ export default {
   methods: {
 
     onSearch (value) {
-      console.log(value)
+      // console.log(value)
       this.tracks = value
     },
 
     getTrack (value) {
       if (value !== 'undefined') {
         this.playingTrack = value
-        console.log(value)
+        // console.log(value)
         this.$store.dispatch('player/updateTrack', value)
       }
     }

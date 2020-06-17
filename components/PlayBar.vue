@@ -46,7 +46,7 @@ export default {
   },
   watch: {
     playingTrack: function (newVal, oldVal) {
-      console.log(newVal, oldVal)
+      // console.log(newVal, oldVal)
 
       if(this.initialised == true){
         // this.$store.dispatch('currentlyPlaying', newVal)
@@ -68,18 +68,15 @@ export default {
   methods: {
 
     async getAccesToken() {
-      console.log('Getting acces token')
+      // console.log('Getting acces token')
       // if(this)
       const accesToken = await this.$axios.get('/api/spotify/get-accestoken')
-      console.log(accesToken)
 
       const {
         data: token
       } = accesToken
       this.accessToken = token
-      console.log('token', this.accessToken)
       return this.accessToken
-      // this.$store.commit('updateAccessToken', tpl)
     },
     async getUserInfo() {
       // TODO remove this, this is for testing which user is logged in
@@ -103,7 +100,6 @@ export default {
         console.log("The Web Playback SDK has loaded.");
 
         const token = await this.getAccesToken()
-        console.log('token', this.accessToken)
 
         // Create a new player, listening to the playtrack
         const player = new Player({
@@ -123,7 +119,7 @@ export default {
         player.on('playback_error', e => console.error(e));
 
         player.on('player_state_changed', state => {
-          console.log(state)
+          // console.log(state)
           const { 
             track_window: {
               current_track
@@ -167,7 +163,7 @@ export default {
     checkPaused (){
 
         this.player.togglePlay().then(() => {
-          console.log('Toggled playback!');
+          // console.log('Toggled playback!');
           this.paused = !this.paused
         });
       

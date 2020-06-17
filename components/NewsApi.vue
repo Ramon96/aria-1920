@@ -11,6 +11,7 @@
       </div>
       <button class="vertical-dots"></button>
     </div>
+    <button @click="loadMore" v-if="showLoadMorebtn" class="load-more">More</button>
   </div>
 </template>
 
@@ -76,6 +77,18 @@
     }
   }
 }
+
+// TODO fix styling button? Not too elegant
+#song-detail button.load-more {
+  color: #fff;
+  font-family: spotify-bold;
+  background: #1DB954;
+  border: none;
+  border-radius: 15px;
+  padding: 5px 10px;
+  display: block;
+  width: 100%;
+}
 </style>
 
 <script>
@@ -90,38 +103,54 @@ export default {
   props: ['artist'],
   data() {
     return {
-      articles: []
+      loadedArticles: [],
+      articles: [],
+      offset: 0,
+      showLoadMorebtn: true
     };
   },
   watch: {
     artist: function(newArtist, oldArtist) {
-    //   console.log("De artist is nu: " + newArtist)
-      this.getPostIds();
+      this.getPostIds()
     },
     deep: true
   },
   computed: {
     // naam
     //   this.getPostIds();
-    
   },
-  beforeMount() {
-    this.init();
+  beforeMount () {
+    this.init()
   },
-  mounted() {
+  mounted () {
     // this.$watch(
     //   this.$props.artist, (newVal, oldVal) => {console.log(newVal)}
     // )
   },
   methods: {
-    async getPostIds() {
-      const postIds = await this.$axios.get(`/api/newsapi/getnews/${this.artist}`);
-      this.articles = postIds.data.articles;
-        console.log(this.articles)
+    async getPostIds (offset) {
+      const postIds = await this.$axios.get(`/api/newsapi/getnews/${this.artist}?offset=${offset}`)
+      // All articles go here
+      this.loadedArticles = postIds.data.articles
+      // get 5 articles of the max 20 loaded
+      this.articles = postIds.data.articles.filter((article, i) => i < 5)
+      this.offset += 5
+      // console.log(this.articles)
     },
-    init() {
-      this.getPostIds();
-    }
+    init () {
+      this.getPostIds(this.offset)
+    },
+    loadMore () {
+      // console.log(this.loadedArticles)
+
+      const postOffset = this.articles.length
+          this.articles = this.loadedArticles.filter((article, i) => i < postOffset + this.offset)
+      if(this.loadedArticles.length > this.articles.length){
+        console.log(this.articles)
+      }else{
+         this.showLoadMorebtn = false
+      }
+    },
   }
 };
 </script>

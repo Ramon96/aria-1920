@@ -41,7 +41,7 @@ export default {
   },
   created () {
     // this.playingTrack = this.$store.state.player.currentlyPlaying
-    console.log(';wef', JSON.parse(JSON.stringify(this.$store.state.player.currentlyPlaying)))
+    // console.log(';wef', JSON.parse(JSON.stringify(this.$store.state.player.currentlyPlaying)))
   },
   // created () {
   //   this.isToggled = this.$store.state.isToggled
