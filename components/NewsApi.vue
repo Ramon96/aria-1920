@@ -20,9 +20,11 @@
   display: flex;
   padding: 15px 20px;
   position: relative;
+  height: 200px;
 
   div {
     padding: 0 1em;
+    padding-right: 0;
     display: flex;
     flex-direction: column;
     a {
@@ -59,7 +61,7 @@
     }
   }
   img {
-    width: 50%;
+    width: 40%;
     object-fit: cover;
   }
 
@@ -90,7 +92,8 @@
   border-radius: 15px;
   padding: 5px 10px;
   display: block;
-  width: 100%;
+  width: 80%;
+  margin: 20px auto;
 }
 </style>
 
