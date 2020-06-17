@@ -1,6 +1,9 @@
 <template>
   <div class="socials">
     <h2 v-if="ids.length > 0">Social media</h2>
+    <!-- TODO remove this loading state -->
+
+  <div class="loading" v-if="loading">loading...</div>
     <swiper ref="mySwiper" :options="swiperOptions">
       <swiper-slide v-for="value in ids" v-bind:key="value ">
         <blockquote
@@ -150,7 +153,8 @@ export default {
         slidesPerView: 1.2,
         centeredSlides: true,
         loop: true,
-        spaceBetween: 10
+        spaceBetween: 10,
+        loading: true
       }
     };
   },
@@ -171,7 +175,7 @@ export default {
   },
   mounted() {
     //  window.instgrm.Embeds.process() 
-
+    this.loading = false
   },
   methods: {
     async getPostIds() {

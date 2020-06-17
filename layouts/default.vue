@@ -56,7 +56,7 @@ export default {
   methods: {
     async test () {
       const data = await this.$axios.get('/api/spotify/now-playing/')
-      console.log(data.data.item)
+      // console.log(data.data.item)
       this.playingTrack = data.data.item
     },
 

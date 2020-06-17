@@ -7,7 +7,7 @@
         <a :href="`${article.url}`">{{article.source.name}}</a>
         <h3>{{article.title}}</h3>
         <!-- TODO 24 aug 2019  w/e this format is calles is desired. -->
-        <time>{{article.publishedAt}}</time>
+        <time>{{article.formatedDate}}</time>
       </div>
       <button class="vertical-dots"></button>
     </div>
@@ -33,10 +33,10 @@
     }
     h3 {
       color: color(Primary);
-      font-size: 1.2em;
+      font-size: 1em;
       line-height: 1.5em;
-      height: 3em;
-      width: 85%;
+      height: 6em;
+      width: 90%;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -46,7 +46,7 @@
         text-overflow: ellipsis;
         white-space: initial;
         display: -webkit-box;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
       }
     }
@@ -54,6 +54,8 @@
     time {
       color: color(Secondairy);
       margin-top: auto;
+      font-family: spotify-book;
+      font-size: .8rem;
     }
   }
   img {
@@ -93,6 +95,7 @@
 </style>
 
 <script>
+import moment from 'moment';
 export default {
   head() {
     return {
@@ -132,11 +135,12 @@ export default {
     async getPostIds (offset) {
       const postIds = await this.$axios.get(`/api/newsapi/getnews/${this.artist}?offset=${offset}`)
       // All articles go here
-      this.loadedArticles = postIds.data.articles
+      const articles = this.formatDates(postIds.data.articles)
+      this.loadedArticles = articles
       // get 5 articles of the max 20 loaded
-      this.articles = postIds.data.articles.filter((article, i) => i < 5)
+      this.articles = articles.filter((article, i) => i < 5)
       this.totalArticles = postIds.data.totalResults
-      this.offset += 20
+      this.offset += 5
       // console.log(this.articles)
     },
     init () {
@@ -153,6 +157,14 @@ export default {
          this.showLoadMorebtn = false
       }
     },
+    formatDates (articles) {
+      return articles.map(article =>{
+        return {
+          ...article,
+          formatedDate: moment(article.publishedAt).format('DD MMM. YYYY').toUpperCase()
+        }
+      })
+    }
   }
 };
 </script>

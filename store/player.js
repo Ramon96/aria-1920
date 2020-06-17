@@ -34,7 +34,6 @@ export const actions = {
             const {
               data: { item, is_playing }
             } = await axios.get(`${clientUrl}/api/spotify/now-playing`)
-            console.log('await currently playing')
             commit('setPlayingTrack', item)
           }
         } catch (err) {
