@@ -272,7 +272,7 @@ export default {
     border: none;
     color: color(White);
     margin-left: auto;
-
+    outline: none;
     &[data-control="play"] {
       &::before {
         content: "\f132";
