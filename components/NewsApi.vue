@@ -96,6 +96,10 @@
   width: 14rem;
   margin: 20px auto;
   text-transform: uppercase;
+  &:active, 
+  &:focus{
+    outline: none;
+  }
 }
 </style>
 
@@ -143,9 +147,9 @@ export default {
       const articles = this.formatDates(postIds.data.articles)
       this.loadedArticles = articles
       // get 5 articles of the max 20 loaded
-      this.articles = articles.filter((article, i) => i < 5)
+      this.articles = articles.filter((article, i) => i < 3)
       this.totalArticles = postIds.data.totalResults
-      this.offset += 5
+      this.offset += 3
 
        if(this.loadedArticles.length <= this.articles.length){
          this.showLoadMorebtn = false
