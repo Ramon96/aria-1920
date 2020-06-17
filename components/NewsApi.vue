@@ -24,6 +24,7 @@
 
   div {
     padding: 0 1em;
+    padding-right: 0;
     display: flex;
     flex-direction: column;
     a {
@@ -60,7 +61,7 @@
     }
   }
   img {
-    width: 50%;
+    width: 40%;
     object-fit: cover;
   }
 
