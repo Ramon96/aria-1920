@@ -31,14 +31,15 @@
       color: color(Green);
       text-transform: uppercase;
       letter-spacing: 2px;
-      font-size: 0.8em;
+      font-size: 0.7em;
     }
     h3 {
       color: color(Primary);
-      font-size: 1em;
-      line-height: 1.5em;
+      font-size: 1.2em;
+      line-height: 1.2em;
       height: 6em;
       width: 90%;
+      margin-top: .3em;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -57,7 +58,7 @@
       color: color(Secondairy);
       margin-top: auto;
       font-family: spotify-book;
-      font-size: .8rem;
+      font-size: .7rem;
     }
   }
   img {
