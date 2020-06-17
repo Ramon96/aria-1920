@@ -20,6 +20,7 @@
   display: flex;
   padding: 15px 20px;
   position: relative;
+  height: 200px;
 
   div {
     padding: 0 1em;
@@ -61,7 +62,6 @@
   img {
     width: 50%;
     object-fit: cover;
-    height: 100%;
   }
 
   button {
