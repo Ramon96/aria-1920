@@ -89,11 +89,13 @@
   font-family: spotify-bold;
   background: #1DB954;
   border: none;
-  border-radius: 15px;
-  padding: 5px 10px;
+  border-radius: 24px;
   display: block;
-  width: 80%;
+  padding: 16px 48px;
+  text-transform: uppercase;
+  width: 14rem;
   margin: 20px auto;
+  text-transform: uppercase;
 }
 </style>
 

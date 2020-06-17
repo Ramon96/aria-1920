@@ -65,18 +65,18 @@ export default {
 
 <style scoped lang="scss">
 @import "~/css/main.scss";
-.slide-out-leave{
-  transform: translate(0, 0);
-  /* opacity: 1; */
-}
+// .slide-out-leave{
+//   transform: translate(0, 0);
+//   /* opacity: 1; */
+// }
 .slide-out-leave-active,
 .slide-out-enter-active{
   transition: all 1s;
 }
 .slide-out-leave-to,
-.slide-enter{
-  transform: translate(-100%, 0);
-  /* opacity: 0; */
+.slide-out-enter{
+  // transform: translate(-100%, 0);
+  opacity: 0;
 }
 
 h2{

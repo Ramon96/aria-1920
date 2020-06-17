@@ -111,18 +111,26 @@ export default {
 <style lang="scss">
 /* TODO: Refactor styling, styling should be in its own component */
 
-.slide-in-enter{
-  transform: translate(0, 100vh);
-  opacity: 0;
-}
-.slide-in-leave-active,
+// .slide-in-enter{
+//   transform: translate(0, 100vh);
+//   opacity: 0;
+// }
+// .slide-in-leave-active,
+// .slide-in-enter-active{
+//   transition: all 1s;
+// }
+// .slide-in-enter-to,
+// .slide-enter{
+//   transform: translate(0, 0);
+//   opacity: 1;
+// }
+.slide-out-leave-active,
 .slide-in-enter-active{
   transition: all 1s;
 }
-.slide-in-enter-to,
-.slide-enter{
-  transform: translate(0, 0);
-  opacity: 1;
+.slide-in-leave-to,
+.slide-in-enter{
+  transform: translate(-100%, 0);
 }
 
 #song-detail {
