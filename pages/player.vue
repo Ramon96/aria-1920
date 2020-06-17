@@ -122,6 +122,7 @@ export default {
 
   h2:not(.track-name){
     padding: 1em 20px;
+    font-size: 1.1em;
   }
   width: 100%;
   box-sizing: border-box;
@@ -129,18 +130,10 @@ export default {
   height: 100vh;
   top: 0;
   transition: opacity 3s;
-  // TODO padding per component, otherwise slider gets cutoff.
-  // padding: 1.5rem;
   // TODO The color has to be determined by the album color, Tomas found a node library for this
   // https://cssgradient.io/
   background: rgb(25, 20, 20);
-  background: linear-gradient(
-    360deg,
-    rgba(25, 20, 20, 1) 0%,
-    rgba(88, 15, 57, 1) 33%,
-    rgba(97, 14, 62, 1) 48%,
-    rgba(255, 0, 155, 1) 100%
-  );
+  background: linear-gradient(to top, black, #939393);
 
   overflow-y: scroll;
   // Wat doet deze before?

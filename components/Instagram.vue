@@ -1,6 +1,6 @@
 <template>
   <div class="socials">
-    <h2 v-if="ids.length > 0">Socials</h2>
+    <h2 v-if="ids.length > 0">Social media</h2>
     <swiper ref="mySwiper" :options="swiperOptions">
       <swiper-slide v-for="value in ids" v-bind:key="value ">
         <blockquote
@@ -100,11 +100,13 @@ blockquote {
   min-width: unset !important;
 }
 
+.socials{
 iframe {
   max-width: unset !important;
   min-width: unset !important;
   width: inherit !important;
   max-height: 450px ;
+}
 }
 
 .swiper-slide-active{
