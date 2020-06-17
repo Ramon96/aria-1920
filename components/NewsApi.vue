@@ -61,6 +61,7 @@
   img {
     width: 50%;
     object-fit: cover;
+    height: 100%;
   }
 
   button {
@@ -90,7 +91,8 @@
   border-radius: 15px;
   padding: 5px 10px;
   display: block;
-  width: 100%;
+  width: 80%;
+  margin: 20px auto;
 }
 </style>
 
