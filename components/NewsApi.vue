@@ -141,6 +141,10 @@ export default {
       this.articles = articles.filter((article, i) => i < 5)
       this.totalArticles = postIds.data.totalResults
       this.offset += 5
+
+       if(this.loadedArticles.length <= this.articles.length){
+         this.showLoadMorebtn = false
+       }
       // console.log(this.articles)
     },
     init () {

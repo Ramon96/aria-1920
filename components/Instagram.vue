@@ -171,6 +171,7 @@ export default {
     }
   },
   beforeMount() {
+    setTimeout(()=>{}, 3000)
     this.init();
   },
   mounted() {
