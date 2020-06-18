@@ -125,6 +125,10 @@ iframe {
   transform: scale(0.5);
   transform-origin: top right;
 }
+
+.swiper-container-android {
+  transform: none;
+}
 </style>
 
 <script>

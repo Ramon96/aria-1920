@@ -19,7 +19,7 @@ import Track from '~/components/Track.vue'
 // import PlayBar from '~/components/PlayBar.vue'
 
 export default {
-  transition: 'slide-out',
+  transition: 'slide',
   components: {
     SearchField,
     Track
@@ -69,12 +69,12 @@ export default {
 //   transform: translate(0, 0);
 //   /* opacity: 1; */
 // }
-.slide-out-leave-active,
-.slide-out-enter-active{
+.slide-leave-active,
+.slide-enter-active{
   transition: all 1s;
 }
-.slide-out-leave-to,
-.slide-out-enter{
+.slide-leave-to,
+.slide-enter{
   // transform: translate(-100%, 0);
   opacity: 0;
 }

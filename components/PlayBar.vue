@@ -4,7 +4,7 @@
       <div v-if="playingTrack" id="play-bar" :class="playingTrack ? 'playing' : ''">
          
           <progress value="0" max="100"></progress>
-          <nuxt-link to="/player">
+          <nuxt-link to="/player" prefetch>
           <!-- {{ playingTrack.album.images }} -->
           <img :src="playingTrack.album.images[2]['url']" :alt="playingTrack.title">
           <marquee behavior="scroll" direction="left">
