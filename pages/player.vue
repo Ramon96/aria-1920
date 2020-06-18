@@ -231,8 +231,8 @@ export default {
   }
   width: 100%;
   box-sizing: border-box;
-  position: fixed;
-  height: 100vh;
+  // position: fixed;
+  // height: 100vh;
   top: 0;
   transition: opacity 3s;
   // TODO The color has to be determined by the album color, Tomas found a node library for this
