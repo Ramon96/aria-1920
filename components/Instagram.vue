@@ -126,8 +126,8 @@ iframe {
   transform-origin: top right;
 }
 
-.swiper-container-android {
-  transform: none;
+.swiper-container-android .swiper-slide-next{
+  transform: scale(0.5);
 }
 </style>
 
