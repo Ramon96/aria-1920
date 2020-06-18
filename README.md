@@ -406,6 +406,11 @@ Our goal is to provide a demo where a single user can:
 - Consume the external content while listening to a song
 - Persue embeded content to it&#39;s source / platform
 
+## Wishlist 
+- [ ] Database for saving user specific preferences
+- [ ] Multi user support
+- [ ] More ways to enhance it as a PWA (s.w., webp, skeleton UI, no reflow)
+- [ ] More interaction within the player
 
 ## **External content providers**
 
