@@ -283,7 +283,7 @@ export default {
     padding: 5px 20px;
     h2{
       padding: 0;
-      letter-spacing: 1px;
+      letter-spacing: 0px;
       text-transform: initial;
     }
   }
