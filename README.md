@@ -12,7 +12,7 @@ You can see the live version [here](https://aria-hva.herokuapp.com/)
 1. Install the project using `git clone https://github.com/Ramon96/aria-1920.git`.
 2. Navigate to the folder using your terminal.
 3. add an .env file with the secrets from one of the devs.
-4. hit npm install.
+4. hit `npm install` in your terminal.
 5. run `npm run dev` in your terminal to start the project.
 6. navigate to localhost:3000 in your browser.
 
