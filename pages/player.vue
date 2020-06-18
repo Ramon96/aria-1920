@@ -111,6 +111,10 @@ export default {
 /* TODO: Refactor styling, styling should be in its own component */
 
 #song-detail {
+  >div{
+    margin-bottom: .5em;
+  }
+
   h2 {
     color: color(White);
     text-transform: uppercase;
@@ -297,7 +301,6 @@ export default {
     display: flex;
     justify-content: space-between;
     padding: 20px 0;
-
     .shuffle {
       position: relative;
 
