@@ -85,7 +85,7 @@ h2{
 
 ul{
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 4rem;
   padding-left: 0;
 }
 

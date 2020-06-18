@@ -212,10 +212,14 @@ export default {
 // }
 
 #song-detail {
+  >div{
+    margin-bottom: .5em;
+  }
+
   h2 {
     color: color(White);
     text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     font-size: 1.5em;
     margin: 0;
     padding: 1em 0;
@@ -223,7 +227,7 @@ export default {
 
   h2:not(.track-name){
     padding: 1em 20px;
-    font-size: 1.1em;
+    font-size: 1.2em;
   }
   width: 100%;
   box-sizing: border-box;
@@ -398,7 +402,6 @@ export default {
     display: flex;
     justify-content: space-between;
     padding: 20px 0;
-
     .shuffle {
       position: relative;
 

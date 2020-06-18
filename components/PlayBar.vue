@@ -227,6 +227,7 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 100%;
   }
   progress {
     // for some reason, the styling of the progress bar gets lost if you remove the border-radius, I dont know why..

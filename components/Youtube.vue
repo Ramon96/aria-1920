@@ -65,9 +65,10 @@ export default {
         swiperOptions: {
         grabCursor: true,
         slidesPerView: 1.2,
-        centeredSlides: true,
+        // centeredSlides: true,
         loop: true,
-        spaceBetween: 10,
+        spaceBetween: 20,
+        slidesOffsetBefore: 20
       }
     };
   },
