@@ -16,7 +16,31 @@ Aria is a prototype of a Spotify plugin where the user is able to add social med
 
 ## Table of content
 
-[Generator hier] [https://ecotrust-canada.github.io/markdown-toc/](https://ecotrust-canada.github.io/markdown-toc/)
+- [Design rationale](#design-rationale)
+  * [**Debriefing**](#--debriefing--)
+  * [**Problem definition**](#--problem-definition--)
+  * [**Sub Question**](#--sub-question--)
+  * [**Edge cases**](#--edge-cases--)
+    + [**Our goal is to allow the spotify user to:**](#--our-goal-is-to-allow-the-spotify-user-to---)
+  * [**Scope of the project**](#--scope-of-the-project--)
+  * [**What we don&#39;t do (at least not during these 5 weeks)**](#--what-we-don--39-t-do--at-least-not-during-these-5-weeks---)
+  * [**Solution**](#--solution--)
+    + [**Spotify oAuth**](#--spotify-oauth--)
+    + [**Social handles**](#--social-handles--)
+    + [**Social Media**](#--social-media--)
+      - [Instagram](#instagram)
+      - [Youtube](#youtube)
+      - [**Articles**](#--articles--)
+    + [**Code**](#--code--)
+- [**Deliverables**](#--deliverables--)
+- [**External content providers**](#--external-content-providers--)
+  * [**Social media**](#--social-media--)
+  * [**Videos**](#--videos--)
+  * [**News**](#--news--)
+- [**Contributors**](#--contributors--)
+- [**Commissioned by**](#--commissioned-by--)
+- [**Coaching**](#--coaching--)
+- [**External sources**](#--external-sources--)
 
 ## Design rationale
 
