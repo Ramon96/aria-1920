@@ -1,9 +1,7 @@
 # ARIA @2020
 
-<p align="left">
-<img style="margin:0 auto;" width="30%" src="https://github.com/Ramon96/aria-1920/blob/master/docs/images/Initial-screen.png">
-    <img style="margin:0 auto;" width="30%" src="https://github.com/Ramon96/aria-1920/blob/master/docs/images/results.png">
-  <img style="margin:0 auto;" width="35%" src="https://github.com/Ramon96/aria-1920/blob/master/docs/images/Playing%20-%20Enter%20Sandman.gif">
+<p align="center">
+<img style="margin:0 auto;" width="100%" src="https://github.com/Ramon96/aria-1920/blob/master/docs/images/Banner.gif">
  </p>
 
 
