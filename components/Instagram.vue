@@ -125,6 +125,10 @@ iframe {
   transform: scale(0.5);
   transform-origin: top right;
 }
+
+.swiper-container-android {
+  transform: none;
+}
 </style>
 
 <script>
@@ -171,6 +175,7 @@ export default {
     }
   },
   beforeMount() {
+    setTimeout(()=>{}, 3000)
     this.init();
   },
   mounted() {

@@ -8,16 +8,95 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Player from '~/components/Player.vue'
 import Instagram from '~/components/Instagram.vue'
 import Youtube from '~/components/Youtube.vue'
 import NewsApi from '~/components/NewsApi.vue'
+
+async function updateCurrentSong () {
+  const { data } = await axios.get('/api/spotify/now-playing/')
+  console.log('ayncdata')
+  console.log('async', data.item)
+  const currentTrack = data.item
+  const trackdata = data
+  // if (data.item.uri !== this.currentTrack.uri) {
+  //   this.$store.dispatch('player/updateTrack', data.item)
+  // }
+
+  const artist = data.item.artists[0].name
+  // console.log(this.artist)
+  const uris = await axios.get(
+    '/api/musicbrainz/getartist/' + artist
+  )
+  const uri = uris
+  const resources = ['youtube', 'instagram']
+  const { instagramHandle, youtubeHandle } = updateHandles(uri, resources)
+
+  return {
+    currentTrack,
+    trackdata,
+    uri,
+    artist,
+    instagramHandle,
+    youtubeHandle,
+    resources
+  }
+}
+
+async function updateHandles (uris, resources) {
+  // if none of the resources are available then the value's should be set to null so the compents dont stay
+
+  console.log('uris', uris)
+  const filter = uris.data.filter((item) => {
+    for (let i = 0; i < resources.length; i++) {
+      if (item.url.resource.includes(resources[i])) {
+        return item
+      }
+    }
+  })
+
+  let instagramHandle, youtubeHandle
+
+  const getHandle = (array) => {
+    console.log('Getting new handles')
+    const instagram = array.find(handle =>
+      handle.url.resource.includes('instagram')
+    )
+    if (instagram == null) {
+      instagramHandle = null
+    } else {
+      instagramHandle = instagram.url.resource.split('/')[3]
+    }
+
+    const youtube = array.find(handle =>
+      handle.url.resource.includes('youtube')
+    )
+    if (youtube == null) {
+      youtubeHandle = null
+    } else {
+      youtubeHandle = youtube.url.resource.split('/')[4]
+    }
+
+    return {
+      youtubeHandle,
+      instagramHandle
+    }
+  }
+
+  return await getHandle(filter)
+}
+
 export default {
+  // transition: 'slide-in',
   components: {
     Player,
     Instagram,
     Youtube,
     NewsApi
+  },
+  asyncData () {
+    updateCurrentSong()
   },
   data () {
     return {
@@ -109,6 +188,28 @@ export default {
 
 <style lang="scss">
 /* TODO: Refactor styling, styling should be in its own component */
+
+// .slide-in-enter{
+//   transform: translate(0, 100vh);
+//   opacity: 0;
+// }
+// .slide-in-leave-active,
+// .slide-in-enter-active{
+//   transition: all 1s;
+// }
+// .slide-in-enter-to,
+// .slide-enter{
+//   transform: translate(0, 0);
+//   opacity: 1;
+// }
+// .slide-out-leave-active,
+// .slide-in-enter-active{
+//   transition: all 1s;
+// }
+// .slide-in-leave-to,
+// .slide-in-enter{
+//   transform: translate(-100%, 0);
+// }
 
 #song-detail {
   >div{
