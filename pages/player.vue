@@ -218,7 +218,7 @@ export default {
 
   h2 {
     color: color(White);
-    text-transform: uppercase;
+    // text-transform: uppercase;
     // letter-spacing: 3px;
     font-size: 1.5em;
     margin: 0;
