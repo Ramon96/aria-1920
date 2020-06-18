@@ -411,6 +411,13 @@ Our goal is to provide a demo where a single user can:
 - [ ] Multi user support
 - [ ] More ways to enhance it as a PWA (s.w., webp, skeleton UI, no reflow)
 - [ ] More interaction within the player
+- [ ] More support for older browsers
+- [ ] More support for screen readers
+- [ ] Showing playlist after login
+- [ ] Working music controls
+- [ ] Desktop design
+- [ ] More social media platforms
+- [ ] Browser caching
 
 ## **External content providers**
 
@@ -447,3 +454,34 @@ Vasilis van Gemert
 [Spotify housestyle](https://developer.spotify.com/branding-guidelines/)
 
 [Joost&#39;s case](https://drive.google.com/file/d/1LIhH6LVYCvJZ8bm6NlvcSjMMKwOUjwI2/view)
+
+[Creating A Spotify-Powered App Using Nuxt.js](https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/)
+
+[PHP Scraper](https://github.com/postaddictme/instagram-php-scraper)
+
+[NuxtJs](https://nuxtjs.org/)
+
+[SwiperJS](https://swiperjs.com/api/)
+
+[Youtube Api](https://developers.google.com/youtube/v3)
+
+[News Api](https://newsapi.org/)
+
+[MusicBrainz Api](https://musicbrainz.org/)
+
+[Redis](https://redis.io/)
+
+[ExpressJs](https://expressjs.com/)
+
+[Heroku](https://dashboard.heroku.com/apps)
+
+[Eslint](https://eslint.org/)
+
+[Moment js](https://momentjs.com/)
+
+[dotenv](https://www.npmjs.com/package/dotenv)
+
+[Font awesome](https://fontawesome.com/)
+
+[Axios](https://github.com/axios/axios)
+
