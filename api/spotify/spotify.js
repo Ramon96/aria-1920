@@ -177,7 +177,7 @@ function connectToRedis() {
 
 
 router.get('/spotify/ramon/', (req, res) => {
-    res.send('Ramon is de beste')
+    res.send('Ramon en Tomas zijn de beste 🙊🛌')
 })
 
   router.get('/spotify/search/', async (req, res) => {
