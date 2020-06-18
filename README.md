@@ -99,7 +99,7 @@ Later on we switched from Express and HBS to a Nuxt Universal app with Express s
 
 To get the artists his/hers social handles we made use of an api called MusicBrainz (With many thank you&#39;s to [Menno]([https://github.com/Mennauu](https://github.com/Mennauu)) for suggesting this api).
 
-Musicbrainz stores everything you can know about an artist, including their social media links. If you search for example Eminem we will get a link to one of his social media channels, for example his youtube like so [https://www.youtube.com/user/eminemmusic](https://www.youtube.com/user/eminemmusic). Since we only need the handle we can slice the last part off doing so: `this.youtubeHandle = youtube.url.resource.split(&#39;/&#39;)[4]`
+Musicbrainz stores everything you can know about an artist, including their social media links. If you search for example Eminem we will get a link to one of his social media channels, for example his youtube like so [https://www.youtube.com/user/eminemmusic](https://www.youtube.com/user/eminemmusic). Since we only need the handle we can slice the last part off doing so: `this.youtubeHandle = youtube.url.resource.split('/')[4]`
 
 **Social Media**
 
