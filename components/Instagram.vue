@@ -11,7 +11,7 @@
           data-instgrm-captioned
           :data-instgrm-permalink="`https://www.instagram.com/p/${value}/?utm_source=ig_embed&amp;utm_campaign=loading`"
           data-instgrm-version="12"
-          style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:326px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px); max-width:540px"
+          style=" background:#FFF; border:0; border-radius:15px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:326px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px); max-width:540px"
         >
           <div style="padding:16px;">
             <a
@@ -109,6 +109,7 @@ iframe {
   min-width: unset !important;
   width: inherit !important;
   max-height: 450px ;
+  border-radius: 15px !important;
 }
 }
 

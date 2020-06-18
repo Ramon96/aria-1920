@@ -95,7 +95,7 @@
   font-family: spotify-bold;
   background: #1DB954;
   border: none;
-  border-radius: 24px;
+  border-radius: 30px;
   display: block;
   padding: 16px 48px;
   text-transform: uppercase;

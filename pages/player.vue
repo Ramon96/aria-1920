@@ -219,7 +219,7 @@ export default {
   h2 {
     color: color(White);
     text-transform: uppercase;
-    letter-spacing: 3px;
+    // letter-spacing: 3px;
     font-size: 1.5em;
     margin: 0;
     padding: 1em 0;
@@ -283,7 +283,7 @@ export default {
     padding: 5px 20px;
     h2{
       padding: 0;
-      letter-spacing: 1.5px;
+      letter-spacing: 1px;
       text-transform: initial;
     }
   }
