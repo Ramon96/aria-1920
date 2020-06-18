@@ -166,6 +166,10 @@ At first we were unable to get these news sources because we tried to retrieve t
 
 ![news](https://github.com/Ramon96/aria-1920/blob/master/docs/images/news.png)
 
+
+##### Then all together we create this experience
+![gif](https://github.com/Ramon96/aria-1920/blob/master/docs/images/Playing%20-%20Enter%20Sandman.gif)
+
 #### **Code**
 
 **SCSS**
