@@ -2,7 +2,7 @@
 
 <p align="center">
 <img style="margin:0 auto;" width="100%" src="https://github.com/Ramon96/aria-1920/blob/master/docs/images/Banner.gif">
- </p>
+</p>
 
 
 # Introduction
@@ -126,6 +126,9 @@ The process is pretty complex and we made use of the official Spotify web API oA
 
 Later on we switched from Express and HBS to a Nuxt Universal app with Express server middleware. Therefore the oAuth process is still the same, but the way the script is split up and saves the credentials to Redis is different. To make a little more progress we followed along with a [tutorial](https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/) to better understand how such things work within Nuxt and get along with the fundamentals.
 
+![login](https://github.com/Ramon96/aria-1920/blob/master/docs/images/login.png)
+![search](https://github.com/Ramon96/aria-1920/blob/master/docs/images/searchArtist.gif)
+
 #### **Social handles**
 
 To get the artists his/hers social handles we made use of an api called MusicBrainz (With many thank you&#39;s to [Menno]([https://github.com/Mennauu](https://github.com/Mennauu)) for suggesting this api).
@@ -136,16 +139,21 @@ Musicbrainz stores everything you can know about an artist, including their soci
 
 ##### Instagram
 Instagram doesn&#39;t have a Api we can use, however if you go to a instagram user page and add `?__a=1` you will actually get a json of all the data and posts ( as of june 2020 that is) We fetch this from an oege page build by Tomas and return the post id to aria. Then for each Id we load an iFrame of that post.
+![socials](https://github.com/Ramon96/aria-1920/blob/master/docs/images/metallica.png)
 
 ##### Youtube
 
 For Youtube we made a developer account on google and got our very own api key. We can use this key to access the Youtube Data api v3. This will return us the Id&#39;s of their recent uploads which we use to render the video of that artist.
+
+![videos](https://github.com/Ramon96/aria-1920/blob/master/docs/images/videos.png)
 
 ##### **Articles**
 
 To get our news sources we made use of the news Api. At the current moment we get our news from the following sources: Pitchfork, Billboard and rolling stone.
 
 At first we were unable to get these news sources because we tried to retrieve these sources directly. We later figured out we could give the newsapi a news source domain and we were able to get the news articles that way.
+
+![news](https://github.com/Ramon96/aria-1920/blob/master/docs/images/news.png)
 
 #### **Code**
 
@@ -423,17 +431,17 @@ Our goal is to provide a demo where a single user can:
 
 ### **Social media**
 
-- Instagram
+- [Instagram](https://www.instagram.com/)
 
 ### **Videos**
 
-- Youtube
+- [Youtube](http://youtube.com/)
 
 ### **News**
 
-- Pitchfork
-- Billboard
-- Rolling stone
+- [Pitchfork](pitchfork.com/)
+- [Billboard](https://www.billboard.com/)
+- [Rolling stone](https://www.rollingstone.com/)
 
 ## **Contributors**
 
@@ -452,36 +460,20 @@ Vasilis van Gemert
 ## **External sources**
 
 [Spotify housestyle](https://developer.spotify.com/branding-guidelines/)
-
 [Joost&#39;s case](https://drive.google.com/file/d/1LIhH6LVYCvJZ8bm6NlvcSjMMKwOUjwI2/view)
-
 [Creating A Spotify-Powered App Using Nuxt.js](https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/)
-
 [PHP Scraper](https://github.com/postaddictme/instagram-php-scraper)
-
 [NuxtJs](https://nuxtjs.org/)
-
 [SwiperJS](https://swiperjs.com/api/)
-
 [Youtube Api](https://developers.google.com/youtube/v3)
-
 [News Api](https://newsapi.org/)
-
 [MusicBrainz Api](https://musicbrainz.org/)
-
 [Redis](https://redis.io/)
-
 [ExpressJs](https://expressjs.com/)
-
 [Heroku](https://dashboard.heroku.com/apps)
-
 [Eslint](https://eslint.org/)
-
 [Moment js](https://momentjs.com/)
-
 [dotenv](https://www.npmjs.com/package/dotenv)
-
 [Font awesome](https://fontawesome.com/)
-
 [Axios](https://github.com/axios/axios)
 
