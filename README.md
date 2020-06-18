@@ -20,7 +20,7 @@ Aria is a prototype of a Spotify plugin where the user is able to add social med
 
 ## Design rationale
 
-**Debriefing**
+### **Debriefing**
 
 The Aria project is commissioned by Joost de Boo. The core concept is to enrich Spotify Users with their musical experience with external embedded media sources within Spotify.
 
@@ -34,38 +34,38 @@ It should be and feel like Spotify. Because it&#39;s not a standalone platform. 
 
 Ramon and I are gonna explore the Spotify universe the first week, and check out the technical possibilities and boundaries. From then on we&#39;ll check-in with Joost as we make sprints of a week where we keep on re-iterating.
 
-**Problem definition**
+### **Problem definition**
 
 How can we provide **relevant data** from **external apis** and **platforms** to a **spotify application**?
 
-**Sub Question**
+### **Sub Question**
 
 **How** can we allow **the user** to **configure desired information** from **external media channels**
 
-**Edge cases**
+### **Edge cases**
 
 What does it mean for the user when an external data source is not available?
 
 **Not available:** The artist does not use a data source (for example instagram) or the Api server is down.
 
-**Our goal is to allow the spotify user to:**
+#### **Our goal is to allow the spotify user to:**
 
 - De user can turn on a song, relanvent media channels will pop-up dependent to the artist
 - Research for technical solutions to develop the front-end
 - Allowing the user to configure certain media channels.
 - To deliver a demo where a specific user can login via Spotify
 
-**Scope of the project**
+### **Scope of the project**
 
 To realise the technical possibilities and research mentioned in above points. Possible restrictions, obstacles and other possible challenges will be documented down the line and will be mentioned to Koost.
 
-**What we don&#39;t do (at least not during these 5 weeks)**
+### **What we don&#39;t do (at least not during these 5 weeks)**
 
 - In principe geen machine-learning, geen heftige algoritmes die de data zelf te veel beïnvloeden.
 - No heavy machine learning or algorithms that create data our selves
 - Delivering a production ready product. It&#39;s still a demo. We have to protect our scope. After these 5 weeks we have more time to go on if we want.
 
-**Solution**
+### **Solution**
 
 To solve Joost&#39;s problem we are gonna need several external sources
 
@@ -79,7 +79,7 @@ for that we use
 
 Instagram no longer provides an api that lets you retrieve data from other users. You are now only allowed to fetch your own user data. To get around that we make use of a php Scraper. We tried integrating scrapers within our own application. But since we deployed our demo on heroku this was not entirely possible. This is because the herokuapp is blacklisted on instagram. To get around that we deployed an php scraper on oege (one of hva&#39;s provided domains.) Tomas built a Php scraper so that the data would be injected in the DOM before the first paint. That way we can fetch to the oege domain and get our much needed post ids from there.
 
-**Spotify oAuth**
+#### **Spotify oAuth**
 
 To be able to make use of Spotify data we need to go through an authorisation process. This authorisation needs to be done by the oAuth protocol.
 
@@ -95,28 +95,28 @@ The process is pretty complex and we made use of the official Spotify web API oA
 
 Later on we switched from Express and HBS to a Nuxt Universal app with Express server middleware. Therefore the oAuth process is still the same, but the way the script is split up and saves the credentials to Redis is different. To make a little more progress we followed along with a [tutorial](https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/) to better understand how such things work within Nuxt and get along with the fundamentals.
 
-**Social handles**
+#### **Social handles**
 
 To get the artists his/hers social handles we made use of an api called MusicBrainz (With many thank you&#39;s to [Menno]([https://github.com/Mennauu](https://github.com/Mennauu)) for suggesting this api).
 
 Musicbrainz stores everything you can know about an artist, including their social media links. If you search for example Eminem we will get a link to one of his social media channels, for example his youtube like so [https://www.youtube.com/user/eminemmusic](https://www.youtube.com/user/eminemmusic). Since we only need the handle we can slice the last part off doing so: `this.youtubeHandle = youtube.url.resource.split('/')[4]`
 
-**Social Media**
+#### **Social Media**
 
-Instagram
- Instagram doesn&#39;t have a Api we can use, however if you go to a instagram user page and add `?__a=1` you will actually get a json of all the data and posts ( as of june 2020 that is) We fetch this from an oege page build by Tomas and return the post id to aria. Then for each Id we load an iFrame of that post.
+##### Instagram
+Instagram doesn&#39;t have a Api we can use, however if you go to a instagram user page and add `?__a=1` you will actually get a json of all the data and posts ( as of june 2020 that is) We fetch this from an oege page build by Tomas and return the post id to aria. Then for each Id we load an iFrame of that post.
 
-Youtube
+##### Youtube
 
 For Youtube we made a developer account on google and got our very own api key. We can use this key to access the Youtube Data api v3. This will return us the Id&#39;s of their recent uploads which we use to render the video of that artist.
 
-**Articles**
+##### **Articles**
 
 To get our news sources we made use of the news Api. At the current moment we get our news from the following sources: Pitchfork, Billboard and rolling stone.
 
 At first we were unable to get these news sources because we tried to retrieve these sources directly. We later figured out we could give the newsapi a news source domain and we were able to get the news articles that way.
 
-**Code**
+#### **Code**
 
 **SCSS**
 
