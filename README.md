@@ -486,5 +486,4 @@ Vasilis van Gemert
 [Moment js](https://momentjs.com/)\
 [dotenv](https://www.npmjs.com/package/dotenv)\
 [Font awesome](https://fontawesome.com/)\
-[Axios](https://github.com/axios/axios)\
-
+[Axios](https://github.com/axios/axios)
