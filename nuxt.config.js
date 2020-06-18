@@ -98,6 +98,9 @@ module.exports = {
   pwa: {
     icon: {
       iconSrc: 'static/icon.png'
+    },
+    meta: {
+      theme_color: '#191414'
     }
   }
 }
