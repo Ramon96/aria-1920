@@ -136,7 +136,6 @@ iframe {
 export default {
   head() {
     return {
-      // TODO fix title
       Title: "Instagram",
       script: [
         {
@@ -156,7 +155,6 @@ export default {
       swiperOptions: {
         grabCursor: true,
         slidesPerView: 1.2,
-        // centeredSlides: true,
         loop: true,
         spaceBetween: 20,
         loading: true,
@@ -177,16 +175,13 @@ export default {
     }
   },
   beforeMount() {
-    setTimeout(()=>{}, 3000)
     this.init();
   },
   mounted() {
-    //  window.instgrm.Embeds.process() 
     this.loading = false
   },
   methods: {
     async getPostIds() {
-      // TODO eminem moet vervangen worden met een artiste naam die van musicbrianz
       const postIds = await this.$axios.get(`/api/instagram/recent/${this.handle}`);
       this.ids = postIds.data;
     },

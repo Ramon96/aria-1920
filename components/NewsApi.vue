@@ -23,10 +23,6 @@
   position: relative;
   height: 200px;
 
-  // &:first-of-type{
-  //   padding-top: 0;
-  // }
-
   div {
     padding: 0 1em;
     padding-right: 0;

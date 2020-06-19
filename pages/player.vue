@@ -218,7 +218,7 @@ export default {
 
   h2 {
     color: color(White);
-    text-transform: uppercase;
+    // text-transform: uppercase;
     // letter-spacing: 3px;
     font-size: 1.5em;
     margin: 0;
@@ -231,14 +231,14 @@ export default {
   }
   width: 100%;
   box-sizing: border-box;
-  position: fixed;
-  height: 100vh;
+  // position: fixed;
+  // height: 100vh;
   top: 0;
   transition: opacity 3s;
   // TODO The color has to be determined by the album color, Tomas found a node library for this
   // https://cssgradient.io/
   background: rgb(25, 20, 20);
-  background: linear-gradient(to top, black, #939393);
+  background: linear-gradient(0deg,#000 80%,#5c5c5c);
 
   overflow-y: scroll;
   // Wat doet deze before?
@@ -283,7 +283,7 @@ export default {
     padding: 5px 20px;
     h2{
       padding: 0;
-      letter-spacing: 1px;
+      letter-spacing: 0px;
       text-transform: initial;
     }
   }
