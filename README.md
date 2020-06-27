@@ -58,6 +58,7 @@ Aria is a prototype of a Spotify plugin where the user is able to add social med
 - [**Contributors**](#--contributors--)
 - [**Commissioned by**](#--commissioned-by--)
 - [**Coaching**](#--coaching--)
+- [** Product Biography & self reflection**](#--product-biography-&-self-reflection--)
 - [**External sources**](#--external-sources--)
 
 ## Design rationale
@@ -441,6 +442,10 @@ Our goal is to provide a demo where a single user can:
 - [ ] Desktop design
 - [ ] More social media platforms
 - [ ] Browser caching
+
+## Product Biography & self reflection
+[Ramon Meijers (Dutch)](https://github.com/Ramon96/aria-1920/wiki/(Dutch)-Product-Biography-and-refection-Ramon-Meijers)
+[Tomas Stolp](https://github.com/Ramon96/aria-1920/wiki/Product-Biography-and-refection-Tomas-Stolp)
 
 ## **External content providers**
 
