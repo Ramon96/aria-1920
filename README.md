@@ -58,7 +58,7 @@ Aria is a prototype of a Spotify plugin where the user is able to add social med
 - [**Contributors**](#--contributors--)
 - [**Commissioned by**](#--commissioned-by--)
 - [**Coaching**](#--coaching--)
-- [** Product Biography & self reflection**](#--product-biography-&-self-reflection--)
+- [**Product Biography & self reflection**](#--product-biography-&-self-reflection--)
 - [**External sources**](#--external-sources--)
 
 ## Design rationale
