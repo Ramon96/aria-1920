@@ -8,11 +8,9 @@ async function getMediaId(handle) {
 
       const oege = await axios.get(`https://oege.ie.hva.nl/~stolpt1/insta-aria/index.php?username=${handle}`)
       if(oege == null) {
-        if(handle == 'eminem') {
+
           return ["CHGJcV3BMVO", "CG8AoyMBfkU", "CG8AouCBmyB", "CG8Aot9BK_c", "CG8Aot-hwsS", "CG8Aot-BkPl"]
-         } else {
-          return null
-        }
+
       }
       return oege.data
     }
