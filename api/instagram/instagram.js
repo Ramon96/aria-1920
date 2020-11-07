@@ -7,11 +7,36 @@ import axios from 'axios';
 async function getMediaId(handle) {
 
       const oege = await axios.get(`https://oege.ie.hva.nl/~stolpt1/insta-aria/index.php?username=${handle}`)
-      if(oege == null) {
+      console.warn("AAAAAAH", oege.data)
+      if(!oege.data  || oege.data == null) {
 
-          return ["CHGJcV3BMVO", "CG8AoyMBfkU", "CG8AouCBmyB", "CG8Aot9BK_c", "CG8Aot-hwsS", "CG8Aot-BkPl"]
+          // return [{
+          //   node: {
+          //     shortcode: "CHGJcV3BMVO"
+          //   }
+          // },{
+          //   node: {
+          //     shortcode: "CG8AoyMBfkU"
+          //   },
+          // },{
+          //   node: {
+          //     shortcode: "CG8AouCBmyB"
+          //   },
+          // },{
+          //   node: {
+          //     shortcode: "CG8Aot9BK_c"
+          //   },
+          // }, {
+          //   node: {
+          //     shortcode: "CG8Aot-hwsS"
+          //   },
+          // }, {
+          //   node: {
+          //     shortcode: "CG8Aot-BkPl"
+          //   }
+          // }]
+        }
 
-      }
       return oege.data
     }
 
