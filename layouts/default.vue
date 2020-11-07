@@ -32,11 +32,11 @@ export default {
   },
   watch: {
     playingTrack (newVal, oldVal) {
-      console.log('hmmm', oldVal, newVal)
+      // console.log('hmmm', oldVal, newVal)
     },
     isToggled (newVal, oldVal) {
-      console.log('triggered')
-      console.log(newVal, oldVal)
+      // console.log('triggered')
+      // console.log(newVal, oldVal)
     }
   },
   created () {
@@ -66,7 +66,7 @@ export default {
     },
 
     togglePlay (value) {
-      console.log('toggle')
+      // console.log('toggle')
     },
 
     getTrack (value) {

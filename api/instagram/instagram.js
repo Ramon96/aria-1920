@@ -5,8 +5,10 @@ import axios from 'axios';
 
 
 async function getMediaId(handle) {
-      const oege = await axios.get(`https://oege.ie.hva.nl/~stolpt1/insta/index.php?username=${handle}`)
-      return(oege.data)
+
+      const oege = await axios.get(`https://oege.ie.hva.nl/~stolpt1/insta-aria/index.php?username=${handle}`)
+      console.warn("HOOOO", oege)
+      return oege.data
     }
 
     router.get('/instagram/recent/:url', async (req, res) => {

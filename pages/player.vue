@@ -1,7 +1,7 @@
 <template>
   <section id="song-detail" data-overlay="enabled">
     <Player v-if="currentTrack" :trackdata="trackdata" :track="currentTrack" />
-    <Instagram v-if="instagramHandle" :handle="instagramHandle" />
+    <Instagram v-if="instagramHandle" :instahandle="instagramHandle" />
     <Youtube v-if="youtubeHandle" :ythandle="youtubeHandle" />
     <NewsApi v-if="artist" :artist="artist" />
   </section>
@@ -16,8 +16,8 @@ import NewsApi from '~/components/NewsApi.vue'
 
 async function updateCurrentSong () {
   const { data } = await axios.get('/api/spotify/now-playing/')
-  console.log('ayncdata')
-  console.log('async', data.item)
+  // console.log('ayncdata')
+  // console.log('async', data.item)
   const currentTrack = data.item
   const trackdata = data
   // if (data.item.uri !== this.currentTrack.uri) {
@@ -47,7 +47,7 @@ async function updateCurrentSong () {
 async function updateHandles (uris, resources) {
   // if none of the resources are available then the value's should be set to null so the compents dont stay
 
-  console.log('uris', uris)
+  // console.log('uris', uris)
   const filter = uris.data.filter((item) => {
     for (let i = 0; i < resources.length; i++) {
       if (item.url.resource.includes(resources[i])) {
@@ -165,8 +165,10 @@ export default {
           handle.url.resource.includes('instagram')
         )
         if (instagram == null) {
+          // console.log('IK HEB INSTA')
           this.instagramHandle = null
         } else {
+          console.log('hell yeah')
           this.instagramHandle = instagram.url.resource.split('/')[3]
         }
 

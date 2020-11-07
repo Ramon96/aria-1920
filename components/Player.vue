@@ -49,7 +49,7 @@ export default {
 
   beforeMount (){
     // this.track = data.item; 
-    console.log('Name is', this.name)
+    // console.log('Name is', this.name)
   },
 
   computed: {
@@ -75,7 +75,7 @@ export default {
 
   methods: {
     isPaused(){
-      console.log(this.trackdata)
+      // console.log(this.trackdata)
       this.$store.dispatch('player/togglePlay', 'yes')
     }
   }

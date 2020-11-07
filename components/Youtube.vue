@@ -74,6 +74,7 @@ export default {
   },
   watch: {
     ythandle: function(newHandle, oldHandle){
+            console.log('yt assign')
       this.getVideoIds();
     }, deep: true
   },
@@ -90,7 +91,7 @@ export default {
   methods: {
     async getVideoIds() {
       // TODO vervang eminimen met de youtube handle die we van de music brainz api terug krijgen.
-      console.log('ik maak een call' + this.ythandle)
+      // console.log('ik maak een call' + this.ythandle)
       const videos = await this.$axios.get(`/api/youtube/data/${this.ythandle}`);
       this.ids = videos.data;
     },

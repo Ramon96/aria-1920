@@ -60,10 +60,11 @@ function connectToRedis() {
       })
       const { access_token, refresh_token, expires_in } = data
       const {
-        test
+        data: test
       } = await getUserData(access_token)
   
-      // console.log(test)
+      // console.log(`test`, test)
+      // console.log(`test`, access_token)
   
       // if (test.id !== process.env.SPOTIFY_USER_ID)
       //   throw "🤖 You aren't the droid we're looking for."
@@ -146,6 +147,7 @@ function connectToRedis() {
   // https://www.smashingmagazine.com/2019/03/spotify-app-vue-nuxt-javascript/
   router.get('/spotify/now-playing/', async (req, res) => {
     try {
+      
       const access_token = await getAccessToken()
       const response = await axios.get(
         `${spotifyBaseUrl}me/player/currently-playing?market=US`,

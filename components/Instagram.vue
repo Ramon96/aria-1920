@@ -3,7 +3,7 @@
     <h2 v-if="ids.length > 0">Social media</h2>
     <!-- TODO remove this loading state -->
 
-  <div class="loading" v-if="loading">loading...</div>
+
     <swiper ref="mySwiper" :options="swiperOptions">
       <swiper-slide v-for="value in ids" v-bind:key="value ">
         <blockquote
@@ -148,7 +148,7 @@ export default {
   },
   name: "Instagram",
   components: {},
-  props: ['handle'],
+  props: ['instahandle'],
   data() {
     return {
       ids: [],
@@ -162,11 +162,18 @@ export default {
       }
     };
   },
-  watch: {
-    handle: function(newHandle, oldHandle){
-      this.getPostIds().then(() =>{
-        window.instgrm.Embeds.process()
-      });
+  // watch: {
+  //   handle: function(newHandle, oldHandle){
+  //     this.getPostIds().then(() =>{
+  //       console.log('herer there? ')
+  //       window.instgrm.Embeds.process()
+  //     });
+  //   }, deep:true
+  // },
+   watch: {
+    instahandle: function(newHandle, oldHandle){
+      console.log('instaaaaa')
+     
     }, deep:true
   },
   computed: {
@@ -182,8 +189,10 @@ export default {
   },
   methods: {
     async getPostIds() {
-      const postIds = await this.$axios.get(`/api/instagram/recent/${this.handle}`);
-      this.ids = postIds.data;
+      const postIds = await this.$axios.get(`/api/instagram/recent/${this.instahandle}`);
+      console.warn(postIds.data)
+      const ids = postIds.data.map(( {node: { shortcode }} ) => shortcode)
+      this.ids = ids
     },
     init() {
       this.getPostIds()

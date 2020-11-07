@@ -126,6 +126,7 @@ export default {
   },
   watch: {
     artist: function(newArtist, oldArtist) {
+      console.log('nu wordt er geupdate')
       this.getPostIds()
     },
     deep: true
@@ -167,7 +168,7 @@ export default {
       const postOffset = this.articles.length
           this.articles = this.loadedArticles.filter((article, i) => i < postOffset + this.offset)
       if(this.loadedArticles.length > this.articles.length){
-        console.log(this.articles)
+        // console.log(this.articles)
       }else{
          this.showLoadMorebtn = false
       }

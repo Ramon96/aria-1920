@@ -88,7 +88,7 @@ export default {
           "Content-Type": "application/json"
         },
       })
-      console.log(userData)
+      // console.log(userData)
     },
     // TODO This will turn into initSdk or whatever
     async init() {
@@ -110,7 +110,7 @@ export default {
           volume: .9
         });
 
-        console.log('Player',  player)
+        // console.log('Player',  player)
 
         // Error logging
         player.on('initialization_error', e => console.error(e));
